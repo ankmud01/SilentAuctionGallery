@@ -1,0 +1,29 @@
+{
+  "name": "silentauctiongallery",
+  "version": "1.0.0",
+  "description": "A webpage to display student artwork with comments and host as a silent auction",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankmud01/SilentAuctionGallery.git"
+  },
+  "keywords": [
+    "mysql",
+    "express",
+    "express-handlebars",
+    "sequelize"
+  ],
+  "author": "Ankit Mudvari and Dean Warren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ankmud01/SilentAuctionGallery/issues"
+  },
+  "homepage": "https://github.com/ankmud01/SilentAuctionGallery#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express-handlebars": "^4.0.4"
+  }
+}
