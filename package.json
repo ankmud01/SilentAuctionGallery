@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ankmud01/SilentAuctionGallery#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express-handlebars": "^4.0.4"
   }
 }
