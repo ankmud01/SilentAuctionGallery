@@ -16,7 +16,7 @@
     "express-handlebars",
     "sequelize"
   ],
-  "author": "Ankit Mudvari and Dean Warren",
+  "author": "Ankit Mudvari, Esther Kwon,and Dean Warren",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ankmud01/SilentAuctionGallery/issues"
@@ -24,6 +24,9 @@
   "homepage": "https://github.com/ankmud01/SilentAuctionGallery#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express-handlebars": "^4.0.4"
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.11"
   }
 }
