@@ -43,8 +43,17 @@ const routes = require('./controllers/login_controller.js');
 
 app.use(routes);
 
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`PID: ${pid}\nApp now listening at localhost:${PORT}`);
+// Syncing our database and logging a message to the user upon success
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`PID: ${pid}\n`);
+    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT);
+  });
 });
+
+// app.listen(PORT, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`PID: ${pid}\nApp now listening at localhost:${PORT}`);
+// });
+
 module.exports = express;

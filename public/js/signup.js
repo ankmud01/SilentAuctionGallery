@@ -4,6 +4,10 @@ $(document).ready(() => {
   const emailInput = $('input#email-input');
   const passwordInput = $('input#password-input');
 
+  function handleLoginErr(err) {
+    $('#alert .msg').text(err.responseJSON);
+    $('#alert').fadeIn(500);
+  }
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
@@ -19,10 +23,6 @@ $(document).ready(() => {
       .catch(handleLoginErr);
   }
 
-  function handleLoginErr(err) {
-    $('#alert .msg').text(err.responseJSON);
-    $('#alert').fadeIn(500);
-  }
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on('submit', (event) => {
     event.preventDefault();

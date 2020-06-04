@@ -5,7 +5,7 @@
     "database": "silentauctiondb",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "dialectModule": "mysql2"
   },
   "test": {
     "username": "root",
@@ -13,7 +13,8 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "dialectModule": "mysql2"
+    
   },
   "production": {
     "username": "root",
@@ -21,6 +22,6 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "dialectModule": "mysql2"
   }
 }
