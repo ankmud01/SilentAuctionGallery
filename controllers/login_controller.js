@@ -6,11 +6,12 @@ const router = express.Router();
 const sag = require('../models/user');
 
 //  const router = Router();
-let hschool = "North Oconee Highschool"
+
 
 // Create all our routes and set up logic within those routes where required.
+// Login and default route - The highschool below can be made a variable.
 router.get('/', (req, res) => {
-  res.render('index', {title: "Login Page", school: hschool });
+  res.render('index', { title: 'Login Page', school: 'North Oconee Highschool' });
   console.log('Line 13 - In Get / route');
 });
 
@@ -40,7 +41,7 @@ router.put('/api/login/:id', (req, res) => {
         // If no rows were changed, then the ID must not exist, so 404
         return res.status(404).end();
       }
-      res.status(200).end();
+      return res.status(200).end();
     },
   );
 });

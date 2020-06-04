@@ -29,25 +29,25 @@ router.post('/api/users', (req, res) => {
   });
 });
 
-router.put('/api/login/:id', (req, res) => {
-  const condition = `id = ${req.params.id}`;
-  console.log('auction_controller.js condition: ', condition);
+// router.put('/api/login/:id', (req, res) => {
+//   const condition = `id = ${req.params.id}`;
+//   console.log('auction_controller.js condition: ', condition);
 
-  sag.update(
-    {
-      gallery: req.body.gallery,
-      // devoured: req.body.gallery
-    },
-    condition,
-    (result) => {
-      if (result.changedRows === 0) {
-        // If no rows were changed, then the ID must not exist, so 404
-        return res.status(404).end();
-      }
-      res.status(200).end();
-    },
-  );
-});
+//   // sag.update(
+//   //   {
+//   //     gallery: req.body.gallery,
+//   //     // devoured: req.body.gallery
+//   //   },
+//   //   condition,
+//   //   (result) => {
+//   //     if (result.changedRows === 0) {
+//   //       // If no rows were changed, then the ID must not exist, so 404
+//   //       return res.status(404).end();
+//   //     }
+//   //     res.status(200).end();
+//   //   },
+//   // );
+// });
 
 // Export routes for server.js to use.
 module.exports = router;

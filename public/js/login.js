@@ -35,5 +35,4 @@ $(document).ready(() => {
     emailInput.val('');
     passwordInput.val('');
   });
-
 });
