@@ -17,6 +17,7 @@ $(document).ready(() => {
       password,
     })
       .then((data) => {
+        console.log(data);
         window.location.replace('/members');
       // If there's an error, handle it by throwing up a bootstrap alert
       })
@@ -37,6 +38,8 @@ $(document).ready(() => {
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.email, userData.password);
     emailInput.val('');
+    console.log('SignUpUser:', userData.email);
     passwordInput.val('');
+    console.log('SignUpUser:', userData.password);
   });
 });

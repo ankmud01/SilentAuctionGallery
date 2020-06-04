@@ -11,30 +11,33 @@ const db = require('./models');
 
 const app = express();
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static('public'));
-
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }),
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static('public'));
 // Set Handlebars.
 
-app.engine('handlebars', exphbs({
-  extname: 'handlebars',
-  defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, 'views/layouts'),
-  partialsDir: [
-    //  path to your partials
-    path.join(__dirname, 'views/partials'),
-  ],
-}));
+app.engine(
+  'handlebars',
+  exphbs({
+    extname: 'handlebars',
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: [
+      //  path to your partials
+      path.join(__dirname, 'views/partials'),
+    ],
+  }),
+);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
@@ -47,7 +50,11 @@ app.use(routes);
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`PID: ${pid}\n`);
-    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORT, PORT);
+    console.log(
+      '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
+      PORT,
+      PORT,
+    );
   });
 });
 
