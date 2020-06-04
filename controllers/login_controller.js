@@ -3,27 +3,23 @@ const express = require('express');
 const router = express.Router();
 
 // Import the model (index.js) to use its database functions.
-const sag = require('../models/index');
+const sag = require('../models/user');
 
 //  const router = Router();
-
+let hschool = "North Oconee Highschool"
 
 // Create all our routes and set up logic within those routes where required.
-router.get('/', (_req, res) => {
-  sag.all((data) => {
-    const hbsObject = {
-      sag: data,
-    };
-    // console.log("In Get route hbsObject: ",hbsObject);
-    res.render('index', hbsObject);
-  });
+router.get('/', (req, res) => {
+  res.render('index', {title: "Login Page", school: hschool });
+  console.log('Line 13 - In Get / route');
 });
+
 
 router.post('/api/users', (req, res) => {
   sag.create([
-    'user_name', 'gallery',
+    'user_name', 'password',
   ],
-  [req.body.name, req.body.gallery], (result) => {
+  [req.body.name, req.body.password], (result) => {
     // Send back the ID
     res.json({ id: result.insertId });
   });
