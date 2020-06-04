@@ -31,7 +31,7 @@ router.put('/api/login/:id', (req, res) => {
 
   sag.update(
     {
-      gallery: req.body.gallery,
+      user: req.body.email,
       // devoured: req.body.gallery
     },
     condition,
