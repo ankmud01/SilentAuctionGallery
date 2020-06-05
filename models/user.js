@@ -56,14 +56,10 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    role_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   });
 
-  User.associate = function (models) {
-    User.belongsTo(models.roles, {
+  User.associate = (models) => {
+    User.belongsTo(models.Roles, {
       foreignKey: {
         allowNull: false,
       },
