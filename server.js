@@ -42,9 +42,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 // Import routes and give the server access to them.
-const routes = require('./controllers/login_controller.js');
+const dashboardRoutes = require('./controllers/dashboard_controller.js');
+const signupRoutes = require('./controllers/signup_controller.js');
+const loginRoutes = require('./controllers/login_controller.js');
+const donateRoutes = require('./controllers/donate_controller.js');
 
-app.use(routes);
+app.use(dashboardRoutes);
+app.use(signupRoutes);
+app.use(loginRoutes);
+app.use(donateRoutes);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
