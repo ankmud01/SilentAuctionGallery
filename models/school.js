@@ -1,4 +1,5 @@
-
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
 // Creating our school model
 module.exports = function bar(sequelize, DataTypes) {
   const School = sequelize.define('School', {
@@ -29,8 +30,7 @@ module.exports = function bar(sequelize, DataTypes) {
     adminName: {
       allowNull: false,
       type: DataTypes.STRING,
-      },
     },
-  );
+  });
   return School;
 };
