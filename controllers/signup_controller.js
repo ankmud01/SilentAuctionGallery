@@ -13,7 +13,7 @@ const router = express.Router();
 
 // This is a get route for signup page
 router.get('/signup', (req, res) => {
-  res.render('signup', { title: 'Login Page', school: 'North Oconee Highschool' });
+  res.render('signup', { title: 'Login Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
 });
 

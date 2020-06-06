@@ -9,7 +9,7 @@ const sag = require('../models/user');
 
 // This is get route for login page
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', { title: 'Login Page', school: 'North Oconee High School' });
 });
 
 // This is post route for login page

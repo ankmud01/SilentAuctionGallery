@@ -41,6 +41,28 @@ $(document).ready(() => {
       password: passwordInput.val().trim(),
     };
 
+    // find k-12 school code via API
+    {
+      "schoolMatches": [
+        {
+          "schoolid": "string",
+          "schoolName": "string",
+          "city": "string",
+          "state": "string",
+          "zip": "string",
+          "schoolLevel": "string",
+          "lowGrade": "string",
+          "highGrade": "string",
+          "latitude": 0,
+          "longitude": 0,
+          "hasBoundary": true,
+          "rank": 0,
+          "rankOf": 0,
+          "rankStars": 0
+        }
+      ]
+    }
+
     if (!userData.firstname || !userData.middlename || !userData.lastname || !userData.email
       || !userData.password) {
       return;
