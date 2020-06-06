@@ -1,11 +1,12 @@
 const express = require('express');
 const passport = require('passport');
 const db = require('../models');
+const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
 // This is get route for login page
-router.get('/login', (req, res) => {
+router.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login');
 });
 
@@ -17,7 +18,7 @@ router.get('/api/user', (req, res) => {
 });
 
 // This is post route for login page
-router.post('/api/login', passport.authenticate('local', {
+router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/api/user',
   faliureRedirect: '/login',
   faliureFlash: true,
@@ -41,7 +42,7 @@ router.get('/api/user_data', (req, res) => {
 // Route for logging user out
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 // Export routes for server.js to use.

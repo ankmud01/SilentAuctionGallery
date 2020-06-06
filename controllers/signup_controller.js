@@ -1,4 +1,6 @@
 const express = require('express');
+const { checkAuthenticated, checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
+
 
 const router = express.Router();
 
@@ -6,19 +8,19 @@ const router = express.Router();
 const db = require('../models');
 
 // This is a get route for members page
-router.get('/members', (req, res) => {
+router.get('/members', checkAuthenticated, (req, res) => {
   res.render('members', { title: 'Login Page', school: 'North Oconee Highschool' });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
-router.get('/signup', (req, res) => {
+router.get('/signup', checkNotAuthenticated, (req, res) => {
   res.render('signup', { title: 'Login Page', school: 'North Oconee Highschool' });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is post route for signup page
-router.post('/api/signup', (req, res) => {
+router.post('/api/signup', checkNotAuthenticated, (req, res) => {
   console.log(req.body);
   db.User.create({
     first_name: req.body.firstname,
