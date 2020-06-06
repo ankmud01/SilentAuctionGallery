@@ -3,13 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 // Import the model (index.js) to use its database functions.
-// const sag = require('../models/user');
+const db = require('../models');
 
-//  const router = Router();
-
-
-// Create all our routes and set up logic within those routes where required.
-// Login and default route - The highschool below can be made a variable.
+// This is a get route for members page
+router.get('/members', (req, res) => {
+  res.render('members', { title: 'Login Page', school: 'North Oconee Highschool' });
+  // console.log('Line 13 - In Get / route');
+});
 
 // This is a get route for signup page
 router.get('/signup', (req, res) => {
@@ -18,15 +18,28 @@ router.get('/signup', (req, res) => {
 });
 
 // This is post route for signup page
-// router.post('/api/signup', (req, res) => {
-//   sag.create([
-//     'user_name', 'password',
-//   ],
-//   [req.body.name, req.body.password], (result) => {
-//     // Send back the ID
-//     res.json({ id: result.insertId });
-//   });
-// });
+router.post('/api/signup', (req, res) => {
+  console.log(req.body);
+  db.User.create({
+    first_name: req.body.firstname,
+    last_name: req.body.lastname,
+    email: req.body.email,
+    password: req.body.email,
+    phone: req.body.phonenumber,
+    address: req.body.address,
+    address2: req.body.address2,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zipcode,
+    school: req.body.school,
+  }).then((result) => {
+    res.json({ id: result.insertId });
+  })
+    .catch((err) => {
+      res.status(410).json(err);
+    });
+});
+
 
 // router.put('/api/login/:id', (req, res) => {
 //   const condition = `id = ${req.params.id}`;
