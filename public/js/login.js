@@ -23,7 +23,7 @@ $(document).ready(() => {
         password,
       })
         .then(() => {
-          window.location.replace('/members');
+          window.location.replace('/api/user');
           // If there's an error, log the error
         })
         .catch((err) => {

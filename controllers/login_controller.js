@@ -1,16 +1,27 @@
 const express = require('express');
-const passport = require('../config/passport');
+const passport = require('passport');
+const db = require('../models');
 
 const router = express.Router();
-
-// Import the model (index.js) to use its database functions.
-// eslint-disable-next-line no-unused-vars
-// const db = require('../models');
 
 // This is get route for login page
 router.get('/login', (req, res) => {
   res.render('login');
 });
+
+// This is get route for all users
+router.get('/api/user', (req, res) => {
+  db.User.findAll({}).then((users) => {
+    res.json(users);
+  });
+});
+
+// This is post route for login page
+router.post('/api/login', passport.authenticate('local', {
+  successRedirect: '/api/user',
+  faliureRedirect: '/login',
+  faliureFlash: true,
+}));
 
 // Route for getting some data about our user to be used client side
 router.get('/api/user_data', (req, res) => {
@@ -31,12 +42,6 @@ router.get('/api/user_data', (req, res) => {
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
-});
-
-// This is post route for login page
-router.post('/api/login', passport.authenticate('local'), (req, res) => {
-  console.log(req.body);
-  res.json(req.user);
 });
 
 // Export routes for server.js to use.
