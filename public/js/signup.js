@@ -1,11 +1,17 @@
 $(document).ready(() => {
   // Getting references to our form and input
   const signUpForm = $('form.signup');
-  const firstnameInput = $('input#firstname-input');
-  const middlenameInput = $('input#middlename-input');
-  const lastnameInput = $('input#lastname-input');
-  const emailInput = $('input#email-input');
-  const passwordInput = $('input#password-input');
+  const firstnameInput = $('#firstname-input');
+  const lastnameInput = $('#lastname-input');
+  const emailInput = $('#email-input');
+  const phoneInput = $('#phone-input');
+  const passwordInput = $('#password-input');
+  const addressInput = $('#address-input');
+  const address2Input = $('#address2-input');
+  const cityInput = $('#city-input');
+  const stateInput = $('#state-input');
+  const zipcodeInput = $('#zipcode-input');
+  const schoolInput = $('#school-input');
 
   function handleLoginErr(err) {
     $('#alert .msg').text(err.responseJSON);
@@ -14,13 +20,20 @@ $(document).ready(() => {
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(firstname, middlename, lastname, email, password) {
+  function signUpUser(firstname, lastname, email, phonenumber, password,
+    address, address2, city, state, zipcode, school) {
     $.post('/api/signup', {
       firstname,
-      middlename,
       lastname,
       email,
       password,
+      phonenumber,
+      address,
+      address2,
+      city,
+      state,
+      zipcode,
+      school,
     })
       .then((data) => {
         console.log(data);
@@ -35,50 +48,47 @@ $(document).ready(() => {
     event.preventDefault();
     const userData = {
       firstname: firstnameInput.val().trim(),
-      middlename: middlenameInput.val().trim(),
       lastname: lastnameInput.val().trim(),
       email: emailInput.val().trim(),
+      phonenumber: phoneInput.val().trim(),
       password: passwordInput.val().trim(),
+      address: addressInput.val().trim(),
+      address2: address2Input.val().trim(),
+      city: cityInput.val().trim(),
+      state: stateInput.val().trim(),
+      zipcode: zipcodeInput.val().trim(),
+      school: schoolInput.val().trim(),
     };
 
-    // find k-12 school code via API
-    {
-      "schoolMatches": [
-        {
-          "schoolid": "string",
-          "schoolName": "string",
-          "city": "string",
-          "state": "string",
-          "zip": "string",
-          "schoolLevel": "string",
-          "lowGrade": "string",
-          "highGrade": "string",
-          "latitude": 0,
-          "longitude": 0,
-          "hasBoundary": true,
-          "rank": 0,
-          "rankOf": 0,
-          "rankStars": 0
-        }
-      ]
-    }
-
-    if (!userData.firstname || !userData.middlename || !userData.lastname || !userData.email
-      || !userData.password) {
+    if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
+      || !userData.phonenumber) {
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.firstname, userData.middlename, userData.lastname, userData.email,
-      userData.password);
+    signUpUser(userData.firstname, userData.lastname, userData.email, userData.phonenumber,
+      userData.password, userData.address, userData.address2, userData.city, userData.state,
+      userData.zipcode, userData.school);
     firstnameInput.val('');
-    console.log('SignUpUser:', userData.firstname);
-    middlenameInput.val('');
-    console.log('SignUpUser:', userData.middlename);
+    // console.log('FirstName:', userData.firstname);
     lastnameInput.val('');
-    console.log('SignUpUser:', userData.lastname);
+    // console.log('LastName:', userData.lastname);
     emailInput.val('');
-    console.log('SignUpUser:', userData.email);
+    // console.log('Email:', userData.email);
+    phoneInput.val('');
+    // console.log('PhoneNumber:', userData.phonenumber);
     passwordInput.val('');
-    console.log('SignUpUser:', userData.password);
+    // console.log('Password:', userData.password);
+    addressInput.val('');
+    // console.log('Address:', userData.address);
+    address2Input.val('');
+    // console.log('Address2:', userData.address2);
+    cityInput.val('');
+    // console.log('City:', userData.city);
+    stateInput.val('');
+    // console.log('State:', userData.state);
+    zipcodeInput.val('');
+    // console.log('ZipCode:', userData.zipcode);
+    schoolInput.val('');
+    // console.log('School:', userData.school);
   });
 });
