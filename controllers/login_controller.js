@@ -7,7 +7,7 @@ const router = express.Router();
 
 // This is get route for login page
 router.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login');
+  res.render('login3');
 });
 
 // This is get route for all users

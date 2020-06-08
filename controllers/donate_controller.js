@@ -8,7 +8,7 @@ const sag = require('../models/user');
 
 // This is get route for login page
 router.get('/donate', (req, res) => {
-  res.render('donate');
+  res.render('donate2');
 });
 
 // Export routes for server.js to use.

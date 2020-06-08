@@ -15,7 +15,17 @@ router.get('/', (_req, res) => {
       sag: data,
     };
     // console.log("In Get route hbsObject: ",hbsObject);
-    res.render('index', hbsObject);
+    res.render('login', hbsObject);
+  });
+});
+
+router.get('/Register', (_req, res) => {
+  sag.all((data) => {
+    const hbsObject = {
+      sag: data,
+    };
+    // console.log("In Get route hbsObject: ",hbsObject);
+    res.render('signup', hbsObject);
   });
 });
 
