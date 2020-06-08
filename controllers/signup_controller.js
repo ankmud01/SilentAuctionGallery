@@ -14,7 +14,7 @@ router.get('/members', checkAuthenticated, (req, res) => {
 });
 
 // This is a get route for signup page
-router.get('/signup', checkNotAuthenticated, (req, res) => {
+router.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('signup2', { title: 'Login Page', school: 'North Oconee Highschool' });
   // console.log('Line 13 - In Get / route');
 });
