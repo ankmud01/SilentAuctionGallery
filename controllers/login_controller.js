@@ -11,9 +11,30 @@ const sag = require('../models/user');
 // Create all our routes and set up logic within those routes where required.
 // Login and default route - The highschool below can be made a variable.
 router.get('/', (req, res) => {
+  res.render('index2');
+  console.log('Line 13 - In Get / route');
+});
+
+router.get('/register', (req, res) => {
+  res.render('signup2');
+  console.log('Line 13 - In Get / route');
+});
+
+router.get('/members', (req, res) => {
   res.render('index', { title: 'Login Page', school: 'North Oconee Highschool' });
   console.log('Line 13 - In Get / route');
 });
+
+router.get('/login', (req, res) => {
+  res.render('login3', { title: 'Login Page', school: 'North Oconee Highschool' });
+  console.log('Line 13 - In Get / route');
+});
+
+router.get('/donate', (req, res) => {
+  res.render('donate', { title: 'Login Page', school: 'North Oconee Highschool' });
+  console.log('Line 13 - In Get / route');
+});
+
 
 
 router.post('/api/users', (req, res) => {
