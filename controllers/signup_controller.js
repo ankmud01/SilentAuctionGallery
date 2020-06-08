@@ -9,13 +9,13 @@ const db = require('../models');
 
 // This is a get route for members page
 router.get('/members', checkAuthenticated, (req, res) => {
-  res.render('members', { title: 'Login Page', school: 'North Oconee Highschool' });
+  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: true });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
 router.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('signup2', { title: 'Login Page', school: 'North Oconee Highschool' });
+  res.render('signup', { title: 'Login Page', school: 'North Oconee High School', logged: false });
   // console.log('Line 13 - In Get / route');
 });
 
