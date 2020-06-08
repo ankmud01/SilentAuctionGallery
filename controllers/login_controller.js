@@ -1,70 +1,48 @@
 const express = require('express');
+const passport = require('passport');
+const db = require('../models');
+const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
-// Import the model (index.js) to use its database functions.
-const sag = require('../models/user');
-
-//  const router = Router();
-
-
-// Create all our routes and set up logic within those routes where required.
-// Login and default route - The highschool below can be made a variable.
-router.get('/', (req, res) => {
-  res.render('index2');
-  console.log('Line 13 - In Get / route');
+// This is get route for login page
+router.get('/login', checkNotAuthenticated, (req, res) => {
+  res.render('login3');
 });
 
-router.get('/register', (req, res) => {
-  res.render('signup2');
-  console.log('Line 13 - In Get / route');
-});
-
-router.get('/members', (req, res) => {
-  res.render('index', { title: 'Login Page', school: 'North Oconee Highschool' });
-  console.log('Line 13 - In Get / route');
-});
-
-router.get('/login', (req, res) => {
-  res.render('login3', { title: 'Login Page', school: 'North Oconee Highschool' });
-  console.log('Line 13 - In Get / route');
-});
-
-router.get('/donate', (req, res) => {
-  res.render('donate', { title: 'Login Page', school: 'North Oconee Highschool' });
-  console.log('Line 13 - In Get / route');
-});
-
-
-
-router.post('/api/users', (req, res) => {
-  sag.create([
-    'user_name', 'password',
-  ],
-  [req.body.name, req.body.password], (result) => {
-    // Send back the ID
-    res.json({ id: result.insertId });
+// This is get route for all users
+router.get('/api/user', (req, res) => {
+  db.User.findAll({}).then((users) => {
+    res.json(users);
   });
 });
 
-router.put('/api/login/:id', (req, res) => {
-  const condition = `id = ${req.params.id}`;
-  console.log('auction_controller.js condition: ', condition);
+// This is post route for login page
+router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/api/user',
+  faliureRedirect: '/login',
+  faliureFlash: true,
+}));
 
-  sag.update(
-    {
-      user: req.body.email,
-      // devoured: req.body.gallery
-    },
-    condition,
-    (result) => {
-      if (result.changedRows === 0) {
-        // If no rows were changed, then the ID must not exist, so 404
-        return res.status(404).end();
-      }
-      return res.status(200).end();
-    },
-  );
+// Route for getting some data about our user to be used client side
+router.get('/api/user_data', (req, res) => {
+  if (!req.user) {
+    // The user is not logged in, send back an empty object
+    res.json({});
+  } else {
+    // Otherwise send back the user's email and id
+    // Sending back a password, even a hashed password, isn't a good idea
+    res.json({
+      email: req.user.email,
+      id: req.user.id,
+    });
+  }
+});
+
+// Route for logging user out
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
 });
 
 // Export routes for server.js to use.

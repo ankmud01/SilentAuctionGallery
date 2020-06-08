@@ -3,7 +3,9 @@ const session = require('express-session');
 const process = require('process');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const flash = require('express-flash');
 const passport = require('./config/passport');
+require('dotenv').config();
 
 const { pid } = process;
 const PORT = process.env.PORT || 3000;
@@ -15,10 +17,18 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Using flash for messages
+app.use(flash());
+
 // We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }),
-);
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  // need to understand this more
+  resave: false,
+  saveUninitialized: true,
+}));
+
+// using passport and session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -42,9 +52,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 // Import routes and give the server access to them.
-const routes = require('./controllers/login_controller.js');
+const dashboardRoutes = require('./controllers/dashboard_controller.js');
+const signupRoutes = require('./controllers/signup_controller.js');
+const loginRoutes = require('./controllers/login_controller.js');
+const donateRoutes = require('./controllers/donate_controller.js');
 
-app.use(routes);
+app.use(dashboardRoutes);
+app.use(signupRoutes);
+app.use(loginRoutes);
+app.use(donateRoutes);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
@@ -57,10 +73,5 @@ db.sequelize.sync().then(() => {
     );
   });
 });
-
-// app.listen(PORT, () => {
-//   // eslint-disable-next-line no-console
-//   console.log(`PID: ${pid}\nApp now listening at localhost:${PORT}`);
-// });
 
 module.exports = express;
