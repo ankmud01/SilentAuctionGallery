@@ -18,9 +18,9 @@ $(document).ready(() => {
     $('#alert').fadeIn(500);
   }
   // Validate Email is reasonable format
-  function emailIsValid(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  // function emailIsValid(email) {
+  //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // }
   $('select[required]').css({
     display: 'inline',
     height: 0,
@@ -29,10 +29,10 @@ $(document).ready(() => {
   });
 
   // validate if phone number is numbers
-  function validatePhone(phoneNumber) {
-    const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    return phoneNumberPattern.test(phoneNumber);
-  }
+  // function validatePhone(phoneNumber) {
+  //   const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+  //   return phoneNumberPattern.test(phoneNumber);
+  // }
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
