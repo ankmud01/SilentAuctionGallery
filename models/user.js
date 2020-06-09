@@ -7,6 +7,12 @@ const bcrypt = require('bcryptjs');
 module.exports = function bar(sequelize, DataTypes) {
   const User = sequelize.define('User', {
     // The email cannot be null, and must be a proper email before creation
+    userId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -52,13 +58,34 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    school: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   });
 
   User.associate = (models) => {
+    User.hasMany(models.Artwork, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    User.hasMany(models.Bid, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    User.hasMany(models.orderHdr, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    User.hasMany(models.OrderDtl, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    User.belongsTo(models.School, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
     User.belongsTo(models.Roles, {
       foreignKey: {
         allowNull: false,

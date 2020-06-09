@@ -1,9 +1,9 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
-// Creating our school model
+
 module.exports = function bar(sequelize, DataTypes) {
   const Artwork = sequelize.define('Artwork', {
-    id: {
+    artId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -25,5 +25,44 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.STRING,
     },
   });
+
+  Artwork.associate = (models) => {
+    Artwork.hasMany(models.Bid, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.hasMany(models.OrderHdr, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.hasMany(models.OrderDtl, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.hasMany(models.School, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.belongsTo(models.School, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    Artwork.belongsTo(models.Bid, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
   return Artwork;
 };

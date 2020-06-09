@@ -2,52 +2,46 @@
 // eslint-disable-next-line linebreak-style
 
 module.exports = function bar(sequelize, DataTypes) {
-  const Bid = sequelize.define('Bid', {
-    bidId: {
+  const OrderHdr = sequelize.define('OrderHdr', {
+    orderId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    startBid: {
-      type: DataTypes.INTEGER,
+    orderStatus: {
+      type: DataTypes.STRING,
     },
-    bids: {
-      type: DataTypes.INTEGER,
+    paymentMethod: {
+      type: DataTypes.STRING,
     },
-    status: {
+    externalRefId: {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    tranDate: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
   });
 
-  Bid.associate = (models) => {
-    Bid.hasMany(models.Artwork, {
+  OrderHdr.associate = (models) => {
+    OrderHdr.belongsTo(models.Artwork, {
       foreignKey: {
         allowNull: false,
       },
     });
-    Bid.hasMany(models.OrderHdr, {
+    OrderHdr.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
     });
-    Bid.hasMany(models.OrderDtl, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    Bid.belongsTo(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    Bid.belongsTo(models.User, {
+    OrderHdr.belongsTo(models.Bid, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
 
-  return Bid;
+  return OrderHdr;
 };

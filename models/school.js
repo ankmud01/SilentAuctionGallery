@@ -1,9 +1,9 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
-// Creating our school model
+
 module.exports = function bar(sequelize, DataTypes) {
   const School = sequelize.define('School', {
-    id: {
+    schoolId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -27,10 +27,24 @@ module.exports = function bar(sequelize, DataTypes) {
     zip: {
       type: DataTypes.STRING,
     },
-    adminName: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
   });
+
+  School.associate = (models) => {
+    School.hasMany(models.Artwork, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    School.hasMany(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+    School.belongsTo(models.Artwork, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
   return School;
 };
