@@ -7,7 +7,8 @@ const router = express.Router();
 
 // This is get route for login page
 router.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login', { title: 'Login Page', school: 'North Oconee High School', logged: false });
+  req.headers.logged = 'false';
+  res.render('login', { title: 'Login Page', school: 'North Oconee High School' });
 });
 
 // This is get route for all users
@@ -27,6 +28,7 @@ router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', 
 // Route for getting some data about our user to be used client side
 router.get('/api/user_data', (req, res) => {
   if (!req.user) {
+    req.headers.logged = 'false';
     // The user is not logged in, send back an empty object
     res.json({});
   } else {
@@ -41,6 +43,7 @@ router.get('/api/user_data', (req, res) => {
 
 // Route for logging user out
 router.get('/logout', (req, res) => {
+  req.headers.logged = 'true';
   req.logout(); // Needs to be a separate LoguOut Page
   res.redirect('/login');
 });

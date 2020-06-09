@@ -9,13 +9,16 @@ const db = require('../models');
 
 // This is a get route for members page
 router.get('/members', checkAuthenticated, (req, res) => {
-  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: true });
+  req.headers.logged = 'true';
+  console.log('is logged in: ', req.headers.logged);
+  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
 router.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('signup', { title: 'Login Page', school: 'North Oconee High School', logged: false });
+  req.headers.logged = 'false';
+  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
 });
 
@@ -42,26 +45,4 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     });
 });
 
-
-// router.put('/api/login/:id', (req, res) => {
-//   const condition = `id = ${req.params.id}`;
-//   console.log(`auction_controller.js condition: ${condition}`);
-
-//   sag.update(
-//     {
-//       user: req.body.email,
-//       // devoured: req.body.gallery
-//     },
-//     condition,
-//     (result) => {
-//       if (result.changedRows === 0) {
-//         // If no rows were changed, then the ID must not exist, so 404
-//         return res.status(404).end();
-//       }
-//       return res.status(200).end();
-//     },
-//   );
-// });
-
-// Export routes for server.js to use.
 module.exports = router;

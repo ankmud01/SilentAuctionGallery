@@ -3,9 +3,13 @@
         <a href="/" class="brand-logo" ><img src="https://www.oconeeschools.org/cms/lib/GA01903601/Centricity/Template/GlobalAssets/images///logos/NOHSWebLogo.png" height="62px" width="100px" title="logo"/></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
+            {{#if logged}}
+            <li><a href="/logout" class="navText">LogOut</a></li>
+            {{else}}
             <li><a href="/login" class="navText">Login</a></li>
             <li><a href="/register" class="navText">Register</a></li>
-            <li><a href="/donate" class="navText">Donate</a></li>
+            {{/if}}
+            <li><a href="/donate" class="navText">Donate/CheckOut</a></li>
         </ul>
     </div>
 </nav>
@@ -13,7 +17,7 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/login">Login</a></li>
     <li><a href="/register">Register</a></li>
-    <li><a href="/donate">Donate</a></li>
+    <li><a href="/donate">Donate/CheckOut</a></li>
 </ul>
 
 

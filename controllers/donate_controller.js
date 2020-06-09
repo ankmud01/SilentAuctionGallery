@@ -8,6 +8,7 @@ const sag = require('../models/user');
 
 // This is get route for login page
 router.get('/donate', (req, res) => {
+  req.headers.logged = 'true';
   res.render('donate2');
 });
 
