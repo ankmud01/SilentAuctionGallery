@@ -30,20 +30,9 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   School.associate = (models) => {
-    School.hasMany(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
+    School.hasMany(models.Artwork);
     School.hasMany(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    School.belongsTo(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
+      onDelete: 'cascade',
     });
   };
   return School;

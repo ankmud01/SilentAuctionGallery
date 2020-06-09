@@ -7,6 +7,7 @@ module.exports = function bar(sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
       type: DataTypes.INTEGER,
     },
     startBid: {
@@ -22,31 +23,14 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   Bid.associate = (models) => {
-    Bid.hasMany(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
+    Bid.hasMany(models.OrderDtl, {
+      onDelete: 'cascade',
     });
     Bid.hasMany(models.OrderHdr, {
-      foreignKey: {
-        allowNull: false,
-      },
+      onDelete: 'cascade',
     });
-    Bid.hasMany(models.OrderDtl, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    Bid.belongsTo(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    Bid.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
+    Bid.belongsTo(models.Artwork);
+    Bid.belongsTo(models.User);
   };
 
   return Bid;

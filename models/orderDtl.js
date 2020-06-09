@@ -3,7 +3,7 @@
 
 module.exports = function bar(sequelize, DataTypes) {
   const OrderDtl = sequelize.define('OrderDtl', {
-    id: {
+    orderd: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,

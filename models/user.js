@@ -62,35 +62,15 @@ module.exports = function bar(sequelize, DataTypes) {
 
   User.associate = (models) => {
     User.hasMany(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
+      onDelete: 'cascade',
     });
-    User.hasMany(models.Bid, {
-      foreignKey: {
-        allowNull: false,
-      },
+    User.hasMany(models.Bid);
+    User.hasMany(models.OrderHdr, {
+      onDelete: 'cascade',
     });
-    User.hasMany(models.orderHdr, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    User.hasMany(models.OrderDtl, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    User.belongsTo(models.School, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    User.belongsTo(models.Roles, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
+    User.hasMany(models.OrderDtl);
+    User.belongsTo(models.School);
+    User.belongsTo(models.Roles);
   };
 
 
