@@ -1,6 +1,7 @@
 const express = require('express');
 
-const { checkAuthenticated, checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
+const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
+
 const router = express.Router();
 
 // Import the model (index.js) to use its database functions.
