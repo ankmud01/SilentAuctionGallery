@@ -16,7 +16,7 @@ router.get('/members', checkAuthenticated, (req, res) => {
 });
 
 // This is a get route for signup page
-router.get('/register', checkNotAuthenticated, (req, res) => {
+router.get('/signup', checkNotAuthenticated, (req, res) => {
   req.headers.logged = 'false';
   res.render('signup', { title: 'Registration Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
@@ -45,4 +45,25 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     });
 });
 
+// router.put('/api/login/:id', (req, res) => {
+//   const condition = `id = ${req.params.id}`;
+//   console.log(`auction_controller.js condition: ${condition}`);
+
+//   sag.update(
+//     {
+//       user: req.body.email,
+//       // gallery: req.body.gallery
+//     },
+//     condition,
+//     (result) => {
+//       if (result.changedRows === 0) {
+//         // If no rows were changed, then the ID must not exist, so 404
+//         return res.status(404).end();
+//       }
+//       return res.status(200).end();
+//     },
+//   );
+// });
+
+// Export routes for server.js to use.
 module.exports = router;
