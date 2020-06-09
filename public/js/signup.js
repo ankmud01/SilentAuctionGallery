@@ -38,7 +38,7 @@ $(document).ready(() => {
       .then((data) => {
         console.log(data);
         window.location.replace('/members');
-      // If there's an error, handle it by throwing up a bootstrap alert
+        // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
@@ -60,8 +60,20 @@ $(document).ready(() => {
       school: schoolInput.val().trim(),
     };
 
+    const errors = [];
+    // check all required fields are filled
     if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
       || !userData.phonenumber) {
+      errors.push({ message: 'Please fill in all the required fields' });
+    }
+
+    // check password length
+    if (userData.password.length < 6) {
+      errors.push({ message: 'Password must be atleast 6 character long' });
+    }
+
+    //
+    if (errors.length > 0) {
       return;
     }
     // If we have an email and password, run the signUpUser function

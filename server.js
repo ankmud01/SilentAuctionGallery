@@ -56,11 +56,13 @@ const dashboardRoutes = require('./controllers/dashboard_controller.js');
 const signupRoutes = require('./controllers/signup_controller.js');
 const loginRoutes = require('./controllers/login_controller.js');
 const donateRoutes = require('./controllers/donate_controller.js');
+const profileRoutes = require('./controllers/profile_controller.js');
 
 app.use(dashboardRoutes);
 app.use(signupRoutes);
 app.use(loginRoutes);
 app.use(donateRoutes);
+app.use(profileRoutes);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
