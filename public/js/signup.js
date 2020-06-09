@@ -18,9 +18,9 @@ $(document).ready(() => {
     $('#alert').fadeIn(500);
   }
   // Validate Email is reasonable format
-  function emailIsValid(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  // function emailIsValid(email) {
+  //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // }
   $('select[required]').css({
     display: 'inline',
     height: 0,
@@ -29,10 +29,10 @@ $(document).ready(() => {
   });
 
   // validate if phone number is numbers
-  function validatePhone(phoneNumber) {
-    const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-    return phoneNumberPattern.test(phoneNumber);
-  }
+  // function validatePhone(phoneNumber) {
+  //   const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+  //   return phoneNumberPattern.test(phoneNumber);
+  // }
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
@@ -54,7 +54,7 @@ $(document).ready(() => {
       .then((data) => {
         console.log(data);
         window.location.replace('/members');
-      // If there's an error, handle it by throwing up a bootstrap alert
+        // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
   }
@@ -76,13 +76,24 @@ $(document).ready(() => {
       school: schoolInput.val().trim(),
     };
 
-    if (!emailIsValid(userData.email) || !validatePhone(userData.phonenumber)) {
-      if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
-        || !userData.phonenumber) {
-        handleLoginErr();
-        return;
-      }
+    const errors = [];
+    // check all required fields are filled
+    if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
+      || !userData.phonenumber) {
+      errors.push({ msg: 'Please fill in all the required fields' });
     }
+
+    // check password length
+    if (userData.password.length < 6) {
+      errors.push({ msg: 'Password must be atleast 6 character long' });
+    }
+
+    //
+    if (errors.length > 0) {
+      handleLoginErr();
+      return;
+    }
+
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.firstname, userData.lastname, userData.email, userData.phonenumber,
       userData.password, userData.address, userData.address2, userData.city, userData.state,

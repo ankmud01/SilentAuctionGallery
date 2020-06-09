@@ -21,7 +21,7 @@ router.get('/', checkNotAuthenticated, (_req, res) => {
   });
 });
 
-router.get('/Register', checkNotAuthenticated, (_req, res) => {
+router.get('/signup', checkNotAuthenticated, (_req, res) => {
   sag.all((data) => {
     const hbsObject = {
       sag: data,
