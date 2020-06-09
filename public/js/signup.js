@@ -17,6 +17,22 @@ $(document).ready(() => {
     $('#alert .msg').text(err.responseJSON);
     $('#alert').fadeIn(500);
   }
+  // Validate Email is reasonable format
+  function emailIsValid(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  $('select[required]').css({
+    display: 'inline',
+    height: 0,
+    padding: 0,
+    width: 0,
+  });
+
+  // validate if phone number is numbers
+  function validatePhone(phoneNumber) {
+    const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    return phoneNumberPattern.test(phoneNumber);
+  }
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
@@ -60,9 +76,12 @@ $(document).ready(() => {
       school: schoolInput.val().trim(),
     };
 
-    if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
-      || !userData.phonenumber) {
-      return;
+    if (!emailIsValid(userData.email) || !validatePhone(userData.phonenumber)) {
+      if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
+        || !userData.phonenumber) {
+        handleLoginErr();
+        return;
+      }
     }
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.firstname, userData.lastname, userData.email, userData.phonenumber,
