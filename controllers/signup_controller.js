@@ -9,13 +9,16 @@ const db = require('../models');
 
 // This is a get route for members page
 router.get('/members', checkAuthenticated, (req, res) => {
-  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: true });
+  req.headers.logged = 'true';
+  console.log('is logged in: ', req.headers.logged);
+  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
-router.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('signup', { title: 'Login Page', school: 'North Oconee High School', logged: false });
+router.get('/signup', checkNotAuthenticated, (req, res) => {
+  req.headers.logged = 'false';
+  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School' });
   // console.log('Line 13 - In Get / route');
 });
 
@@ -42,7 +45,6 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     });
 });
 
-
 // router.put('/api/login/:id', (req, res) => {
 //   const condition = `id = ${req.params.id}`;
 //   console.log(`auction_controller.js condition: ${condition}`);
@@ -50,7 +52,7 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
 //   sag.update(
 //     {
 //       user: req.body.email,
-//       // devoured: req.body.gallery
+//       // gallery: req.body.gallery
 //     },
 //     condition,
 //     (result) => {

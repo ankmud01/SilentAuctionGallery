@@ -17,6 +17,22 @@ $(document).ready(() => {
     $('#alert .msg').text(err.responseJSON);
     $('#alert').fadeIn(500);
   }
+  // Validate Email is reasonable format
+  function emailIsValid(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  $('select[required]').css({
+    display: 'inline',
+    height: 0,
+    padding: 0,
+    width: 0,
+  });
+
+  // validate if phone number is numbers
+  function validatePhone(phoneNumber) {
+    const phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    return phoneNumberPattern.test(phoneNumber);
+  }
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
@@ -64,18 +80,20 @@ $(document).ready(() => {
     // check all required fields are filled
     if (!userData.firstname || !userData.lastname || !userData.email || !userData.password
       || !userData.phonenumber) {
-      errors.push({ message: 'Please fill in all the required fields' });
+      errors.push({ msg: 'Please fill in all the required fields' });
     }
 
     // check password length
     if (userData.password.length < 6) {
-      errors.push({ message: 'Password must be atleast 6 character long' });
+      errors.push({ msg: 'Password must be atleast 6 character long' });
     }
 
     //
     if (errors.length > 0) {
+      handleLoginErr();
       return;
     }
+
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.firstname, userData.lastname, userData.email, userData.phonenumber,
       userData.password, userData.address, userData.address2, userData.city, userData.state,

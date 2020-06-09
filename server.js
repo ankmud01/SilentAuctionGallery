@@ -23,6 +23,7 @@ app.use(flash());
 // We need to use sessions to keep track of our user's login status
 app.use(session({
   secret: process.env.SESSION_SECRET,
+  // httpOnly: true,
   // need to understand this more
   resave: false,
   saveUninitialized: true,
