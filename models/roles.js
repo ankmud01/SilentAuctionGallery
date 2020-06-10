@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
   });
   roles.associate = (models) => {
     // associations can be defined here
-    roles.hasMany(models.User);
+    roles.hasMany(models.User, {
+      onDelete: 'cascade',
+    });
   };
   return roles;
 };

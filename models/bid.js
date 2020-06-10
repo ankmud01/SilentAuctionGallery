@@ -23,14 +23,16 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   Bid.associate = (models) => {
-    Bid.hasMany(models.OrderDtl, {
-      onDelete: 'cascade',
+    Bid.belongsTo(models.Artwork, {
+      foreignKey: {
+        allowNull: false,
+      },
     });
-    Bid.hasMany(models.OrderHdr, {
-      onDelete: 'cascade',
+    Bid.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
     });
-    Bid.belongsTo(models.Artwork);
-    Bid.belongsTo(models.User);
   };
 
   return Bid;
