@@ -10,21 +10,22 @@ const db = require('../models');
 // This is a get route for members page
 router.get('/members', checkAuthenticated, (req, res) => {
   req.headers.logged = 'true';
-  console.log('is logged in: ', req.headers.logged);
-  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School' });
+  console.log('Signup controller Line 13 user is logged in: ', req.headers.logged);
+  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: req.headers.logged });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
 router.get('/signup', checkNotAuthenticated, (req, res) => {
   req.headers.logged = 'false';
-  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School' });
+  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.headers.logged });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is post route for signup page
 router.post('/api/signup', checkNotAuthenticated, (req, res) => {
   console.log(req.body);
+  console.log('Signup_controller School: ', req.body.school);
   db.User.create({
     first_name: req.body.firstname,
     last_name: req.body.lastname,
@@ -39,6 +40,7 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     school: req.body.school,
   }).then((result) => {
     res.json({ id: result.insertId });
+    res.render('members', { title: 'Members Page', school: req.body.school, logged: req.headers.logged });
   })
     .catch((err) => {
       res.status(410).json(err);
