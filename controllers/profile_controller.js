@@ -16,8 +16,6 @@ router.get('/api/profile/:id', (req, res) => {
       },
     },
   ).then((users) => {
-    // Pass in the cloumn name after users to get the required value
-    // e.g. res.json(user.last_name)
     res.json(users);
   });
 });

@@ -40,7 +40,7 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     school: req.body.school,
   }).then((result) => {
     res.json({ id: result.insertId });
-    res.render('members', { title: 'Members Page', school: req.body.school, logged: req.headers.logged });
+    // res.render('members', { title: 'Members Page', school: req.body.school, logged: req.headers.logged });
   })
     .catch((err) => {
       res.status(410).json(err);

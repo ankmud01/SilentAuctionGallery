@@ -53,7 +53,7 @@ $(document).ready(() => {
     })
       .then((data) => {
         console.log(data);
-        window.location.replace('/members');
+        window.location.replace('/login');
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
