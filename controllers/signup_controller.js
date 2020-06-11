@@ -22,6 +22,10 @@ router.get('/signup', checkNotAuthenticated, (req, res) => {
   // console.log('Line 13 - In Get / route');
 });
 
+router.get('/privacypolicy', checkNotAuthenticated, (req, res) => {
+  res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
+});
+
 // This is post route for signup page
 router.post('/api/signup', checkNotAuthenticated, (req, res) => {
   console.log(req.body);
