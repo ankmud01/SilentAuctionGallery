@@ -27,22 +27,6 @@ router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', 
   faliureFlash: true,
 }));
 
-// Route for getting some data about our user to be used client side
-router.get('/api/user_data', (req, res) => {
-  if (!req.user) {
-    req.headers.logged = 'false';
-    // The user is not logged in, send back an empty object
-    res.json({});
-  } else {
-    // Otherwise send back the user's email and id
-    // Sending back a password, even a hashed password, isn't a good idea
-    res.json({
-      email: req.user.email,
-      id: req.user.id,
-    });
-  }
-});
-
 router.get('/logout', (req, res) => {
   req.headers.logged = 'false';
   console.log(
