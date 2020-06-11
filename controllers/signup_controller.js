@@ -10,15 +10,15 @@ const db = require('../models');
 // This is a get route for members page
 router.get('/members', checkAuthenticated, (req, res) => {
   req.headers.logged = 'true';
-  console.log('Signup controller Line 13 user is logged in: ', req.headers.logged);
-  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: req.headers.logged });
+  console.log('Signup controller Line 13 user is logged in: ', req.isAuthenticated());
+  res.render('members', { title: 'Registered Member Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
   // console.log('Line 13 - In Get / route');
 });
 
 // This is a get route for signup page
 router.get('/signup', checkNotAuthenticated, (req, res) => {
   req.headers.logged = 'false';
-  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.headers.logged });
+  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
   // console.log('Line 13 - In Get / route');
 });
 
@@ -40,7 +40,6 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     school: req.body.school,
   }).then((result) => {
     res.json({ id: result.insertId });
-    // res.render('members', { title: 'Members Page', school: req.body.school, logged: req.headers.logged });
   })
     .catch((err) => {
       res.status(410).json(err);

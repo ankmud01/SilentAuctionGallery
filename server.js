@@ -41,7 +41,7 @@ app.engine(
   'handlebars',
   exphbs({
     extname: 'handlebars',
-    defaultLayout: 'main2',
+    defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: [
       //  path to your partials

@@ -7,7 +7,7 @@ const router = express.Router();
 // This is get route for dashboard
 router.get('/', checkAuthenticated, (req, res) => {
   req.headers.logged = 'true';
-  res.render('index', { title: 'Gallery', school: 'North Oconee Highschool', logged: req.headers.logged });
+  res.render('index', { title: 'Gallery', school: 'North Oconee Highschool', logged: req.isAuthenticated() });
 //   console.log('Line 13 - In Get / route');
 });
 
