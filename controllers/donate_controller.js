@@ -11,7 +11,7 @@ const sag = require('../models/user');
 // This is get route for login page
 router.get('/donate', checkAuthenticated, (req, res) => {
   req.headers.logged = 'true';
-  res.render('donate2', { title: 'Donations Page', school: req.body.school, logged: req.isAuthenticated()});
+  res.render('donate2', { title: 'Donations Page', school: req.body.school, logged: req.isAuthenticated() });
 });
 
 // Export routes for server.js to use.
