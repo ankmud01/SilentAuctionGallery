@@ -11,20 +11,23 @@ const sag = require('../models/index');
 
 
 // Create all our routes and set up logic within those routes where required.
-router.get('/', checkNotAuthenticated, (_req, res) => {
+router.get('/', checkNotAuthenticated, (req, res) => {
   sag.all((data) => {
     const hbsObject = {
       sag: data,
+      logged: req.isAuthenticated(),
     };
     // console.log("In Get route hbsObject: ",hbsObject);
     res.render('login', hbsObject);
   });
 });
 
-router.get('/signup', checkNotAuthenticated, (_req, res) => {
+router.get('/signup', checkNotAuthenticated, (req, res) => {
   sag.all((data) => {
     const hbsObject = {
       sag: data,
+      logged: req.isAuthenticated(),
+
     };
 
     // console.log("In Get route hbsObject: ",hbsObject);
