@@ -8,7 +8,7 @@ const router = express.Router();
 // This is get route for login page
 router.get('/login', checkNotAuthenticated, (req, res) => {
   req.headers.logged = 'true';
-  res.render('login', { title: 'Login Page', school: 'North Oconee High School', logged: req.headers.logged });
+  res.render('login', { title: 'Login Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
 });
 
 // This is get route for all users
@@ -16,7 +16,7 @@ router.get('/members' /* '/api/user' */, (req, res) => {
   db.User.findAll({}).then((users) => {
     req.headers.logged = 'true';
     res.json(users);
-    res.render('members', { school: req.headers.school, logged: req.headers.logged });
+    res.render('members', { logged: req.isAuthenticated() });
   });
 });
 
@@ -43,11 +43,17 @@ router.get('/api/user_data', (req, res) => {
   }
 });
 
-// Route for logging user out
 router.get('/logout', (req, res) => {
   req.headers.logged = 'false';
+  console.log(
+    'login_controller line 49 user is logged in: ',
+    req.headers.logged,
+  );
+  res.render('logout', {
+    school: 'North Oconee High School',
+    logged: req.isAuthenticated(), // needs to be Not Logged in to show the LogIn menu option
+  });
   req.logout(); // Needs to be a separate LoguOut Page
-  res.redirect('/login');
   // res.render('/login', { logged: req.headers.logged });
 });
 
