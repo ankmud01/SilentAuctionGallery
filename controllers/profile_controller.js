@@ -1,6 +1,6 @@
 const express = require('express');
 // const passport = require('passport');
-const db = require('../models');
+// const db = require('../models');
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get('/api/user_data', (req, res) => {
       zipcode: req.user.zip,
       phone: req.user.phone,
       email: req.user.email,
-      school: req.user.school
+      school: req.user.school,
     });
   }
 });
