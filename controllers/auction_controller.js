@@ -1,5 +1,7 @@
 const express = require('express');
 
+const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
+
 const router = express.Router();
 
 // Import the model (index.js) to use its database functions.
@@ -9,17 +11,31 @@ const sag = require('../models/index');
 
 
 // Create all our routes and set up logic within those routes where required.
-router.get('/', (_req, res) => {
+router.get('/', checkNotAuthenticated, (req, res) => {
   sag.all((data) => {
     const hbsObject = {
       sag: data,
+      logged: req.isAuthenticated(),
     };
     // console.log("In Get route hbsObject: ",hbsObject);
-    res.render('index', hbsObject);
+    res.render('login', hbsObject);
   });
 });
 
-router.post('/api/users', (req, res) => {
+router.get('/signup', checkNotAuthenticated, (req, res) => {
+  sag.all((data) => {
+    const hbsObject = {
+      sag: data,
+      logged: req.isAuthenticated(),
+
+    };
+
+    // console.log("In Get route hbsObject: ",hbsObject);
+    res.render('signup', hbsObject);
+  });
+});
+
+router.post('/api/users', checkNotAuthenticated, (req, res) => {
   sag.create([
     'user_name', 'gallery',
   ],

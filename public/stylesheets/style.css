@@ -1,4 +1,148 @@
-form.signup,
+
 form.login {
-  margin-top: 50px;
+  margin-top: 90%;
 }
+
+/* #navBar{
+  height: 15%;
+  background-color: red;
+} */
+
+#schoolColor{
+  background: url(https://www.oconeeschools.org/cms/lib/GA01903601/Centricity/Domain/517/Art%20Club.png);
+  height: 180px;
+  
+}
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:7%;
+  width:100%;
+  text-align: center;
+  z-index: -1;
+}
+
+
+
+.loginForm, .signUp2{
+  text-align: center;     
+  width: 50%;
+}
+
+
+
+#logInButton{
+  text-align: center;
+ 
+}
+
+.navText{
+  color:black;
+}
+
+.footerText{
+  color:black;
+}
+
+#loginCard{
+  height: 90%;
+  width: 90%;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-bottom: 5%;
+ 
+}
+#loginCard2{
+  height: 50%;
+  width: 120%;
+  margin-top: 30%;
+  margin-left: 5%;
+ 
+}
+
+.material-icons{
+  color: black;
+}
+  
+#registerCard{
+  height: 50%;
+  width: 60%;
+  margin-top: 5%;
+  margin-left: 20%;
+  text-align: center;
+  margin-bottom: 10%;
+ 
+}
+
+
+
+#registerBtn{
+  text-align: center;
+}
+
+#donateCard{
+  height: 60%;
+  width: 30%;
+  margin-top: 5%;
+  margin-left: 40%;
+  text-align: left;
+  margin-bottom: 7%;
+
+ 
+}
+
+h2{
+  text-align: center;
+  font-size: 3vw;
+  font-weight: 700;
+}
+
+.reoccuringSwitch{
+  text-align: center;
+  
+}
+
+.changeRecurringText{
+  font-size: 80%;
+  text-align: center;
+  
+}
+
+.donateButton{
+  margin-left: 30%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+[type="radio"]:checked+span:after{
+  background-color: red;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after{
+  background-color: red;
+}
+
+p{
+  font-size: 1vw;
+}
+
+.loginPic{
+  margin-top: 7%;
+  padding-right: 10%;
+}
+
+.donateBody{
+ 
+  background-image: url("https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5e74d72a07adf00006dbab87%2F0x0.jpg");
+}
+
+.signUpBody{
+  
+  background-image: url("https://static01.nyt.com/images/2020/01/17/arts/15galleries-nodjoumi/15galleries-nodjoumi-mobileMasterAt3x.jpg");
+}
+
+/* body{
+  position: relative;
+} */
