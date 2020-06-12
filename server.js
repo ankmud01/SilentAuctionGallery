@@ -4,9 +4,10 @@ const process = require('process');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const flash = require('express-flash');
-var bodyParser = require("body-parser");
-var cookieParser = require('cookie-parser');
-const passport = require('./config/passport');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+// const cookieParser = require('cookie-parser');
+require('./config/passport')(passport);
 require('dotenv').config();
 
 const { pid } = process;
@@ -15,7 +16,7 @@ const db = require('./models');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Parse request body as JSON
@@ -31,8 +32,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-        expires: 600000
-    }
+    expires: 600000,
+  },
 }));
 
 // using passport and session
