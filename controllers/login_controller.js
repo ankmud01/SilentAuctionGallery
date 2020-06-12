@@ -21,11 +21,37 @@ router.get('/members' /* '/api/user' */, (req, res) => {
 });
 
 // This is post route for login page
-router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/members' /* '/api/user' */,
-  faliureRedirect: '/login',
-  faliureFlash: true,
-}));
+// router.post('/api/login', checkNotAuthenticated, passport.authenticate('local-login', {
+//   successRedirect: '/members' /* '/api/user' */,
+//   faliureRedirect: '/login',
+//   faliureFlash: true,
+// }));
+  router.post('/api/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      console.log("\n\n\n########userrrr", user)
+      if (err) {
+        console.log("passport err", err);
+        return next(err); // will generate a 500 error
+      }
+      if (!user) {
+
+        return res.send({ success : false, message : 'authentication failed'});
+      }
+      req.login(user, loginErr => {
+        if (loginErr) {
+          console.log("loginerr", loginErr)
+          return next(loginErr);
+        }
+ 
+        console.log('redirecting....')
+        res.cookie('first_name', user.first_name);
+        res.cookie('user_id', user.uuid );
+
+        return res.json(true);
+        
+      });      
+    })(req, res, next);
+  });
 
 router.get('/logout', (req, res) => {
   req.headers.logged = 'false';
