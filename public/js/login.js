@@ -28,7 +28,7 @@ $(document).ready(() => {
         url: '/api/login',
         data: userData,
       }).then(() => {
-        window.location.replace('/members');
+        window.location.replace('/dashboard');
       });
     } else {
       console.log('**Please enter a valid username and password**');
