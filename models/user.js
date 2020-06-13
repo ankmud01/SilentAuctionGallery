@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* Requiring bcrypt for password hashing */
 
 const bcrypt = require('bcrypt');
@@ -5,12 +6,6 @@ const bcrypt = require('bcrypt');
 module.exports = function bar(sequelize, DataTypes) {
   const User = sequelize.define('User', {
     // The email cannot be null, and must be a proper email before creation
-    userId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -58,6 +53,7 @@ module.exports = function bar(sequelize, DataTypes) {
 
   User.associate = (models) => {
     User.hasMany(models.Bid, {
+      foreignKey: "user_id"
       onDelete: 'cascade',
     });
     User.belongsTo(models.School, {
@@ -67,6 +63,7 @@ module.exports = function bar(sequelize, DataTypes) {
     });
     User.belongsTo(models.Roles, {
       foreignKey: {
+        
         allowNull: false,
       },
     });
