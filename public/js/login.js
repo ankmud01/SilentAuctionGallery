@@ -23,13 +23,23 @@ $(document).ready(() => {
       password: passwordInput.val().trim(),
     };
     if (emailIsValid(userData.email)) {
-      $.ajax({
-        type: 'post',
-        url: '/api/login',
-        data: userData,
-      }).then(() => {
-        window.location.replace('/members');
-      });
+      try {
+        $.ajax({
+          type: 'post',
+          url: '/api/login',
+          data: userData,
+        }).then((res) => {
+          // console.log(res);
+          if (res.id !== undefined) {
+            window.location.replace('/members');
+          } else {
+            $('#err-msg').empty('').text('** INVALID Username and Password**');
+            console.log(`Invalid Username and password ~~~~~~${res.info}`);
+          }
+        });
+      } catch (err) {
+        console.log(`Invalid Username and password ~~~~~~${err}`);
+      }
     } else {
       console.log('**Please enter a valid username and password**');
       $('#create-err-msg').empty('').text('**Please enter a valid username and password**');

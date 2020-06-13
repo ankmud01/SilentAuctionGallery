@@ -92,7 +92,7 @@ module.exports = (passport) => {
       // if no user is found, return the message
       if (!user) {
         console.log('no user found');
-        return done(null, false, req.flash('loginMessage', 'No user found.'));
+        return done(null, false, 'No user found.');
       }
 
       // if the user is found but the password is wrong
