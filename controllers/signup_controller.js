@@ -38,7 +38,7 @@ router.post('/api/signup', (req, res, next) => {
       res.cookie('first_name', user.first_name);
       res.cookie('user_id', user.id);
       req.flash('success_msg', 'You are now registered');
-      return res.redirect('/members');
+      return res.redirect('/dashboard');
     });
   })(req, res, next);
 });
