@@ -13,6 +13,7 @@ async function main() {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   smtpTransport.verify(function (error, success) {
     if (error) {
       console.log(error);
@@ -30,7 +31,6 @@ async function main() {
   //     resolve(true);
   //   }
   // });
-
 }
 
 main().catch(console.error);

@@ -67,6 +67,7 @@ router.get('/send', checkNotAuthenticated, (req, res) => {
   mailOptions = {
     to: req.query.to,
     subject: 'Silent Auction Gallery is asking you to confirm your Email account',
+    // eslint-disable-next-line prefer-template
     html: 'Hi there,<br> Please Click on the link to verify your email. <br><a href=' + link + '>Click here to verify</a>',
   };
   console.log('Sent by:', process.env.GMAIL_USERNAME);
@@ -95,7 +96,8 @@ router.get('/verify', (req, res) => {
       console.log('email is verified');
       // eslint-disable-next-line prefer-template
       res.render('members', { title: 'Profile Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
-      //res.end('members, <h1>Email ' + mailOptions.to + ' is been Successfully verified');
+      // eslint-disable-next-line spaced-comment
+      // res.end('members, <h1>Email ' + mailOptions.to + ' is been Successfully verified');
     } else {
       console.log('email is not verified');
       res.end('<h1>Bad Request</h1>');

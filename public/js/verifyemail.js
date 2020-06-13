@@ -12,8 +12,10 @@ $(document).ready(() => {
       // eslint-disable-next-line object-shorthand
       $.get('/send', { to: to, subject: subject }, (data) => {
         if (data === 'sent') {
+          // eslint-disable-next-line prefer-template
           $('#message').empty().html('Email has been sent to ' + to + ' . Please check your inbox!');
         } else {
+          // eslint-disable-next-line prefer-template
           $('message').empty().html('Something happened - Unable to send email to ' + to + '. Please check the email address you entered.');
         }
       });
