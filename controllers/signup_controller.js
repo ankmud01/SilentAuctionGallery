@@ -1,67 +1,46 @@
+/* eslint-disable consistent-return */
 const express = require('express');
-const { checkAuthenticated, checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
-
+const passport = require('passport');
+const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
-// Import the model (index.js) to use its database functions.
-const db = require('../models');
-
-// This is a get route for members page
-router.get('/members', checkAuthenticated, (req, res) => {
-  res.render('members', { title: 'Login Page', school: 'North Oconee Highschool' });
-  // console.log('Line 13 - In Get / route');
+// HTML ROUTE FOR SIGNUP SCREEN
+router.get('/signup', checkNotAuthenticated, (req, res) => {
+  req.headers.logged = 'false';
+  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
 });
 
-// This is a get route for signup page
-router.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('signup2', { title: 'Login Page', school: 'North Oconee Highschool' });
-  // console.log('Line 13 - In Get / route');
+// ROUTE FOR PRIVACY POLICY
+router.get('/privacypolicy', checkNotAuthenticated, (req, res) => {
+  res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
 });
 
-// This is post route for signup page
-router.post('/api/signup', checkNotAuthenticated, (req, res) => {
-  console.log(req.body);
-  db.User.create({
-    first_name: req.body.firstname,
-    last_name: req.body.lastname,
-    email: req.body.email,
-    password: req.body.email,
-    phone: req.body.phonenumber,
-    address: req.body.address,
-    address2: req.body.address2,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zipcode,
-    school: req.body.school,
-  }).then((result) => {
-    res.json({ id: result.insertId });
-  })
-    .catch((err) => {
-      res.status(410).json(err);
+// ROUTE TO SIGNUP A NEW USER
+router.post('/api/signup', (req, res, next) => {
+  passport.authenticate('local-signup', (err, user, info) => {
+    console.log('info', info);
+    if (err) {
+      console.log('passport err', err);
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (!user) {
+      console.log('user error', user);
+      return res.send({ success: false, message: 'authentication failed' });
+    }
+    req.login(user, (loginErr) => {
+      if (loginErr) {
+        console.log('loginerr', loginErr);
+        return next(loginErr);
+      }
+      console.log('redirecting....');
+      res.cookie('first_name', user.first_name);
+      res.cookie('user_id', user.id);
+      req.flash('success_msg', 'You are now registered');
+      return res.redirect('/members');
     });
+  })(req, res, next);
 });
 
-
-// router.put('/api/login/:id', (req, res) => {
-//   const condition = `id = ${req.params.id}`;
-//   console.log(`auction_controller.js condition: ${condition}`);
-
-//   sag.update(
-//     {
-//       user: req.body.email,
-//       // devoured: req.body.gallery
-//     },
-//     condition,
-//     (result) => {
-//       if (result.changedRows === 0) {
-//         // If no rows were changed, then the ID must not exist, so 404
-//         return res.status(404).end();
-//       }
-//       return res.status(200).end();
-//     },
-//   );
-// });
-
-// Export routes for server.js to use.
 module.exports = router;

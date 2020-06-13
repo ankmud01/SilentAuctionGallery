@@ -1,31 +1,38 @@
-<div class="container" id="sideNavContainer">
-    <div class="w3-sidebar w3-bar-block w3-collapse w3-card" style="width:20%;" id="mySidebar">
-        <button class="w3-bar-item w3-button w3-hide-large " onclick="w3_close()">Close &times;</button>
-        <div class="topSectionSideNav">
-            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar" id="avatar2">
-            <br>
-            <p style="text-align: center">Welcome <span class="member-name"></span></p>
-            <p style="text-align: center;">North Oconee High School</p>
-        </div>
-        <div class="middleSectionSidenav">
-            <a href="/" class="w3-bar-item button sideNavBtn" style="text-align: center;">Home</a>
-            <a href="/profile" class="w3-bar-item button sideNavBtn" style="text-align: center;">Profile</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Auction Gallery</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Donate</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Link 2</a>
-            <a href="/logout" class="w3-bar-item button sideNavBtn" style="text-align: center;">Logout</a>
-        </div>
-        <div class="bottomSectionSidenav">
-            <a href="/logout" class="w3-bar-item button sideNavBtn" style="text-align: center;">Logout</a>
-        </div>
-    </div>
-</div>
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li>
+        <div class="user-view">
+            <div class="background">
 
-<div class="w3-main" style="margin-left:20%">
+            </div>
+            <img class="circle" style="text-align: center; margin-left:35%"
+                src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4">
+            <a href="#name"><span class="white-text name">{{userInfo.first_name}} {{userInfo.last_name}}</span></a>
+            <a href="#email"><span class="white-text email">{{userInfo.email}}</span></a>
+        </div>
+    </li>
+    <li class="sidenavLinks">
+        <div class="divider"></div>
+    </li>
+    <li class="sidenavLinks"><a href="/"><i class="material-icons crazyLinks" style="color:black">home</i>Home</a></li>
+    <li class="sidenavLinks"><a href="/profile"><i class="material-icons" style="color:black">account_box</i>Profile</a>
+    </li>
+        <li class="sidenavLinks"><a href="/gallery"><i class="material-icons" style="color:black">color_lens</i>Art Gallery</a>
+    </li>
+    <li class="sidenavLinks"><a href="/privacypolicy"><i class="material-icons" style="color:black">security</i>Privacy
+            Policy</a></li>
+    <li class="sidenavLinks"><a href="/donate"><i class="material-icons" style="color:black">payment</i>Donate/Bid</a>
+    </li>
+    
+    <li class="sidenavLinks"><a href="/logout"><i class="material-icons"
+                style="color:black">power_settings_new</i>Logout</a></li>
+
+</ul>
+
+
+<div class="w3-main">
 
     <div class="w3-teal" id="headerBg">
-        <button class="w3-button w3-transparent w3-xxlarge sidenav-close w3-hover-none" style="" id="hamburgerIcon"
-            onclick="w3_open()">&#9776;</button>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:black">menu</i></a>
         <div class="w3-container">
             <h1 class="headerText">Silent Auction Gallery</h1>
         </div>
@@ -37,9 +44,11 @@
 <div class="header" id="secondNavBar">
     <a href="/" class="logo">S.A.G</a>
     <div class="header-right">
-        <a class="active" href="/">Home</a>
+        <a href="/">Home</a>
         <a href="/profile">Profile</a>
-        <a href="#about">About</a>
+        <a href="/donate">Donate/Bid</a>
+        <a href="/privacypolicy">Privacy Policy</a>
+        <a href="#about">About Us</a>
         <a href="/logout">Log Out</a>
     </div>
 </div>
@@ -191,14 +200,14 @@
 
     /* Style the active/current link*/
     .header a.active {
-            {
-                {
-                 !-- background-color: black;
+            
+                
+                 {{!-- !-- background-color: black;
                 color: silver;
-                --
-            }
+                -- --}}
+            
         }
-    }
+    
 
     /* Float the link section to the right */
     .header-right {
@@ -255,7 +264,6 @@
 
     }
 
-    
     .auctionLink {
         color: white;
         text-align: center;
@@ -273,20 +281,15 @@
         text-shadow: 1px 1px black
     }
 
+
     #cardGalleryPics {
         margin-top: 5%;
         margin-bottom: 5%;
     }
+    
 </style>
 <script>
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-    }
-
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-    }
-
+   
     //for the countdown timer
     // Set the date we're counting down to
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
@@ -350,6 +353,8 @@
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 
-
+ $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
 
 </script>

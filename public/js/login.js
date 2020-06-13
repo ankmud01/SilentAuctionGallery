@@ -4,6 +4,17 @@ $(document).ready(() => {
   const emailInput = $('#email-input');
   const passwordInput = $('#password-input');
 
+  // Validate Email is reasonable format
+  function emailIsValid(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  $('select[required]').css({
+    display: 'inline',
+    height: 0,
+    padding: 0,
+    width: 0,
+  });
+
   // When the form is submitted, we validate there's an email and password entered
   loginForm.on('submit', (event) => {
     event.preventDefault();
@@ -11,28 +22,17 @@ $(document).ready(() => {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
     };
-    if (!userData.email || !userData.password) {
-      return;
+    if (emailIsValid(userData.email)) {
+      $.ajax({
+        type: 'post',
+        url: '/api/login',
+        data: userData,
+      }).then(() => {
+        window.location.replace('/members');
+      });
+    } else {
+      console.log('**Please enter a valid username and password**');
+      $('#create-err-msg').empty('').text('**Please enter a valid username and password**');
     }
-
-    // loginUser does a post to our "api/login" route and if successful,
-    // redirects us the the members page
-    function loginUser(email, password) {
-      $.post('/api/login', {
-        email,
-        password,
-      })
-        .then(() => {
-          window.location.replace('/api/user');
-          // If there's an error, log the error
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    // If we have an email and password we run the loginUser function and clear the form
-    loginUser(userData.email, userData.password);
-    emailInput.val('');
-    passwordInput.val('');
   });
 });

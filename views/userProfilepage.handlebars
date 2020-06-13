@@ -1,31 +1,38 @@
-<div class="container" id="sideNavContainer">
-    <div class="w3-sidebar w3-bar-block w3-collapse w3-card" style="width:20%;" id="mySidebar">
-        <button class="w3-bar-item w3-button w3-hide-large " onclick="w3_close()">Close &times;</button>
-        <div class="topSectionSideNav">
-            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar" id="avatar2">
-            <br>
-            <p style="text-align: center">Welcome <span class="member-name"></span></p>
-            <p style="text-align: center;">North Oconee High School</p>
-        </div>
-        <div class="middleSectionSidenav">
-            <a href="/" class="w3-bar-item button sideNavBtn" style="text-align: center;">Home</a>
-            <a href="/profile" class="w3-bar-item button sideNavBtn" style="text-align: center;">Profile</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Auction Gallery</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Donate</a>
-            <a href="#" class="w3-bar-item button sideNavBtn" style="text-align: center;">Link 2</a>
-            <a href="/logout" class="w3-bar-item button sideNavBtn" style="text-align: center;">Logout</a>
-        </div>
-        <div class="bottomSectionSidenav">
-            <a href="/logout" class="w3-bar-item button sideNavBtn" style="text-align: center;">Logout</a>
-        </div>
-    </div>
-</div>
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li>
+        <div class="user-view">
+            <div class="background">
 
-<div class="w3-main" style="margin-left:20%">
+            </div>
+            <img class="circle" style="text-align: center; margin-left:35%"
+                src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4">
+            <a href="#name"><span class="white-text name">{{userInfo.first_name}} {{userInfo.last_name}}</span></a>
+            <a href="#email"><span class="white-text email">{{userInfo.email}}</span></a>
+        </div>
+    </li>
+    <li class="sidenavLinks">
+        <div class="divider"></div>
+    </li>
+    <li class="sidenavLinks"><a href="/"><i class="material-icons crazyLinks" style="color:black">home</i>Home</a></li>
+    <li class="sidenavLinks"><a href="/profile"><i class="material-icons" style="color:black">account_box</i>Profile</a>
+    </li>
+        <li class="sidenavLinks"><a href="/gallery"><i class="material-icons" style="color:black">color_lens</i>Art Gallery</a>
+    </li>
+    <li class="sidenavLinks"><a href="/privacypolicy"><i class="material-icons" style="color:black">security</i>Privacy
+            Policy</a></li>
+    <li class="sidenavLinks"><a href="/donate"><i class="material-icons" style="color:black">payment</i>Donate/Bid</a>
+    </li>
+    
+    <li class="sidenavLinks"><a href="/logout"><i class="material-icons"
+                style="color:black">power_settings_new</i>Logout</a></li>
+
+</ul>
+
+
+<div class="w3-main">
 
     <div class="w3-teal" id="headerBg">
-        <button class="w3-button w3-transparent w3-xxlarge sidenav-close w3-hover-none" style="" id="hamburgerIcon"
-            onclick="w3_open()">&#9776;</button>
+         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:black">menu</i></a>
         <div class="w3-container">
             <h1 class="headerText">Silent Auction Gallery</h1>
         </div>
@@ -37,19 +44,21 @@
 <div class="header" id="secondNavBar">
     <a href="/" class="logo">S.A.G</a>
     <div class="header-right">
-        <a class="active" href="/">Home</a>
+        <a href="/">Home</a>
         <a href="/profile">Profile</a>
-        <a href="#about">About</a>
+        <a href="/donate">Donate/Bid</a>
+        <a href="/privacypolicy">Privacy Policy</a>
+        <a href="#about">About Us</a>
         <a href="/logout">Log Out</a>
     </div>
 </div>
 
 
 
-<div class="container" id="mainContent2" style="margin-right:12%;">
-    <div class="w3-card-4" id="profilePageCard" style="margin-left:12%;">
+<div class="card" id="profilePageCardMain" style="width: 80%">
+    <div class="container" id="mainContent2" style="margin-right:12%;">
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('aboutMe', this, 'white')"
-            id="defaultOpen">About me</button>
+            id="defaultOpen">Account Info</button>
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('artwork', this, 'white')">Artwork</button>
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('Contact', this, 'white')">Contact</button>
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('About', this, 'white')">Settings</button>
@@ -62,24 +71,36 @@
                     alt="Avatar" class="img-floating profilePic">
             </div>
 
-            <div class="col s12 m12 l12" style="margin-top: -1%;">
-                <div class="card" id="profilePageAboutMeCard" style="width: 100%;">
-                    <div>
-                        <h3>Profile</h3>
-                        <hr>
-                        <h4>Name:</h4>
-                        <h4>Email:</h4>
-                        <h4>Phone:</h4>
-                        <hr>
-                        <h3>School Information</h3>
+
+            <div class="card" id="profilePageAboutMeCard" style="width: 100%; margin-top: 0;">
+                <div>
+                    <h3 style="font-size: 1.7vw;">Account Information</h3>
+                    <hr>
+                    <p style="font-size: 1vw;"> First Name: {{userInfo.first_name}}</p>
+                    <p style="font-size: 1vw;"> Last Name: {{userInfo.last_name}}</p>
+                    <p style="font-size: 1vw;"> Email-Id: {{userInfo.email}}</p>
+                    <p style="font-size: 1vw;"> Phone Number: {{userInfo.phone}}</p>
+                    <p style="font-size: 1vw;"> Address1: {{userInfo.address}}</p>
+                    <p style="font-size: 1vw;"> Address2: {{userInfo.address2}}</p>
+                    <p style="font-size: 1vw;"> City: {{userInfo.city}}</p>
+                    <p style="font-size: 1vw;"> State: {{userInfo.state}}</p>
+                    <p style="font-size: 1vw;"> Zip Code: {{userInfo.zip}}</p>
+
+                    <hr>
+                    <h3 style="font-size: 1.7vw;">School Afilliation</h3>
+                    <p> School: {{userInfo.school}}</p>
+                    <p> Role: {{userInfo.role_id}}</p>
+                    
 
 
-                    </div>
+
                 </div>
-
             </div>
 
         </div>
+
+
+
 
 
 
@@ -88,214 +109,161 @@
 
 
         <div id="artwork" class="tabcontent">
-            <div class="row">
-                <div class="column">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGysCiAn_WCk3ijjIdQGrFLeU6UJoqiQ0r4owkDr0BezaeqLqY&usqp=CAU">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQW85pptV5kK_va3clRW5N8YZ7B4kF2ojUpWK2O8kaVtcL1kWK0&usqp=CAU">
-                    <img src="falls2.jpg">
-                    <img src="paris.jpg">
-                    <img src="nature.jpg">
-                    <img src="mist.jpg">
-                    <img src="paris.jpg">
-                </div>
-                <div class="column">
-                    <img src="underwater.jpg">
-                    <img src="ocean.jpg">
-                    <img src="wedding.jpg">
-                    <img src="mountainskies.jpg">
-                    <img src="rocks.jpg">
-                    <img src="underwater.jpg">
-                </div>
-                <div class="column">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGysCiAn_WCk3ijjIdQGrFLeU6UJoqiQ0r4owkDr0BezaeqLqY&usqp=CAU">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQW85pptV5kK_va3clRW5N8YZ7B4kF2ojUpWK2O8kaVtcL1kWK0&usqp=CAU">
-                    <img src="falls2.jpg">
-                    <img src="paris.jpg">
-                    <img src="nature.jpg">
-                    <img src="mist.jpg">
-                    <img src="paris.jpg">
-                </div>
-                <div class="column">
-                    <img src="underwater.jpg">
-                    <img src="ocean.jpg">
-                    <img src="wedding.jpg">
-                    <img src="mountainskies.jpg">
-                    <img src="rocks.jpg">
-                    <img src="underwater.jpg">
+            <div class="card" id="profilePageAboutMeCard" style="width: 100%;">
+                <div class="row">
+                    <div class="column">
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGysCiAn_WCk3ijjIdQGrFLeU6UJoqiQ0r4owkDr0BezaeqLqY&usqp=CAU">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQW85pptV5kK_va3clRW5N8YZ7B4kF2ojUpWK2O8kaVtcL1kWK0&usqp=CAU">
+                        <img src="falls2.jpg">
+                        <img src="paris.jpg">
+                        <img src="nature.jpg">
+                        <img src="mist.jpg">
+                        <img src="paris.jpg">
+                    </div>
+                    <div class="column">
+                        <img src="underwater.jpg">
+                        <img src="ocean.jpg">
+                        <img src="wedding.jpg">
+                        <img src="mountainskies.jpg">
+                        <img src="rocks.jpg">
+                        <img src="underwater.jpg">
+                    </div>
+                    <div class="column">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGysCiAn_WCk3ijjIdQGrFLeU6UJoqiQ0r4owkDr0BezaeqLqY&usqp=CAU">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQW85pptV5kK_va3clRW5N8YZ7B4kF2ojUpWK2O8kaVtcL1kWK0&usqp=CAU">
+                        <img src="falls2.jpg">
+                        <img src="paris.jpg">
+                        <img src="nature.jpg">
+                        <img src="mist.jpg">
+                        <img src="paris.jpg">
+                    </div>
+                    <div class="column">
+                        <img src="underwater.jpg">
+                        <img src="ocean.jpg">
+                        <img src="wedding.jpg">
+                        <img src="mountainskies.jpg">
+                        <img src="rocks.jpg">
+                        <img src="underwater.jpg">
+                    </div>
                 </div>
             </div>
         </div>
 
+
+
+
         <div id="Contact" class="tabcontent">
-            <h3>Contact</h3>
-            <p>Get in touch, or swing by for a cup of coffee.</p>
+            <div class="card" id="profilePageAboutMeCard" style="width: 100%;">
+                <h3>Contact</h3>
+                <p>Get in touch, or swing by for a cup of coffee.</p>
+            </div>
         </div>
+
+
 
         <div id="About" class="tabcontent">
-            <h3>About</h3>
-            <p>Who we are and what we do.</p>
+            <div class="card" id="profilePageAboutMeCard" style="width: 100%;">
+                <h3>About</h3>
+                <p>Who we are and what we do.</p>
+            </div>
         </div>
-
     </div>
 </div>
 
-    <!-- Container for the image gallery -->
-    <style>
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0 10px;
+<!-- Container for the image gallery -->
+<style>
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+
+    /* Create two equal columns that sits next to each other */
+    .column {
+        flex: 50%;
+        padding: 0
+    }
+
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+    }
+
+    /*the nabar*/
+
+
+
+
+    /*About me page style*/
+
+    .hero-image {
+        /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.cultureentertainment.us/wp-content/uploads/2018/09/Organizing-Your-Office-With-Wall-Art.jpg");
+        height: 25vh;
+
+        position: relative;
+        z-index: 1;
+        background-size: cover;
+        background-repeat: round;
+
+    }
+
+    .profilePic {
+        border-radius: 50%;
+        height: 50%;
+        width: 18%;
+        position: absolute;
+        z-index: 3;
+        bottom: -30px;
+        right: 25vw;
+        border: 5px solid white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #profilePageAboutMeCard {
+        width: 100%;
+        height: 100%;
+    }
+
+    #abcd {
+        width: 100%;
+    }
+</style>
+
+<script>
+
+
+    //profile card
+    function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
 
-        /* Create two equal columns that sits next to each other */
-        .column {
-            flex: 50%;
-            padding: 0
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
         }
 
-        .column img {
-            margin-top: 8px;
-            vertical-align: middle;
-        }
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
 
-        /*the nabar*/
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+    }
 
-        /* Style the header with a grey background and some padding */
-        .header {
-            overflow: hidden;
-            background-color: white;
-            padding: 20px 10px;
-            border-bottom: 1px solid gray;
-        }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
 
-
-        /* Style the header links */
-        .header a {
-            float: left;
-            color: black;
-            text-align: center;
-            padding: 10px;
-            text-decoration: none;
-            font-size: 18px;
-            line-height: 5%;
-            border-radius: 4px;
-
-        }
-
-        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-        .header a.logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        /* Change the background color on mouse-over */
-        .header a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        /* Style the active/current link*/
-        .header a.active {
-              background-color: black;
-        color: silver;
-        }
-
-        /* Float the link section to the right */
-        .header-right {
-            float: right;
-        }
-
-        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-        @media screen and (max-width: 500px) {
-            .header a {
-                float: none;
-                display: block;
-                text-align: left;
-                margin-top: 1%;
-            }
-
-            .header-right {
-                float: none;
-            }
-
-            .logo {
-                margin-bottom: 1%;
-            }
-        }
-
-
-        /*About me page style*/
-
-        .hero-image {
-            /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.cultureentertainment.us/wp-content/uploads/2018/09/Organizing-Your-Office-With-Wall-Art.jpg");
-            height: 25vh;
-            margin-top: -5%;
-            position: relative;
-            z-index: 1;
-            background-size: cover;
-            background-repeat: round;
-
-        }
-
-        .profilePic {
-            border-radius: 50%;
-            height: 50%;
-            width: 18%;
-            position: absolute;
-            z-index: 3;
-            bottom: -30px;
-            right: 25vw;
-            border: 5px solid white;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        #profilePageAboutMeCard {
-            width: 100%;
-            height: 100%;
-        }
-
-        #abcd {
-            width: 100%;
-        }
-    </style>
-
-    <script>
-        function w3_open() {
-            document.getElementById("mySidebar").style.display = "block";
-        }
-
-        function w3_close() {
-            document.getElementById("mySidebar").style.display = "none";
-        }
-
-
-        //profile card
-        function openPage(pageName, elmnt, color) {
-            // Hide all elements with class="tabcontent" by default */
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-
-            // Remove the background color of all tablinks/buttons
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].style.backgroundColor = "";
-            }
-
-            // Show the specific tab content
-            document.getElementById(pageName).style.display = "block";
-
-            // Add the specific color to the button used to open the tab content
-            elmnt.style.backgroundColor = color;
-        }
-
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+    $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+</script>
