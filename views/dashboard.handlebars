@@ -1,0 +1,360 @@
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li>
+        <div class="user-view">
+            <div class="background">
+
+            </div>
+            <img class="circle" style="text-align: center; margin-left:35%"
+                src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4">
+            <a href="#name"><span class="white-text name">{{userInfo.first_name}} {{userInfo.last_name}}</span></a>
+            <a href="#email"><span class="white-text email">{{userInfo.email}}</span></a>
+        </div>
+    </li>
+    <li class="sidenavLinks">
+        <div class="divider"></div>
+    </li>
+    <li class="sidenavLinks"><a href="/"><i class="material-icons crazyLinks" style="color:black">home</i>Home</a></li>
+    <li class="sidenavLinks"><a href="/profile"><i class="material-icons" style="color:black">account_box</i>Profile</a>
+    </li>
+        <li class="sidenavLinks"><a href="/gallery"><i class="material-icons" style="color:black">color_lens</i>Art Gallery</a>
+    </li>
+    <li class="sidenavLinks"><a href="/privacypolicy"><i class="material-icons" style="color:black">security</i>Privacy
+            Policy</a></li>
+    <li class="sidenavLinks"><a href="/donate"><i class="material-icons" style="color:black">payment</i>Donate/Bid</a>
+    </li>
+    
+    <li class="sidenavLinks"><a href="/logout"><i class="material-icons"
+                style="color:black">power_settings_new</i>Logout</a></li>
+
+</ul>
+
+
+<div class="w3-main">
+
+    <div class="w3-teal" id="headerBg">
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:black">menu</i></a>
+        <div class="w3-container">
+            <h1 class="headerText">Silent Auction Gallery</h1>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="header" id="secondNavBar">
+    <a href="/" class="logo">S.A.G</a>
+    <div class="header-right">
+        <a href="/">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/donate">Donate/Bid</a>
+        <a href="/privacypolicy">Privacy Policy</a>
+        <a href="#about">About Us</a>
+        <a href="/logout">Log Out</a>
+    </div>
+</div>
+
+
+
+<div class="container" id="mainContent" style="margin-right:10%">
+    <div class="cards" style="margin-left:10%">
+        <div class="card auctionDashboardCard">
+            <p class="countdownTimerText">Countdown To Next Auction</p>
+            <p id="demo"></p>
+        </div>
+        <div class="card auctionLinkCard">
+            <p style="margin-top: 7%;"></p>
+
+            <a class="waves-effect waves-light transparent btn auctionLink">Place a Bid</a>
+        </div>
+    </div>
+
+    <div class="cards" style="margin-left:10%">
+        <div class="card" id="cardGalleryText">
+            <a href="#">New Artwork</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Container for the image gallery -->
+<div class="container" id="mainContent3" style="margin-right:10%">
+    <div class="w3-card" id="profilePageCard2" style="margin-left:10%">
+
+        <!-- Full-width images with number text -->
+        <div class="mySlides">
+            <div class="numbertext">1 / 6</div>
+            <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/03/elements-of-art-6.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">2 / 6</div>
+            <img src="https://obxartstudio.com/wp-content/uploads/2016/10/Art.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">3 / 6</div>
+            <img src="https://acrylgiessen.com/wp-content/uploads/2018/09/resinkunst_grundlagen-1-1080x675.jpg"
+                style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">4 / 6</div>
+            <img src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1280x1280/products/36835/50093/1547274864391_Screenshot_20190108_111037_copy__55052.1547528015.jpg?c=2&imbypass=on"
+                style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">5 / 6</div>
+            <img src="https://d2u3kfwd92fzu7.cloudfront.net/asset/cms/Art_Basel_Hong_Kong_2020_THUMB-5-1.jpg"
+                style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">6 / 6</div>
+            <img src="https://bridgeportartscouncil.org/wp-content/uploads/2018/02/bacc-jahmane.jpg" style="width:100%">
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <!-- Image text -->
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+
+        <!-- Thumbnail images -->
+        <div class="row">
+            <div class="column">
+                <img class="demo cursor"
+                    src="https://mymodernmet.com/wp/wp-content/uploads/2019/03/elements-of-art-6.jpg" style="width:100%"
+                    onclick="currentSlide(1)" alt="The Woods">
+            </div>
+            <div class="column">
+                <img class="demo cursor" src="https://obxartstudio.com/wp-content/uploads/2016/10/Art.jpg"
+                    style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+            </div>
+            <div class="column">
+                <img class="demo cursor"
+                    src="https://acrylgiessen.com/wp-content/uploads/2018/09/resinkunst_grundlagen-1-1080x675.jpg"
+                    style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+            </div>
+            <div class="column">
+                <img class="demo cursor"
+                    src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1280x1280/products/36835/50093/1547274864391_Screenshot_20190108_111037_copy__55052.1547528015.jpg?c=2&imbypass=on"
+                    style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+            </div>
+            <div class="column">
+                <img class="demo cursor"
+                    src="https://d2u3kfwd92fzu7.cloudfront.net/asset/cms/Art_Basel_Hong_Kong_2020_THUMB-5-1.jpg"
+                    style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
+            </div>
+            <div class="column">
+                <img class="demo cursor"
+                    src="https://bridgeportartscouncil.org/wp-content/uploads/2018/02/bacc-jahmane.jpg"
+                    style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /*the nabar*/
+
+    /* Style the header with a grey background and some padding */
+    .header {
+        overflow: hidden;
+        background-color: white;
+        padding: 20px 10px;
+        border-bottom: 1px solid gray;
+    }
+
+
+    /* Style the header links */
+    .header a {
+        float: left;
+        color: black;
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 5%;
+        border-radius: 4px;
+
+    }
+
+    /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+    .header a.logo {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    /* Change the background color on mouse-over */
+    .header a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    /* Style the active/current link*/
+    .header a.active {
+            
+                
+                 {{!-- !-- background-color: black;
+                color: silver;
+                -- --}}
+            
+        }
+    
+
+    /* Float the link section to the right */
+    .header-right {
+        float: right;
+    }
+
+    .sideNavBtn:hover {
+        background-color: rgb(0, 0, 0);
+        color: silver;
+    }
+
+    /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+    @media screen and (max-width: 500px) {
+        .header a {
+            float: none;
+            display: block;
+            text-align: left;
+            margin-top: 1%;
+        }
+
+        .header-right {
+            float: none;
+        }
+
+        .logo {
+            margin-bottom: 1%;
+        }
+    }
+
+    .auctionDashboardCard {
+        background-image: url("https://wallpaperaccess.com/full/88229.jpg");
+        opacity: 0.9;
+        background-size: cover;
+        background-repeat: round;
+        height: 20vh;
+
+    }
+
+    .auctionLinkCard {
+        background-image: url("https://media.glassdoor.com/l/0e/87/fe/4c/a-live-art-auction.jpg");
+        opacity: 0.9;
+        background-size: cover;
+        background-repeat: round;
+        height: 20vh;
+
+    }
+
+    #cardGalleryText {
+        background-image: url("");
+        opacity: 1;
+        background-size: cover;
+        background-repeat: round;
+
+
+    }
+
+    .auctionLink {
+        color: white;
+        text-align: center;
+        font-size: 2vw;
+        margin-left: 20%;
+        background-position: bottom;
+        text-shadow: 1px 1px black
+    }
+
+    .countdownTimerText {
+        text-align: center;
+        color: white;
+        font-size: 1.5vw;
+        margin-top: 1px;
+        text-shadow: 1px 1px black
+    }
+
+
+    #cardGalleryPics {
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    
+</style>
+<script>
+   
+    //for the countdown timer
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+
+
+
+
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+ $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+</script>

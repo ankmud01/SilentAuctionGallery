@@ -17,7 +17,7 @@ router.get('/members' /* '/api/user' */, (req, res) => {
         isloggedin: req.isAuthenticated(),
       };
       console.log(user.userInfo);
-      res.render('members', user);
+      res.render('profilePage', user);
     });
   } else {
     // eslint-disable-next-line no-unused-vars

@@ -8,7 +8,7 @@ const router = express.Router();
 // HTML ROUTE FOR LOGIN SCREEN
 router.get('/login', (req, res) => {
   if (req.isAuthenticated()) {
-    res.redirect('/members');
+    res.redirect('/dashboard');
   } else {
     res.render('login');
   }
