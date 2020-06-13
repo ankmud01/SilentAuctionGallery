@@ -5,7 +5,7 @@ const db = require('../models');
 const router = express.Router();
 
 // ROUTE TO GET USER DETAILS OF SIGNED IN USER
-router.get('/members' /* '/api/user' */, (req, res) => {
+router.get('/profile' /* '/api/user' */, (req, res) => {
   if (req.isAuthenticated()) {
     db.User.findOne({
       where: {
@@ -18,7 +18,7 @@ router.get('/members' /* '/api/user' */, (req, res) => {
         isloggedin: req.isAuthenticated(),
       };
       console.log(user.userInfo);
-      res.render('profilePage', user);
+      res.render('userProfilepage', user);
     });
   } else {
     // eslint-disable-next-line no-unused-vars
