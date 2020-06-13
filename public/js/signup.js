@@ -35,7 +35,7 @@ $(document).ready(() => {
         data: newAccount,
       }).then((data) => {
         console.log(data);
-        window.location.replace('/login');
+        window.location.replace('/dashboard');
       });
     } else {
       console.log('**Please fill out entire form**');
