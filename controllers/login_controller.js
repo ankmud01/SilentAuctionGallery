@@ -1,45 +1,59 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const passport = require('passport');
-const db = require('../models');
-const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
-// This is get route for login page
-router.get('/login', checkNotAuthenticated, (req, res) => {
-  req.headers.logged = 'true';
-  res.render('login', { title: 'Login Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
+// HTML ROUTE FOR LOGIN SCREEN
+router.get('/login', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.redirect('/members');
+  } else {
+    res.render('login');
+  }
 });
 
-// This is get route for all users
-router.get('/members' /* '/api/user' */, (req, res) => {
-  db.User.findAll({}).then((users) => {
-    req.headers.logged = 'true';
-    res.json(users);
-    res.render('members', { logged: req.isAuthenticated() });
-  });
+// ROUTE TO LOGIN USER INTO APPLICATION
+router.post('/api/login', (req, res, next) => {
+  passport.authenticate('local-login', (err, user, info) => {
+    console.log('\n\n\n########userrrr', user);
+    if (err) {
+      console.log('passport err', err);
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (!user) {
+      req.flash('loginMessage', 'No user found.');
+      return res.send({ success: false, message: 'loginMessage' });
+    }
+    req.login(user, (loginErr) => {
+      if (loginErr) {
+        console.log('loginerr', loginErr);
+        return next(loginErr);
+      }
+      console.log('redirecting....');
+      res.cookie('first_name', user.first_name);
+      res.cookie('user_id', user.id);
+      return res.json(true);
+    });
+  })(req, res, next);
 });
 
-// This is post route for login page
-router.post('/api/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/members' /* '/api/user' */,
-  faliureRedirect: '/login',
-  faliureFlash: true,
-}));
-
+// ROUTE TO LOG OUT USER
 router.get('/logout', (req, res) => {
   req.headers.logged = 'false';
-  console.log(
-    'login_controller line 49 user is logged in: ',
-    req.headers.logged,
-  );
+  console.log('login_controller line 49 user is logged in: ', req.headers.logged);
   res.render('logout', {
     school: 'North Oconee High School',
     logged: req.isAuthenticated(), // needs to be Not Logged in to show the LogIn menu option
   });
-  req.logout(); // Needs to be a separate LoguOut Page
-  // res.render('/login', { logged: req.headers.logged });
+  req.logout();
+  res.clearCookie('user_sid');
+  res.clearCookie('first_name');
+  res.clearCookie('user_id');
+  // res.redirect('/login');
 });
 
-// Export routes for server.js to use.
+
 module.exports = router;

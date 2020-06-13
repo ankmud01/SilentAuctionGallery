@@ -8,17 +8,18 @@
   <div class="container">
     <div class="row">
       <div class="card-panel hoverable col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
-        <p> First Name:  <span class="first-name"><span></p>
-        <p> Last Name:  <span class="last-name"><span></p>
-        <p> Email-Id:  <span class="emailid"><span></p>
-        <p> Phone Number:  <span class="phone"><span></p>
-        <p> Address1:  <span class="add1"><span></p>
-        <p> Address2:  <span class="add2"><span></p>
-        <p> City:  <span class="city"><span></p>
-        <p> State:  <span class="state"><span></p>
-        <p> Zip Code:  <span class="zipcode"><span></p>
-        <p> School:  <span class="school"><span></p>
+        <h2>Welcome, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
+        <p> First Name:  {{userInfo.first_name}}</p>
+        <p> Last Name:  {{userInfo.last_name}}</p>
+        <p> Email-Id:  {{userInfo.email}}</p>
+        <p> Phone Number: {{userInfo.phone}}</p>
+        <p> Address1:  {{userInfo.address}}</p>
+        <p> Address2: {{userInfo.address2}}</p>
+        <p> City:  {{userInfo.city}}</p>
+        <p> State:  {{userInfo.state}}</p>
+        <p> Zip Code:  {{userInfo.zip}}</p>
+        <p> School:  {{userInfo.school}}</p>
+        <p> Role: {{userInfo.role_id}}</p>
       </div>
     </div>
     <div>
