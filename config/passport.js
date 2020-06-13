@@ -61,7 +61,7 @@ module.exports = (passport) => {
           email: req.body.email,
           phone: req.body.phone,
           password: db.User.generateHash(password),
-          secretToken: db.User.secretToken,
+          // secretToken: db.User.secretToken,
 
         }).then((dbUser) => done(null, dbUser)).catch((error) => { console.log(error); });
       });
