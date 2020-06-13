@@ -1,6 +1,6 @@
 const express = require('express');
 const { checkAuthenticated, checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
-
+const { smtpTransport } = require('../config/verify');
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.get('/signup', checkNotAuthenticated, (req, res) => {
   // console.log('Line 13 - In Get / route');
 });
 
-router.get('/privacypolicy', checkNotAuthenticated, (req, res) => {
+router.get('/privacypolicy', (req, res) => {
   res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
 });
 
@@ -48,6 +48,58 @@ router.post('/api/signup', checkNotAuthenticated, (req, res) => {
     .catch((err) => {
       res.status(410).json(err);
     });
+});
+
+
+// Email verification
+let rand;
+let mailOptions;
+let host;
+let link;
+router.get('/send', checkNotAuthenticated, (req, res) => {
+  rand = Math.floor((Math.random() * 100) + 54);
+  console.log('email Verification random number:', rand);
+  host = req.get('host');
+  link = `http://localhost:3000/verify?id=${rand}`;
+  // link = `http://${req.get(host)}/verify?id=${rand}`;
+  mailOptions = {
+    to: req.query.to,
+    subject: 'Silent Auction Gallery is asking you to confirm your Email account',
+    html: 'Hi there,<br> Please Click on the link to verify your email. <br><a href=' + link + '>Click here to verify</a>',
+  };
+  console.log('Sent by:', process.env.GMAIL_USERNAME);
+  console.log(mailOptions);
+  smtpTransport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(error);
+      res.end('error');
+    } else {
+      console.log(`'Message sent: ${response}`);
+      res.end('sent');
+    }
+  });
+});
+
+router.get('/verify', (req, res) => {
+  host = 'localhost:3000';
+  // eslint-disable-next-line prefer-template
+  console.log(req.protocol + ':/' + req.get('host'));
+  // eslint-disable-next-line prefer-template
+  if ((req.protocol + '://' + req.get('host')) === ('http://' + host)) {
+    console.log('Domain is matched. Information is from Authentic email. Random number in rand:', req.query.id);
+    console.log('Random number :', rand);
+    if (parseInt(req.query.id, 10) === rand) {
+      console.log('email is verified');
+      // eslint-disable-next-line prefer-template
+      res.render('members', { title: 'Profile Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
+      //res.end('members, <h1>Email ' + mailOptions.to + ' is been Successfully verified');
+    } else {
+      console.log('email is not verified');
+      res.end('<h1>Bad Request</h1>');
+    }
+  } else {
+    res.end('<h1>Request is from unknown source');
+  }
 });
 
 // router.put('/api/login/:id', (req, res) => {
