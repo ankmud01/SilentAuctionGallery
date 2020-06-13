@@ -51,6 +51,14 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    secretToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   });
 
   User.associate = (models) => {

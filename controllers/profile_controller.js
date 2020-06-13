@@ -17,7 +17,9 @@ router.get('/members' /* '/api/user' */, (req, res) => {
         isloggedin: req.isAuthenticated(),
       };
       console.log(user.userInfo);
-      res.render('members', user);
+      res.render('members', {
+        userInfo: user.userInfo, title: 'Profile Page', school: 'North Oconee High School', logged: req.isAuthenticated(),
+      });
     });
   } else {
     // eslint-disable-next-line no-unused-vars

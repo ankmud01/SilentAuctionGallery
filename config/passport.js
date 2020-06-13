@@ -1,11 +1,10 @@
 /* eslint-disable consistent-return */
 const LocalStrategy = require('passport-local').Strategy;
-
+const randomstring = require('randomstring');
 const db = require('../models');
 
 module.exports = (passport) => {
   console.log('passport loading');
-
 
   // PASSPORT SESSION SETUP
   // required for persistent login sessions
@@ -26,7 +25,7 @@ module.exports = (passport) => {
       }
     });
   });
-
+  
   // LOCAL SIGNUP
   // we are using named strategies since we have one for login and one for signup
   // by default, if there was no name, it would just be called 'local'
@@ -49,6 +48,7 @@ module.exports = (passport) => {
           console.log('signupMessage', 'That email is already taken.');
           return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
         }
+        const secretToken = randomstring.generate();
         db.User.create({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -61,6 +61,7 @@ module.exports = (passport) => {
           email: req.body.email,
           phone: req.body.phone,
           password: db.User.generateHash(password),
+          secretToken: db.User.secretToken,
 
         }).then((dbUser) => done(null, dbUser)).catch((error) => { console.log(error); });
       });

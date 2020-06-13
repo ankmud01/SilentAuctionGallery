@@ -1,27 +1,37 @@
+/* eslint-disable prefer-arrow-callback */
 
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-
-return new Promise(((resolve, reject) => {
-  let smtpTransport = nodemailer.createTransport({
+async function main() {
+  const smtpTransport = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
       user: process.env.GMAIL_USERNAME,
       pass: process.env.GMAIL_PASSWORD,
     },
+  });
 
-});
-let resp = false;
+  smtpTransport.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Server is ready to take our messages');
+    }
+  });
 
-smtpTransport.sendMail(mailOptions, function(error, info) {
-  if (error) {
-    console.log('From verify.js Error is: ', error);
-    resolve(false);
-  }
-  else {
-    console.log('Email sent: ' + info.response);
-    resolve(true);
-  }
-});
+  // let info = await smtpTransport.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.log(`error is ${error}`);
+  //     resolve(false); // or use rejcet(false) but then you will have to handle errors
+  //   } else {
+  //     console.log(`Email sent: ${info.response}`);
+  //     resolve(true);
+  //   }
+  // });
+
+}
+
+main().catch(console.error);
+// module.export = smtpTransport;

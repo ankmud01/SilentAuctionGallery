@@ -28,42 +28,14 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
   
-      {{!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script>
-        $(document).ready(function(){
-          const from = 'silentauctiongallery@gmail.com';
-          let to = '';
-          const subject = 'Silent Auction Verification Email';
-          let text;
-          $("#send_email").click(function(){     
-            to=$("#emailid").val();
-            console.log('Send to :',to );
-            subject;
-            text=$("#content").val();
-            if (!to) {
-              $("#message").text("You must type in an Email to verify.");
-            } else {
-              $("#message").text("Sending E-mail...Please wait");
-              $.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
-                if(data == "sent") {
-                    $("#message").empty().html("Email has been sent to " + to + " . Please check your inbox!");
-                } else {
-                  $("message").empty().html("Something happened - Unable to send email to " + to + ". Please check the email address you entered.");
-                } 
-              });
-            }
-          });
-        });
-      </script> --}}
-
-
   <div class="row">
       <div class="card-panel hoverable col-md-6 col-md-offset-3">
         <h6>EMail Verification</h6>
-        <h6> Email-Id:  <span class="emailid"><span></h6>
-        <input id="emailid" type="text" placeholder="Enter E-mail ID where you want to send" />
+        <h6> Email-Id:  <span class="emailid">{{userInfo.email}}<span></h6>
+        <input id="emailid" type="text" placeholder="Enter E-mail ID where you want to send"{{userInfo.email}} />
         
         
-        <button type="submit" class="btn btn-default red darken-4 hoverable" id="send_email">Verify Email</button>
+        <button type="submit" id="send_email" class="btn btn-default red darken-4 hoverable">Verify Email</button>
         <span id="message"></span>
       </div>
 

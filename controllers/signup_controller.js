@@ -1,6 +1,11 @@
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable consistent-return */
 const express = require('express');
 const passport = require('passport');
+const randomstring = require('randomstring');
+
+const smtpTransport = require('../config/verify');
+
 const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
@@ -12,8 +17,8 @@ router.get('/signup', checkNotAuthenticated, (req, res) => {
 });
 
 // ROUTE FOR PRIVACY POLICY
-router.get('/privacypolicy', checkNotAuthenticated, (req, res) => {
-  res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
+router.get('/privacypolicy', (req, res) => {
+  res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School' });
 });
 
 // ROUTE TO SIGNUP A NEW USER
@@ -49,6 +54,10 @@ let rand;
 let mailOptions;
 let host;
 let link;
+
+// user.value.secretToken = secretToken;
+// user.value.active = false; // Flag account as inactive until verified
+
 router.get('/send', checkNotAuthenticated, (req, res) => {
   rand = Math.floor((Math.random() * 100) + 54);
   console.log('email Verification random number:', rand);
@@ -61,7 +70,8 @@ router.get('/send', checkNotAuthenticated, (req, res) => {
     html: 'Hi there,<br> Please Click on the link to verify your email. <br><a href=' + link + '>Click here to verify</a>',
   };
   console.log('Sent by:', process.env.GMAIL_USERNAME);
-  console.log(mailOptions);
+  console.log('Line 69 signup_controller.js: ', mailOptions);
+  // eslint-disable-next-line func-names
   smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       console.log(error);
