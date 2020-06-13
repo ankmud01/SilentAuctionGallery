@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 const express = require('express');
 const passport = require('passport');
-const randomstring = require('randomstring');
+
 
 const smtpTransport = require('../config/verify');
 
