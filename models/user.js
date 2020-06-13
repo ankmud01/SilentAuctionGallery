@@ -1,6 +1,7 @@
 /* Requiring bcrypt for password hashing */
-
+const randomstring = require('randomstring');
 const bcrypt = require('bcrypt');
+
 // Creating our User model
 module.exports = function bar(sequelize, DataTypes) {
   const User = sequelize.define('User', {
@@ -51,6 +52,15 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    secretToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      default: false,
+    },
   });
 
   User.associate = (models) => {
@@ -68,5 +78,7 @@ module.exports = function bar(sequelize, DataTypes) {
   User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
+  // Generate SecretToken for Email verification
+  User.secretToken = randomstring.generate();
   return User;
 };
