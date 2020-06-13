@@ -20,7 +20,7 @@ footer {
   height:5%;
   width:100%;
   text-align: center;
-  
+  z-index: 99;
   padding-bottom: 2%;
   border-top: 1px solid black;
 }
@@ -53,6 +53,7 @@ footer {
   margin-top: 5%;
   margin-left: 5%;
   margin-bottom: 5%;
+  z-index: 99;
  
 }
 #loginCard2{
