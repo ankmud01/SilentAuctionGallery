@@ -4,11 +4,11 @@ const { checkAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
-// This is get route for dashboard
+// HTML ROUTE FOR DASHBOARD SCREEN
 router.get('/', checkAuthenticated, (req, res) => {
-  req.headers.logged = 'true';
-  res.render('index', { title: 'Gallery', school: 'North Oconee Highschool', logged: req.isAuthenticated() });
-//   console.log('Line 13 - In Get / route');
+  if (req.isAuthenticated()) {
+    res.render('index', { title: 'Gallery', school: 'North Oconee Highschool', logged: req.isAuthenticated() });
+  }
 });
 
 module.exports = router;
