@@ -31,7 +31,7 @@ $(document).ready(() => {
         }).then((res) => {
           // console.log(res);
           if (res.id !== undefined) {
-            window.location.replace('/members');
+            window.location.replace('/dashboard');
           } else {
             $('#err-msg').empty('').text('** INVALID Username and Password**');
             console.log(`Invalid Username and password ~~~~~~${res.info}`);
