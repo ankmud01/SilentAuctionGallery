@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 $(document).ready(() => {
   // <h2>Welcome, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
