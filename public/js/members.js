@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 $(document).ready(() => {
   // GET PROFILE INFORMATION
-  $('#updateButton').on('click', (event) => {
+  $('.profilePage').on('click', (event) => {
     event.preventDefault();
-    console.log('profile button clicked');
+    console.log('Profile Button Clicked');
   });
 
   // DELETE ACCOUNT
