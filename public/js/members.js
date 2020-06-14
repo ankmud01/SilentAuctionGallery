@@ -1,20 +1,13 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 $(document).ready(() => {
-  // <h2>Welcome, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
-  // <p> First Name: {{userInfo.first_name}}</p>
-  // <p> Last Name: {{userInfo.last_name}}</p>
-  // <p> Email-Id: {{userInfo.email}}</p>
-  // <p> Phone Number: {{userInfo.phone}}</p>
-  // <p> Address1: {{userInfo.address}}</p>
-  // <p> Address2: {{userInfo.address2}}</p>
-  // <p> City: {{userInfo.city}}</p>
-  // <p> State: {{userInfo.state}}</p>
-  // <p> Zip Code: {{userInfo.zip}}</p>
-  // <p> School: {{userInfo.school}}</p>
-  // <p> Role: {{userInfo.role_id}}</p>
+  // GET PROFILE INFORMATION
+  $('#updateButton').on('click', (event) => {
+    event.preventDefault();
+    console.log('profile button clicked');
+  });
 
-  // Delete Account
+  // DELETE ACCOUNT
   $('#deleteButton').on('click', (event) => {
     event.preventDefault();
     // $('#err-msg').empty('');
