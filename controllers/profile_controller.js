@@ -5,13 +5,15 @@ const db = require('../models');
 const router = express.Router();
 
 // ROUTE TO GET USER DETAILS OF SIGNED IN USER
-router.get('/profile' /* '/api/user' */, (req, res) => {
+router.get('/profile', (req, res) => {
+  console.log('Hello I am in profile');
   if (req.isAuthenticated()) {
     db.User.findOne({
       where: {
         id: req.session.passport.user,
       },
     }).then((dbUser) => {
+      console.log(dbUser);
       const user = {
         userInfo: dbUser.dataValues,
         id: req.session.passport.user,
