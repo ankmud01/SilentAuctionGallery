@@ -19,6 +19,20 @@
 
             <div class="card" id="profilePageAboutMeCard" style="width: 100%; margin-top: 0;">
                 <div>
+                    <hr>
+                    <h6>Search User by Email</h6>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <form>
+                                <div class="input-field">
+                                    <input id="search" type="search" required>
+                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                    <hr>
                     <h3 style="font-size: 1.7vw;">Account Information</h3>
                     <hr>
                     <form class="signup col s12 m12 l12">
@@ -28,7 +42,7 @@
                                 <label for="id">Account ID</label>
                             </div>
                             <div class="welcomMessage col s10">
-                                <h2>Hello, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
+                                <h2>{{userInfo.first_name}} {{userInfo.last_name}}</h2>
                             </div>
                         </div>
                         <div class="row">
@@ -96,6 +110,10 @@
                                 <label for="role">Role</label>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE
+                            USER</button>
+                        <button type="submit" data-target="delete-account-modal"
+                            class="btn btn-default red darken-4 modal-trigger" id="deleteButton">DELETE USER</button>
 
                         <hr>
                         <h3 style="font-size: 1.5vw;">Email Validation</h3>
@@ -105,7 +123,6 @@
                         </div>
                         <button type="submit" class="btn btn-default red darken-4" id="validateEmailButton">VALIDATE
                             EMAIL</button>
-                        <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE</button>
                         <button type="submit" class="btn btn-default red darken-4" id="refreshButton">REFRESH</button>
                     </form>
 
