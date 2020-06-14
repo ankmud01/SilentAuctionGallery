@@ -10,36 +10,41 @@ $(document).ready(() => {
   // DELETE ACCOUNT
   $('#deleteButton').on('click', (event) => {
     event.preventDefault();
-    // $('#err-msg').empty('');
-    // $('#delete-account-modal').open();
-    // });
+    $('#err-msg').empty('');
+    $('#delete-account-modal').modal();
+  });
 
-    // $('#confirm-delete').on('click', (event) => {
+  $('#confirm-delete').on('click', (event) => {
+    console.log('Clicked on Confirm Delete button');
     const deleteAccount = {
       account_id: $('#account_id').val().trim(),
-      password: $('#password-input').val().trim(),
+      email: $('#email-input').val().trim(),
     };
     console.log(deleteAccount);
-    if (deleteAccount.account_id.length > 0 && deleteAccount.password.length > 0) {
-      $.ajax(`/accounts/${deleteAccount.account_id}/${deleteAccount.password}`, {
+    if (deleteAccount.account_id.length > 0 && deleteAccount.email.length > 0) {
+      $.ajax(`/user/${deleteAccount.account_id}/${deleteAccount.email}`, {
         type: 'DELETE',
       }).then(
         () => {
           console.log('deleted account', deleteAccount.account_id);
           // Reload the page to get the updated list
+          // window.location.replace('/signup');
           location.reload();
         },
-
       );
     } else {
       console.log('fill out entire form');
       $('#err-msg').empty('').text('fill out entire form');
     }
   });
+  $('#cancel-delete').on('click', (event) => {
+    $('#delete-account-modal').modal('close');
+  });
 
   // UPDATE ACCOUNT
   $('#updateButton').on('click', (event) => {
     event.preventDefault();
+    console.log('About to update my account...');
 
     // capture All changes
     const changeAccount = {
@@ -54,21 +59,20 @@ $(document).ready(() => {
       school: $('#school-input').val().trim(),
       email: $('#email-input').val().trim(),
       phone: $('#phone-input').val().trim(),
-      password: $('#password-input').val().trim(),
     };
     $('#err-msg').empty('');
     // $("#change-account-modal").modal("show");
     console.log(changeAccount);
 
 
-    if (changeAccount.password.length > 0 && changeAccount.phone.length > 0
+    if (changeAccount.phone.length > 0
       && changeAccount.email.length > 0 && changeAccount.zip.length > 0
       && changeAccount.state.length > 0 && changeAccount.city.length > 0
       && changeAccount.address1.length > 0 && changeAccount.last_name.length > 0
       && changeAccount.first_name.length > 0) {
       $.ajax({
         type: 'PUT',
-        url: `/accounts/${changeAccount.account_id}/${changeAccount.password}`,
+        url: `/user/${changeAccount.account_id}`,
         data: changeAccount,
       }).then(
         () => {

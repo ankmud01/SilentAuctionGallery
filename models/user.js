@@ -37,6 +37,7 @@ module.exports = function bar(sequelize, DataTypes) {
     },
     address2: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     city: {
       type: DataTypes.STRING,
@@ -52,7 +53,7 @@ module.exports = function bar(sequelize, DataTypes) {
     },
     school: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     secretToken: {
       type: DataTypes.STRING,
