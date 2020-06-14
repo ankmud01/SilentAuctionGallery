@@ -52,7 +52,6 @@ router.post('/api/signup', (req, res, next) => {
 
 
 // Email verification
-let rand;
 let mailOptions;
 let host;
 let link;
