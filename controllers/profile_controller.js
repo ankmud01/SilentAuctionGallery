@@ -17,10 +17,15 @@ router.get('/profile', async (req, res) => {
           const user = {
             userInfo: dbUser[0],
             id: req.session.passport.user,
+            // roleid: dbUser[0].role_id,
             isloggedin: req.isAuthenticated(),
           };
           // console.log(user.userInfo);
-          res.render('userProfilepage', user);
+          if (dbUser[0].role_id > 1) {
+            res.render('userProfilepage', user);
+          } else {
+            res.render('adminProfilepage', user);
+          }
         });
     } catch (error) {
       console.log(error);
@@ -69,5 +74,4 @@ router.put('/user/:account_id', (req, res) => {
     res.json(dbuser);
   });
 });
-
 module.exports = router;
