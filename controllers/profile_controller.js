@@ -6,25 +6,27 @@ const db = require('../models');
 const router = express.Router();
 
 // ROUTE TO GET USER DETAILS OF SIGNED IN USER
-router.get('/profile', (req, res) => {
-  console.log('Hello I am in profile');
+router.get('/profile', async (req, res) => {
   if (req.isAuthenticated()) {
-    db.User.findOne({
-      where: {
-        id: req.session.passport.user,
-      },
-    }).then((dbUser) => {
-      console.log(dbUser);
-      const user = {
-        userInfo: dbUser.dataValues,
-        id: req.session.passport.user,
-        isloggedin: req.isAuthenticated(),
-      };
-      console.log(user.userInfo);
-      res.render('userProfilepage', user);
-    });
+    try {
+      await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.id = :id', {
+        replacements: { id: req.session.passport.user },
+        type: db.Sequelize.QueryTypes.SELECT,
+      })
+        .then((dbUser) => {
+          const user = {
+            userInfo: dbUser[0],
+            id: req.session.passport.user,
+            isloggedin: req.isAuthenticated(),
+          };
+          // console.log(user.userInfo);
+          res.render('userProfilepage', user);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
     const user = {
       id: null,
       isloggedin: req.isAuthenticated(),
@@ -42,7 +44,7 @@ router.delete('/user/:account_id/:email', (req, res) => {
       id: req.params.account_id,
       email: req.params.email,
     },
-  }).then(() => res.json());
+  }).then((dbUser) => res.json(dbUser));
 });
 
 // ROUTER TO UPDATE ACCOUNT
