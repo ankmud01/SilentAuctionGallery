@@ -3,13 +3,6 @@
 
 module.exports = function bar(sequelize, DataTypes) {
   const Bid = sequelize.define('Bid', {
-    bidId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      unique: true,
-      type: DataTypes.INTEGER,
-    },
     startBid: {
       type: DataTypes.INTEGER,
     },
@@ -23,15 +16,13 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   Bid.associate = (models) => {
-    Bid.belongsTo(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
+    Bid.hasMany(models.OrderHdr, {
+      foreignKey: 'bid_id',
+      onDelete: 'cascade',
     });
-    Bid.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+    Bid.hasMany(models.OrderDtl, {
+      foreignKey: 'bid_id',
+      onDelete: 'cascade',
     });
   };
 

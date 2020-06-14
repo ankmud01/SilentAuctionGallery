@@ -3,13 +3,6 @@
 
 module.exports = function bar(sequelize, DataTypes) {
   const Artwork = sequelize.define('Artwork', {
-    artId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      unique: true,
-      type: DataTypes.INTEGER,
-    },
     artName: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -29,17 +22,16 @@ module.exports = function bar(sequelize, DataTypes) {
 
   Artwork.associate = (models) => {
     Artwork.hasMany(models.Bid, {
+      foreignKey: 'artwork_id',
       onDelete: 'cascade',
     });
-    Artwork.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+    Artwork.hasMany(models.OrderHdr, {
+      foreignKey: 'artwork_id',
+      onDelete: 'cascade',
     });
-    Artwork.belongsTo(models.School, {
-      foreignKey: {
-        allowNull: false,
-      },
+    Artwork.hasMany(models.OrderDtl, {
+      foreignKey: 'artwork_id',
+      onDelete: 'cascade',
     });
   };
 

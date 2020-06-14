@@ -3,12 +3,6 @@
 
 module.exports = function bar(sequelize, DataTypes) {
   const OrderHdr = sequelize.define('OrderHdr', {
-    orderHdrId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
     orderStatus: {
       type: DataTypes.STRING,
     },
@@ -24,24 +18,5 @@ module.exports = function bar(sequelize, DataTypes) {
       type: DataTypes.DATE,
     },
   });
-
-  OrderHdr.associate = (models) => {
-    OrderHdr.belongsTo(models.Bid, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    OrderHdr.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-    OrderHdr.belongsTo(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-  };
-
   return OrderHdr;
 };

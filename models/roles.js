@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const roles = sequelize.define('Roles', {
-    roleId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
     roleName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   roles.associate = (models) => {
     // associations can be defined here
     roles.hasMany(models.User, {
+      foreignKey: 'role_id',
       onDelete: 'cascade',
     });
   };

@@ -3,12 +3,6 @@
 
 module.exports = function bar(sequelize, DataTypes) {
   const School = sequelize.define('School', {
-    schoolId: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
     schoolName: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -30,12 +24,8 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   School.associate = (models) => {
-    School.hasMany(models.Artwork, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
     School.hasMany(models.User, {
+      foreignKey: 'school_id',
       onDelete: 'cascade',
     });
   };
