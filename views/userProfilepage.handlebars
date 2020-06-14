@@ -1,59 +1,4 @@
-<ul id="slide-out" class="sidenav sidenav-fixed">
-    <li>
-        <div class="user-view">
-            <div class="background">
-
-            </div>
-            <img class="circle" style="text-align: center; margin-left:35%"
-                src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4">
-            <a href="#name"><span class="white-text name">{{userInfo.first_name}} {{userInfo.last_name}}</span></a>
-            <a href="#email"><span class="white-text email">{{userInfo.email}}</span></a>
-        </div>
-    </li>
-    <li class="sidenavLinks">
-        <div class="divider"></div>
-    </li>
-    <li class="sidenavLinks"><a href="/"><i class="material-icons crazyLinks" style="color:black">home</i>Home</a></li>
-    <li class="sidenavLinks"><a href="/profile"><i class="material-icons" style="color:black">account_box</i>Profile</a>
-    </li>
-        <li class="sidenavLinks"><a href="/gallery"><i class="material-icons" style="color:black">color_lens</i>Art Gallery</a>
-    </li>
-    <li class="sidenavLinks"><a href="/privacypolicy"><i class="material-icons" style="color:black">security</i>Privacy
-            Policy</a></li>
-    <li class="sidenavLinks"><a href="/donate"><i class="material-icons" style="color:black">payment</i>Donate/Bid</a>
-    </li>
-    
-    <li class="sidenavLinks"><a href="/logout"><i class="material-icons"
-                style="color:black">power_settings_new</i>Logout</a></li>
-
-</ul>
-
-
-<div class="w3-main">
-
-    <div class="w3-teal" id="headerBg">
-         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:black">menu</i></a>
-        <div class="w3-container">
-            <h1 class="headerText">Silent Auction Gallery</h1>
-        </div>
-
-
-    </div>
-</div>
-
-<div class="header" id="secondNavBar">
-    <a href="/" class="logo">S.A.G</a>
-    <div class="header-right">
-        <a href="/">Home</a>
-        <a href="/profile">Profile</a>
-        <a href="/donate">Donate/Bid</a>
-        <a href="/privacypolicy">Privacy Policy</a>
-        <a href="#about">About Us</a>
-        <a href="/logout">Log Out</a>
-    </div>
-</div>
-
-
+{{> sidebarNav }}
 
 <div class="card" id="profilePageCardMain" style="width: 80%">
     <div class="container" id="mainContent2" style="margin-right:12%;">
@@ -76,23 +21,95 @@
                 <div>
                     <h3 style="font-size: 1.7vw;">Account Information</h3>
                     <hr>
-                    <p> First Name: {{userInfo.first_name}}</p>
-                    <p> Last Name: {{userInfo.last_name}}</p>
-                    <p> Email-Id: {{userInfo.email}}</p>
-                    <p> Phone Number: {{userInfo.phone}}</p>
-                    <p> Address1: {{userInfo.address}}</p>
-                    <p> Address2: {{userInfo.address2}}</p>
-                    <p> City: {{userInfo.city}}</p>
-                    <p> State: {{userInfo.state}}</p>
-                    <p> Zip Code: {{userInfo.zip}}</p>
+                    <form class="signup col s12 m12 l12">
+                        <div class="row">
+                            <div class="input-field col s2">
+                                <input disabled id="account_id" type="text" value="{{userInfo.id}}">
+                                <label for="id">Account ID</label>
+                            </div>
+                            <div class="welcomMessage col s10">
+                                <h2>Hello, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="First Name" id="firstname-input" type="text"
+                                    value="{{userInfo.first_name}}">
+                                <label for="first_name">Full Name*</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="lastname-input" type="text" value="{{userInfo.last_name}}">
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="address-input" type="text" value="{{userInfo.address}}">
+                                <label for="address">Address</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="address2-input" type="text" "{{userInfo.address2}}">
+                                <label for="address2">Address2</label>
+                            </div>
+                        </div>
 
-                    <hr>
-                    <h3 style="font-size: 1.7vw;">School Afilliation</h3>
-                    <p> School: {{userInfo.school}}</p>
-                    <p> Role: {{userInfo.role_id}}</p>
-                    
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="city-input" type="text" value="{{userInfo.city}}">
+                                <label for="city">City</label>
+                            </div>
 
+                            <div class="input-field col s6">
+                                <input id="state-input" type="text" value="{{userInfo.state}}">
+                                <label for="state">State</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="zipcode-input" type="text" value="{{userInfo.zip}}">
+                                <label for="zipCode">Zip Code</label>
+                            </div>
 
+                            <div class="input-field col s6">
+                                <input id="phone-input" type="text" value="{{userInfo.phone}}">
+                                <label for="phoneNumber">Tel Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email-input" type="email" value="{{userInfo.email}}">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h3 style="font-size: 1.7vw;">School Afilliation</h3>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled id="school-input" type="text" value="{{userInfo.school}}">
+                                <label for="school">School</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled id="role-input" type="text" value="{{userInfo.role_id}}">
+                                <label for="role">Role</label>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h3 style="font-size: 1.5vw;">Email Validation</h3>
+                        <div class="row">
+                            <input id="email-input" type="text" class="validate">
+                            <label for="email">Enter Your Email Address</label>
+                        </div>
+                        <button type="submit" class="btn btn-default red darken-4" id="validateEmailButton">VALIDATE
+                            EMAIL</button>
+                        <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE</button>
+                        <button type="submit" data-target="delete-account-modal"
+                            class="btn btn-default red darken-4 modal-trigger" id="deleteButton">DELETE</button>
+                        <button type="submit" class="btn btn-default red darken-4" id="refreshButton">REFRESH</button>
+                    </form>
 
                 </div>
             </div>
@@ -235,6 +252,7 @@
     }
 </style>
 
+<script type="text/javascript" src="/js/members.js"></script>
 <script>
 
 
@@ -263,7 +281,7 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 
-    $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
 </script>

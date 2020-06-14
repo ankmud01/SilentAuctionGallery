@@ -1,11 +1,10 @@
 /* eslint-disable consistent-return */
 const LocalStrategy = require('passport-local').Strategy;
-
+const randomstring = require('randomstring');
 const db = require('../models');
 
 module.exports = (passport) => {
   console.log('passport loading');
-
 
   // PASSPORT SESSION SETUP
   // required for persistent login sessions
@@ -49,6 +48,8 @@ module.exports = (passport) => {
           console.log('signupMessage', 'That email is already taken.');
           return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
         }
+        // eslint-disable-next-line no-unused-vars
+        const secretToken = randomstring.generate();
         db.User.create({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
@@ -61,7 +62,8 @@ module.exports = (passport) => {
           email: req.body.email,
           phone: req.body.phone,
           password: db.User.generateHash(password),
-
+          secretToken: db.User.secretToken,
+          active: false,
         }).then((dbUser) => done(null, dbUser)).catch((error) => { console.log(error); });
       });
     });
@@ -92,7 +94,7 @@ module.exports = (passport) => {
       // if no user is found, return the message
       if (!user) {
         console.log('no user found');
-        return done(null, false, req.flash('loginMessage', 'No user found.'));
+        return done(null, false, 'No user found.');
       }
 
       // if the user is found but the password is wrong
