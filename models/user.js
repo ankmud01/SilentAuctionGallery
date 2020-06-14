@@ -64,11 +64,16 @@ module.exports = function bar(sequelize, DataTypes) {
     },
   });
 
-  User.associate = (models) => {
-    User.belongsTo(models.Roles, {
-      foreignKey: {
-        allowNull: false,
-      },
+  User.associate = function (models) {
+    User.hasMany(models.Artwork, {
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+    });
+  };
+
+  User.associate = function (models) {
+    User.belongsTo(models.Role, {
+      foreignKey: 'role_id',
     });
   };
 
