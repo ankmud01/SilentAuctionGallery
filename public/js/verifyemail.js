@@ -19,7 +19,7 @@ $(document).ready(() => {
       // eslint-disable-next-line object-shorthand
       console.log('to: ', to, 'subject:', subject);
       $.post('/send', data, (req, res) => {
-        console.log('Return from /send route', req);
+        console.log('Return from /send route', res);
         if (req === 'sent') {
           console.log('Email was sent to: ', to);
           // eslint-disable-next-line prefer-template

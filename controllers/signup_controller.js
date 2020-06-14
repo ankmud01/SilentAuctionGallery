@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const db = require('../models');
 require('dotenv').config();
 
-const transportor = require('../config/verify');
+const smtpTransport = require('../config/verify');
 
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
@@ -93,16 +93,27 @@ router.post('/send', (req, res) => {
       console.log('Sent by:', process.env.GMAIL_USERNAME);
       console.log('Line 87 signup_controller.js: ', mailOptions);
       // eslint-disable-next-line func-names
-      transportor.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(`Email sent: ${info.response}`);
+      smtpTransport.sendMail(mailOptions, (error, info) => {
+        try {
+          smtpTransport.sendEmail({
+            mailOptions,
+          },
+          console.log('Message %s sent: %s', info.messageId, info.response));
+        } catch (err) {
+          console.log(err);
+          throw error;
         }
       });
-    }).catch((error) => console.log('error: ', error));
+    });
+    //   smtpTransport.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log(`Email sent: ${info.response}`);
+    //     }
+    //   });
+    // }).catch((error) => console.log('error: ', error));
   } else {
-    // eslint-disable-next-line no-unused-vars
     const user = {
       id: null,
       isloggedin: req.isAuthenticated(),

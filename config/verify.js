@@ -12,20 +12,36 @@ const smtpTransport = nodemailer.createTransport({
   },
 });
 
-module.exports = {
-  sendEmail(from, to, subject, html) {
-    return new Promise((resolve, reject) => {
-      smtpTransport.sendMail(
-        {
-          from,
-          subject,
-          to,
-          html,
-        }, (err, info) => {
-          if (err) reject(err);
-          resolve(info);
-        },
-      );
-    });
-  },
+module.exports = async (event) => {
+  const request = event.body;
+  try {
+    await this.sendEmail(request);
+    return {
+      statusCode: 201,
+      headers: {
+        'Access-Conttrol-Allow-Origin': '*',
+      },
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+    };
+  }
 };
+// module.exports = {
+//   sendEmail(from, to, subject, html) {
+//     return new Promise((resolve, reject) => {
+//       smtpTransport.sendMail(
+//         {
+//           from,
+//           to,
+//           subject,
+//           html,
+//         }, (err, info) => {
+//           if (err) reject(err);
+//           resolve(info);
+//         },
+//       );
+//     });
+//   },
+// };
