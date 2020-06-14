@@ -103,7 +103,7 @@ module.exports = (passport) => {
       }
 
       if (!user.active) {
-        return done(null, false, { message: 'Please validate Email first.' });
+        return done(null, user);
       }
       // If everything good return successful user
       return done(null, user);

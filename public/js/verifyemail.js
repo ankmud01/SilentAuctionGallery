@@ -2,21 +2,31 @@ let to = '';
 const subject = 'Silent Auction Verification Email';
 $(document).ready(() => {
   // let text;
-  $('#send_email').click((event) => {
+  $('#validateEmailButton').click((event) => {
     event.preventDefault();
-    to = $('#emailid').val();
+    to = $('#email-input').val();
+    console.log('<-------verfy email button clicked-------->');
     if (to === '') {
-      $('#message').text('You must type in an Email to verify.');
+      console.log('No Email to send!');
+      $('#emailmsg').text('You must type in an Email to verify.');
     } else {
-      $('#message').text('Sending E-mail...Please wait');
+      console.log('Sending email to: ', to);
+      $('#emailmsg').text('Sending E-mail...Please wait');
+      const data = {
+        to,
+        subject,
+      };
       // eslint-disable-next-line object-shorthand
-      $.get('/send', { to: to, subject: subject }, (data) => {
-        if (data === 'sent') {
+      console.log('to: ', to, 'subject:', subject);
+      $.post('/send', data, (req, res) => {
+        console.log('Return from /send route', req);
+        if (req === 'sent') {
+          console.log('Email was sent to: ', to);
           // eslint-disable-next-line prefer-template
-          $('#message').empty().html('Email has been sent to ' + to + ' . Please check your inbox!');
+          $('#emailmsg').empty().html(`Email has been sent to ${to}. Please check your inbox!`);
         } else {
           // eslint-disable-next-line prefer-template
-          $('message').empty().html('Something happened - Unable to send email to ' + to + '. Please check the email address you entered.');
+          $('#emailmsg').empty().html(`Something happened - Unable to send email to ${to}. Please check the email address you entered.`);
         }
       });
     }

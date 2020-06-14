@@ -2,16 +2,18 @@
 /* eslint-disable consistent-return */
 const express = require('express');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const db = require('../models');
+require('dotenv').config();
 
-const smtpTransport = require('../config/verify');
+const transportor = require('../config/verify');
 
-const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
+// const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
 
 // HTML ROUTE FOR SIGNUP SCREEN
-router.get('/signup', checkNotAuthenticated, (req, res) => {
+router.get('/signup', (req, res) => {
   req.headers.logged = 'false';
   res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
 });
@@ -57,8 +59,11 @@ let link;
 let secretToken;
 // user.value.secretToken = secretToken;
 // user.value.active = false; // Flag account as inactive until verified
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
-router.get('/send', checkNotAuthenticated, (req, res) => {
+router.post('/send', (req, res) => {
+  console.log('Line 66 in Send route', req.body);
   if (req.isAuthenticated()) {
     db.User.findOne({
       where: {
@@ -71,30 +76,32 @@ router.get('/send', checkNotAuthenticated, (req, res) => {
         secretToken: dbUser.secretToken,
         isloggedin: req.isAuthenticated(),
       };
-      console.log(user.userInfo);
+      console.log('Line 79 User.Info:', user.userInfo);
       res.send(user.secretToken);
+      secretToken = user.secretToken;
     }).then(() => {
-      link = `http://localhost:${process.env.PORT}/verify?id=${secretToken}`;
+      // eslint-disable-next-line prefer-template
+      link = 'http://localhost:3000/verify?id=' + secretToken;
+      console.log('Link: ', link);
       // link = `http://${req.get(host)}/verify?id=${rand}`;
       mailOptions = {
-        to: req.query.to,
+        from: '"Silent Auction Gallery" <silentauctiongallery@gmail.com>',
+        to: req.body.to,
         subject: 'Silent Auction Gallery is asking you to confirm your Email account',
         // eslint-disable-next-line prefer-template
         html: 'Hi there,<br> Please Click on the link to verify your email. <br><a href=' + link + '>Click here to verify</a>',
       };
       console.log('Sent by:', process.env.GMAIL_USERNAME);
-      console.log('Line 69 signup_controller.js: ', mailOptions);
+      console.log('Line 87 signup_controller.js: ', mailOptions);
       // eslint-disable-next-line func-names
-      smtpTransport.sendMail(mailOptions, (error, response) => {
+      transportor.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);
-          res.end('error');
         } else {
-          console.log(`'Message sent: ${response}`);
-          res.end('sent');
+          console.log(`Email sent: ${info.response}`);
         }
       });
-    });
+    }).catch((error) => console.log('error: ', error));
   } else {
     // eslint-disable-next-line no-unused-vars
     const user = {
@@ -106,26 +113,69 @@ router.get('/send', checkNotAuthenticated, (req, res) => {
 });
 
 router.get('/verify', (req, res) => {
-  host = `localhost:${process.env.PORT}`;
+  host = 'localhost:3000';
+  console.log('<----------------------------------Req.body: ', req.body);
+  res.render('verifytoken');
+})
   // eslint-disable-next-line prefer-template
-  console.log(req.protocol + ':/' + req.get('host'));
+  // console.log(req.protocol + ':/' + req.get('host'));
   // eslint-disable-next-line prefer-template
-  if ((req.protocol + '://' + req.get('host')) === ('http://' + host)) {
-    console.log('Domain is matched. Information is from Authentic email. secretToken number in rand:', req.query.id);
-    console.log('Random number :', rand);
-    if (parseInt(req.query.id, 10) === rand) {
-      console.log('email is verified');
-      // eslint-disable-next-line prefer-template
-      res.render('members', { title: 'Profile Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
-      // eslint-disable-next-line spaced-comment
-      // res.end('members, <h1>Email ' + mailOptions.to + ' is been Successfully verified');
-    } else {
-      console.log('email is not verified');
-      res.end('<h1>Bad Request</h1>');
+  .post(async (req, res, next) => {
+    try {
+      secretToken = req.body;
+
+      // Find account with matching secret Token
+      const user = await User.findOne({ secretToken });
+      if (parseInt(req.query.id, 10) === secretToken) {
+        // res.render('verifytoken', { title: 'Verification', school: 'North Oconee Highschool' });
+        //  console.log('email is verified');
+
+        if (!user) {
+          req.flash('Error, No user found.');
+          res.redirect('/signup');
+          return;
+        }
+        user.active = true;
+        user.secretToken = '';
+        await user.save();
+
+        req.flash('Success', 'Thank you! Now you can Login.');
+        res.redirect('/login');
+      }
+    } catch (error) {
+      next(error);
     }
-  } else {
-    res.end('<h1>Request is from unknown source');
-  }
-});
+  });
+
+//   if ((req.protocol + '://' + req.get('host')) === ('http://' + host)) {
+//     console.log('Domain is matched. Information is from Authentic email. secretToken:', req.query.id === secretToken);
+//     if (parseInt(req.query.id, 10) === secretToken) {
+//       res.render('verifytoken', { title: 'Verification', school: 'North Oconee Highschool' });
+//       console.log('email is verified');
+//       try {
+//         db.user.update({
+//           active: 1,
+//         },
+//         {
+//           where: {
+//             email: req.body.email,
+//           },
+//         });
+//       } catch (err) {
+//         console.log(err);
+//       }
+//     }
+//       }(req, res, next);
+//       // eslint-disable-next-line spaced-comment
+//       res.end('members, <h1>Email ' + mailOptions.to + ' has been Successfully verified');
+//     } else {
+//       console.log('email is not verified');
+//       res.end('<h1>Bad Request</h1>');
+//     }
+//   } else {
+//     res.end('<h1>Request is from unknown source');
+//   }
+
+// });
 
 module.exports = router;

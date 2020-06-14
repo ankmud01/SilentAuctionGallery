@@ -32,6 +32,10 @@ footer {
   width: 50%;
 }
 
+#err-msg{
+  color: red;
+  text-align: center;
+}
 
 
 #logInButton{
