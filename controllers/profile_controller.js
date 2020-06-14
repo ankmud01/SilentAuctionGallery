@@ -17,7 +17,7 @@ router.get('/profile' /* '/api/user' */, (req, res) => {
         id: req.session.passport.user,
         isloggedin: req.isAuthenticated(),
       };
-      console.log(user.userInfo);
+      console.log('Line 20----->', user.userInfo);
       res.render('userProfilepage', user);
     });
   } else {

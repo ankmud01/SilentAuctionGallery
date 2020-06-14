@@ -102,6 +102,9 @@ module.exports = (passport) => {
         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
       }
 
+      if (!user.active) {
+        return done(null, false, { message: 'Please validate Email first.' });
+      }
       // If everything good return successful user
       return done(null, user);
     });
