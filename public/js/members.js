@@ -5,7 +5,6 @@ $(document).ready(() => {
   $('.profilePage').on('click', (event) => {
     event.preventDefault();
     console.log('Profile Button Clicked');
-    
   });
 
   // DELETE ACCOUNT
