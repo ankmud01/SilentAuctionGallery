@@ -74,37 +74,4 @@ router.put('/user/:account_id', (req, res) => {
     res.json(dbuser);
   });
 });
-
-// ROUTE FOR ADMIN PAGE
-// router.get('/admin', async (req, res) => {
-//   if (req.isAuthenticated()) {
-//     try {
-//       await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where 
-//        Users.role_id = Roles.id and Roles.id = 1 and Users.id = :id', {
-//         replacements: { id: req.session.passport.user },
-//         type: db.Sequelize.QueryTypes.SELECT,
-//       })
-//         .then((dbUser) => {
-//           const user = {
-//             userInfo: dbUser[0],
-//             id: req.session.passport.user,
-//             roleid: dbUser[0].role_id,
-//             isloggedin: req.isAuthenticated(),
-//           };
-//           res.render('userProfilepage', user);
-//         });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   } else {
-//   // eslint-disable-next-line no-unused-vars
-//     const user = {
-//       id: null,
-//       isloggedin: req.isAuthenticated(),
-//     };
-//     res.redirect('/');
-//   }
-// });
-
-
 module.exports = router;
