@@ -1,0 +1,3 @@
+INSERT INTO `silentauctiondb`.`Roles` (`id`, `role_name`, `role_description`, `createdAt`, `updatedAt`) VALUES ('1', 'Admin', 'Administrator for the website has CRUD permission', '2020-06-14 17:40:36', '2020-06-14 17:40:36');
+INSERT INTO `silentauctiondb`.`Roles` (`id`, `role_name`, `role_description`, `createdAt`, `updatedAt`) VALUES ('2', 'Student', 'Student or Artist has upload and bid permissiion', '2020-06-14 17:40:36', '2020-06-14 17:40:36');
+INSERT INTO `silentauctiondb`.`Roles` (`id`, `role_name`, `role_description`, `createdAt`, `updatedAt`) VALUES ('3', 'Bidder', 'Bidder user has the lowest of all the permission', '2020-06-14 17:40:36', '2020-06-14 17:40:36');

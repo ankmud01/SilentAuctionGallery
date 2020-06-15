@@ -85,7 +85,7 @@ $(document).ready(() => {
   });
 
   // SEARCH FOR AN ACCOUNT
-  $('#searchforUser').submit((event) => {
+  $('#userSearch').submit((event) => {
     // const $form = $(this);
     // const validator = $form.data('validator');
 
