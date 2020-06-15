@@ -1,12 +1,6 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 $(document).ready(() => {
-  // GET PROFILE INFORMATION
-  $('.profilePage').on('click', (event) => {
-    event.preventDefault();
-    console.log('Profile Button Clicked');
-  });
-
   // DELETE ACCOUNT
   $('#deleteButton').on('click', (event) => {
     event.preventDefault();
@@ -14,6 +8,7 @@ $(document).ready(() => {
     $('#delete-account-modal').modal();
   });
 
+  // CONFIRM DELETE
   $('#confirm-delete').on('click', (event) => {
     console.log('Clicked on Confirm Delete button');
     const deleteAccount = {
@@ -37,6 +32,8 @@ $(document).ready(() => {
       $('#err-msg').empty('').text('fill out entire form');
     }
   });
+
+  // CANCEL DELETE
   $('#cancel-delete').on('click', (event) => {
     $('#delete-account-modal').modal('close');
   });
@@ -85,5 +82,35 @@ $(document).ready(() => {
       console.log('**Please fill out entire form**');
       $('#update-err-msg').empty('').text('**Please fill out entire form**');
     }
+  });
+
+  // SEARCH FOR AN ACCOUNT
+  $('#searchforUser').submit((event) => {
+    // const $form = $(this);
+    // const validator = $form.data('validator');
+
+    // if (!validator || !$form.valid()) return;
+    // $validator.resetForm();
+    event.preventDefault();
+    const emailSearched = $('#searchforUser').val().trim();
+    console.log(`emailSearched ~~~~~~~ ${emailSearched}`);
+
+
+    // if (emailSearched.match(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
+    //   try {
+    //     $.ajax({
+    //       type: 'get',
+    //       url: `/searchuser/${emailSearched}`,
+    //     })
+    //       .then((res) => {
+    //         console.log(res);
+    //       });
+    //   } catch (err) {
+    //     console.log(`Something went wrong ${err}`);
+    //   }
+    // } else {
+    //   console.log('**Please enter a valid email**');
+    //   $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
+    // }
   });
 });

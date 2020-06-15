@@ -1,37 +1,36 @@
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-
-module.exports = function bar(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Artwork = sequelize.define('Artwork', {
-    artName: {
+    art_name: {
+      type: DataTypes.STRING,
       allowNull: false,
-      type: DataTypes.STRING,
+      validate: {
+        len: [1, 60],
+      },
     },
-    aboutArt: {
+    description: {
+      type: DataTypes.STRING,
       allowNull: false,
-      type: DataTypes.STRING,
+      validate: {
+        len: [1, 255],
+      },
     },
-    category: {
+    price: {
+      type: DataTypes.DECIMAL(8, 2),
       allowNull: false,
-      type: DataTypes.STRING,
     },
-    artistName: {
+    picture_link: {
       type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 255],
+      },
     },
+
   });
 
-  Artwork.associate = (models) => {
-    Artwork.hasMany(models.Bid, {
-      foreignKey: 'artwork_id',
-      onDelete: 'cascade',
-    });
-    Artwork.hasMany(models.OrderHdr, {
-      foreignKey: 'artwork_id',
-      onDelete: 'cascade',
-    });
-    Artwork.hasMany(models.OrderDtl, {
-      foreignKey: 'artwork_id',
-      onDelete: 'cascade',
+  Artwork.associate = function (models) {
+    Artwork.belongsTo(models.User, {
+      foreignKey: 'user_id',
     });
   };
 
