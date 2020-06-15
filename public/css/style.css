@@ -204,4 +204,16 @@
   src : "../../public/resources/St.-Jude-Logo.png";
 }
 
+.footerCharityOpacity {
+  border-top: 3px solid white;
+  position: absolute; 
+  width: 100%; 
+  opacity: 40%; 
+  background-color: black; 
+}
+
+.footerFront {
+  position: relative;
+}
+
 /* ------------------- FOOTER ------------------- */
