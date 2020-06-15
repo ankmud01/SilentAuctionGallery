@@ -13,6 +13,7 @@ require('dotenv').config();
 const { pid } = process;
 const PORT = process.env.PORT || 3000;
 const db = require('./models');
+console.log('Process PID: ', process.pid);
 
 const app = express();
 
@@ -24,17 +25,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({
-  key: 'user_sid',
-  secret: process.env.SESSION_SECRET,
-  // httpOnly: true,
-  // need to understand this more
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: 600000,
-  },
-}));
+app.use(
+  session({
+    key: 'user_sid',
+    secret: process.env.SESSION_SECRET,
+    // httpOnly: true,
+    // need to understand this more
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      expires: 600000,
+    },
+  })
+);
 
 // using passport and session
 app.use(passport.initialize());
@@ -56,7 +59,7 @@ app.engine(
       //  path to your partials
       path.join(__dirname, 'views/partials'),
     ],
-  }),
+  })
 );
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
@@ -81,7 +84,7 @@ db.sequelize.sync().then(() => {
     console.log(
       '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
       PORT,
-      PORT,
+      PORT
     );
   });
 });

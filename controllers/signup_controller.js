@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const db = require('../models');
 require('dotenv').config();
 
-const smtpTransport = require('../config/verify');
+const smtpTransport = require('../config/verify'); // { sendMail }
+
 
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
@@ -15,12 +16,19 @@ const router = express.Router();
 // HTML ROUTE FOR SIGNUP SCREEN
 router.get('/signup', (req, res) => {
   req.headers.logged = 'false';
-  res.render('signup', { title: 'Registration Page', school: 'North Oconee High School', logged: req.isAuthenticated() });
+  res.render('signup', {
+    title: 'Registration Page',
+    school: 'North Oconee High School',
+    logged: req.isAuthenticated(),
+  });
 });
 
 // ROUTE FOR PRIVACY POLICY
 router.get('/privacypolicy', (req, res) => {
-  res.render('privacypolicy', { title: 'Privacy Policy Page', school: 'North Oconee High School' });
+  res.render('privacypolicy', {
+    title: 'Privacy Policy Page',
+    school: 'North Oconee High School',
+  });
 });
 
 // ROUTE TO SIGNUP A NEW USER
@@ -50,10 +58,8 @@ router.post('/api/signup', (req, res, next) => {
   })(req, res, next);
 });
 
-
 // Email verification
 let mailOptions;
-let host;
 let link;
 let secretToken;
 // user.value.secretToken = secretToken;
@@ -62,57 +68,52 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post('/send', (req, res) => {
-  console.log('Line 66 in Send route', req.body);
+  console.log('Line 72 in Send route', req.body);
   if (req.isAuthenticated()) {
     db.User.findOne({
       where: {
         id: req.session.passport.user,
       },
-    }).then((dbUser) => {
-      const user = {
-        userInfo: dbUser.dataValues,
-        id: req.session.passport.user,
-        secretToken: dbUser.secretToken,
-        isloggedin: req.isAuthenticated(),
-      };
-      console.log('Line 79 User.Info:', user.userInfo);
-      res.send(user.secretToken);
-      secretToken = user.secretToken;
-    }).then(() => {
-      // eslint-disable-next-line prefer-template
-      link = 'http://localhost:3000/verify?id=' + secretToken;
-      console.log('Link: ', link);
-      // link = `http://${req.get(host)}/verify?id=${rand}`;
-      mailOptions = {
-        from: '"Silent Auction Gallery" <silentauctiongallery@gmail.com>',
-        to: req.body.to,
-        subject: 'Silent Auction Gallery is asking you to confirm your Email account',
+    })
+      .then((dbUser) => {
+        const user = {
+          userInfo: dbUser.dataValues,
+          id: req.session.passport.user,
+          secretToken: dbUser.secretToken,
+          isloggedin: req.isAuthenticated(),
+        };
+        console.log('Line 79 User.Info:', user.userInfo);
+        res.send(user.secretToken);
+        secretToken = user.secretToken;
+      })
+      .then(() => {
         // eslint-disable-next-line prefer-template
-        html: 'Hi there,<br> Please Click on the link to verify your email. <br><a href=' + link + '>Click here to verify</a>',
-      };
-      console.log('Sent by:', process.env.GMAIL_USERNAME);
-      console.log('Line 87 signup_controller.js: ', mailOptions);
-      // eslint-disable-next-line func-names
-      smtpTransport.sendMail(mailOptions, (error, info) => {
-        try {
-          smtpTransport.sendEmail({
-            mailOptions,
-          },
-          console.log('Message %s sent: %s', info.messageId, info.response));
-        } catch (err) {
-          console.log(err);
-          throw error;
-        }
+        link = 'http://localhost:3000/verify?id=' + secretToken;
+        console.log('Link: ', link);
+        // link = `http://${req.get(host)}/verify?id=${rand}`;
+        mailOptions = {
+          from: '"Silent Auction Gallery" <silentauctiongallery@gmail.com>',
+          to: req.body.to,
+          subject:
+            'Silent Auction Gallery is asking you to confirm your Email account',
+          // eslint-disable-next-line prefer-template
+          html:
+            `Hi there,<br> Please Click on the link to verify your email. <br><a href=${
+              link}>Click here to verify</a>`,
+        };
+        console.log('Sent by:', process.env.GMAIL_USERNAME);
+        console.log('Line 87 signup_controller.js: ', mailOptions);
+        // eslint-disable-next-line func-names
+        smtpTransport.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log('Error happened!!!');
+            res.status(500).json({ message: 'Error happened!!' });
+          } else {
+            console.log('Email sent!!!');
+            res.json({ message: 'Email sent!!' });
+          }
+        });
       });
-    });
-    //   smtpTransport.sendMail(mailOptions, function (error, info) {
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log(`Email sent: ${info.response}`);
-    //     }
-    //   });
-    // }).catch((error) => console.log('error: ', error));
   } else {
     const user = {
       id: null,
@@ -122,30 +123,35 @@ router.post('/send', (req, res) => {
   }
 });
 
-router.get('/verify', (req, res) => {
-  host = 'localhost:3000';
-  console.log('<----------------------------------Req.body: ', req.body);
-  res.render('verifytoken');
-})
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+
+router
+  .get('/verify', (req, res) => {
+    host = 'localhost:3000';
+    console.log('<----------------------------------Req.body: ', req.body);
+    res.render('verifytoken');
+  })
   // eslint-disable-next-line prefer-template
   // console.log(req.protocol + ':/' + req.get('host'));
   // eslint-disable-next-line prefer-template
-  .post(async (req, res, next) => {
+  .post('/verify', async (req, res, next) => {
     try {
       secretToken = req.body;
-
+      console.log('secretToken:', secretToken);
       // Find account with matching secret Token
-      const user = await User.findOne({ secretToken });
-      if (parseInt(req.query.id, 10) === secretToken) {
+      const user = await db.User.findOne({ secretToken: secretToken });
+      if (req.query.id === secretToken) {
         // res.render('verifytoken', { title: 'Verification', school: 'North Oconee Highschool' });
-        //  console.log('email is verified');
-
+        console.log('email is verified');
+        console.log('In Verify Route and user: ', user);
         if (!user) {
+          console.log('*****************User NOT Found!!!****************');
           req.flash('Error, No user found.');
           res.redirect('/signup');
           return;
         }
-        user.active = true;
+        db.user.active = true;
         user.secretToken = '';
         await user.save();
 

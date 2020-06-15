@@ -15,33 +15,45 @@
           <div class="col s10 m12 l5">
             <div class="row">
               <div class="col s9 m9 l9">
-                <div class="card" id="verifyemail">
+                <div class="card" id="verifyToken">
                   <div class="card-content">
                     <h2>Account Verification</h2>
 
                     <div class="card-content">
-                      <div class="container emailForm">
+                      <div class="container tokenForm">
                         <div class="row">
                           <div class="col-md-6 col-md-offset-3">
 
-                            <form class="form-signin" action="/verify" method="POST">
+                            <form class="form-token">
                               <div class="form-group">
-                                
                                 <label for="secretToken"></label>
                                 <input type="text" class="form-control" id="secretToken"
                                   placeholder="Paste Secret Token Here" required autofocus>
                               </div>
                               <br>
-                              <button type="submit" class="btn btn-default red darken-4"
-                                id="verifyemail">Verify</button>  <i class="material-icons prefix">done</i>
+                              <button type="submit" data-target="verified-token-modal" class="btn btn-default red darken-4 modal-trigger"
+                                id="verifyToken">Verify</button> <i class="material-icons prefix">done</i>
                             </form>
                             <br />
-                            <p>Or sign up <a href="/">here</a></p>
-
+                            <p><a href="/">Or sign up here</a></p>
+                          </div>
+                          <!-- Modal Trigger -->
+                          <div id="verified-token-modal" class="modal">
+                            <div class="modal-content">
+                              <h4>Confirmation</h4>
+                              <div class="modal-header">
+                                <h6> You have Verified this email.</h6>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-default green darken-4" id="confirm-token">Return to Silent Auction Gallery</button>
+                                <button type="submit" class="btn btn-default red darken-4" id="cancel">CANCEL</button>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>

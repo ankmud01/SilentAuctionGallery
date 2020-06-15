@@ -49,7 +49,7 @@ module.exports = (passport) => {
           return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
         }
         // eslint-disable-next-line no-unused-vars
-        const secretToken = randomstring.generate();
+        const secretToken = randomstring.generate(64);
         db.User.create({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
