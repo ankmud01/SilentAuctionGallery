@@ -64,6 +64,44 @@
   }
 /* ------------------- NAVBAR ------------------- */
 
+/* ------------------- FOOTER ------------------- */
+
+.charityText {
+  font-size: 20pt; 
+  margin: 0px;
+}
+
+.charityContainer {
+
+}
+
+.charityContainer p {
+  font-size: 40pt; 
+  margin: 0px; 
+  text-align: left;
+}
+
+.charityContainer img {
+  height: 100px; 
+  text-align: right;
+  cursor: pointer;
+}
+
+.footerCharityOpacity {
+  border-top: 3px solid white;
+  position: absolute; 
+  width: 100%; 
+  opacity: 40%; 
+  background-color: black; 
+}
+
+.footerFront {
+  position: relative;
+}
+
+/* ------------------- FOOTER ------------------- */
+
+
 /* ------------------- BODY TITLE HEADER INDEX------------------- */
 
   .bodyTitleIndex {
@@ -90,6 +128,24 @@
   }
 
 /* ------------------- BODY TITLE HEADER INDEX------------------- */
+
+/* ------------------- BODY TITLE HEADER GALLERY------------------- */
+
+.bodyTitleIndex {
+
+}
+
+.headerTitleIndex {
+  font-size: 40pt;
+}
+
+.headerArtistsIndex p {
+  font-size: 30pt;
+  font-style: italic;
+  cursor: pointer;
+}
+
+/* ------------------- BODY TITLE HEADER GALLERY------------------- */
 
 /* ------------------- BODY INDEX------------------- */
 
@@ -195,41 +251,3 @@
 
 } */
 /* ------------------- CHARITY INDEX FOOTER------------------- */
-
-
-/* ------------------- FOOTER ------------------- */
-
-.charityText {
-  font-size: 20pt; 
-  margin: 0px;
-}
-
-.charityContainer {
-
-}
-
-.charityContainer p {
-  font-size: 40pt; 
-  margin: 0px; 
-  text-align: left;
-}
-
-.charityContainer img {
-  height: 100px; 
-  text-align: right;
-  src : "../../public/resources/St.-Jude-Logo.png";
-}
-
-.footerCharityOpacity {
-  border-top: 3px solid white;
-  position: absolute; 
-  width: 100%; 
-  opacity: 40%; 
-  background-color: black; 
-}
-
-.footerFront {
-  position: relative;
-}
-
-/* ------------------- FOOTER ------------------- */
