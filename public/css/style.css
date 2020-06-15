@@ -221,6 +221,16 @@
 }
 /* ------------------- BODY INDEX------------------- */
 
+/* ------------------- BODY GALLERY------------------- */
+
+.sortButtonGallery { 
+  height: 50px; /* Make Resposnsive */
+  position: absolute; 
+  margin-left: 275px;
+}
+
+/* ------------------- BODY GALLERY------------------- */
+
 /* ------------------- CHARITY INDEX FOOTER------------------- */
   /* .charityAmountContainer {
 

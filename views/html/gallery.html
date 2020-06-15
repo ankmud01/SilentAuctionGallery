@@ -58,6 +58,44 @@
 
     <div class="divider" style="background-color: black; height: 3px;"></div> <!-- Divider -->
   
+    <!-- Page Sort & Top Page Changer -->
+      <div class="row">
+        <div class="col m2">
+          <p class="right">Sort by:</p>
+        </div>
+        <div class="valign-wrapper sortButtonGallery">
+          <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Change to selection</a>
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a class="black-text" href="#!">Time Left (low)</a></li>
+            <li><a class="" href="#!">Time Left (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Price (low)</a></li>
+            <li><a href="#!">Price (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Current Bid (low)</a></li>
+            <li><a href="#!">Current Bid (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Size (low)</a></li>
+            <li><a href="#!">Size (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Name</a></li>
+            <li><a class="black-text" href="#!">Artist</a></li>
+            <li><a class="black-text" href="#!">Category</a></li>
+          </ul>
+        </div>
+        <div class="col m2 push-m8 valign-wrapper galleryPageChange container">
+          <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </div>
+      </div>
+    <!-- Page Sort & Top Page Changer -->
+
     <!-- Body Cards -->
       <div class="row">
           <!-- white low opacity card background -->
@@ -254,6 +292,20 @@
     <!-- Body Cards -->
   </main>
 
+  <!-- Bottom Page Changer -->
+    <div class="row">
+      <div class="col m2 push-m10 valign-wrapper galleryPageChange container">
+        <ul class="pagination">
+          <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="active"><a href="#!">1</a></li>
+          <li class="waves-effect"><a href="#!">2</a></li>
+          <li class="waves-effect"><a href="#!">3</a></li>
+          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+      </div>
+    </div>
+  <!-- Bottom Page Changer -->
+
   <!-- <hr style="width: 70%; border: 1px solid black;"> Divider -->
 
   <!-- Footer Opacity Background -->
@@ -332,6 +384,16 @@
   // leftArrow.css("height", frontCardHeight);
   // rightArrow.css("height", frontCardHeight);
   backCharity.css("height", frontCharityHeight)
+
+  // $('.dropdown-trigger').dropdown();
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    let options = {
+      constrainWidth: false,
+      coverTrigger: false
+    }
+    var instances = M.Dropdown.init(elems, options);
+  });
 
 </script>
 
