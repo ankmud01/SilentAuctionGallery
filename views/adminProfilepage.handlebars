@@ -5,7 +5,7 @@
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('aboutMe', this, 'white')"
             id="defaultOpen">Account Info</button>
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('artwork', this, 'white')">Artwork</button>
-        <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('Contact', this, 'white')">Contact</button>
+        <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('manageUser', this, 'white')">ManageUser</button>
         <button class="tablink" style="font-size: 1.5vw;" onclick="openPage('About', this, 'white')">Settings</button>
 
         <div id="aboutMe" class="tabcontent">
@@ -19,20 +19,6 @@
 
             <div class="card" id="profilePageAboutMeCard" style="width: 100%; margin-top: 0;">
                 <div>
-                    <hr>
-                    <h6>Search User by Email</h6>
-                    <nav>
-                        <div class="nav-wrapper">
-                            <form>
-                                <div class="input-field">
-                                    <input id="search" type="search" required>
-                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                    <i class="material-icons">close</i>
-                                </div>
-                            </form>
-                        </div>
-                    </nav>
-                    <hr>
                     <h3 style="font-size: 1.7vw;">Account Information</h3>
                     <hr>
                     <form class="signup col s12 m12 l12">
@@ -42,7 +28,7 @@
                                 <label for="id">Account ID</label>
                             </div>
                             <div class="welcomMessage col s10">
-                                <h2>{{userInfo.first_name}} {{userInfo.last_name}}</h2>
+                                <h2>Hello, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
                             </div>
                         </div>
                         <div class="row">
@@ -110,10 +96,7 @@
                                 <label for="role">Role</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE
-                            USER</button>
-                        <button type="submit" data-target="delete-account-modal"
-                            class="btn btn-default red darken-4 modal-trigger" id="deleteButton">DELETE USER</button>
+                        <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE PROFILE</button>
 
                         <hr>
                         <h3 style="font-size: 1.5vw;">Email Validation</h3>
@@ -127,22 +110,6 @@
                     </form>
 
                 </div>
-            </div>
-            <div id="delete-account-modal" class="modal">
-                <div class="modal-content">
-                    <h4>Confirmation</h4>
-                    <div class="modal-header">
-                        <h6> Are you sure you want to delete this account?</h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-default red darken-4" id="confirm-delete">YES</button>
-                        <button type="submit" class="btn btn-default green darken-4" id="cancel-delete">CANCEL</button>
-                    </div>
-
-                </div>
-                {{!-- <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div> --}}
             </div>
 
         </div>
@@ -205,10 +172,133 @@
 
 
 
-        <div id="Contact" class="tabcontent">
-            <div class="card" id="profilePageAboutMeCard" style="width: 100%;">
-                <h3>Contact</h3>
-                <p>Get in touch, or swing by for a cup of coffee.</p>
+        <div id="manageUser" class="tabcontent">
+
+            <div class="hero-image">
+
+                {{!-- <img src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4"
+                    alt="Avatar" class="img-floating profilePic"> --}}
+            </div>
+
+            <div class="card" id="profilePageAboutMeCard" style="width: 100%; margin-top: 0;">
+                <div>
+                    <hr>
+                    <h6>Search User by Email</h6>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <form id="userSearch">
+                                <div class="input-field" id="searchblock">
+                                    <input id="searchforUser" type="search" required>
+                                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                            <h3 id="err-msg"></h3>
+                        </div>
+                    </nav>
+                    <hr>
+                    <h3 style="font-size: 1.7vw;">User Account Information</h3>
+                    <hr>
+                    <form class="signup col s12 m12 l12">
+                        <div class="row">
+                            <div class="input-field col s2">
+                                <input disabled id="accountid" type="text" value="{{searchedUser.id}}">
+                                <label for="id">Account ID</label>
+                            </div>
+                            <div class="welcomMessage col s10">
+                                <h2>{{searchedUser.first_name}} {{searchedUser.last_name}}</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="First Name" id="firstnameinput" type="text"
+                                    value="{{searchedUser.first_name}}">
+                                <label for="first_name">Full Name*</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="lastnameinput" type="text" value="{{searchedUser.last_name}}">
+                                <label for="last_name">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="addressinput" type="text" value="{{searchedUser.address}}">
+                                <label for="address">Address</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="address2input" type="text" value="{{searchedUser.address2}}">
+                                <label for="address2">Address2</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="cityinput" type="text" value="{{searchedUser.city}}">
+                                <label for="city">City</label>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="stateinput" type="text" value="{{searchedUser.state}}">
+                                <label for="state">State</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="zipcodeinput" type="text" value="{{searchedUser.zip}}">
+                                <label for="zipCode">Zip Code</label>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="phoneinput" type="text" value="{{searchedUser.phone}}">
+                                <label for="phoneNumber">Tel Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="emailinput" type="email" value="{{searchedUser.email}}">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h3 style="font-size: 1.7vw;">School Afilliation</h3>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input disabled id="schoolinput" type="text" value="{{searchedUser.school}}">
+                                <label for="school">School</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="roleinput" type="text" value="{{searchedUser.role_name}}">
+                                <label for="role">Role</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default red darken-4" id="updateUserButton">UPDATE
+                            USER</button>
+                        <button type="submit" data-target="delete-account-modal"
+                            class="btn btn-default red darken-4 modal-trigger" id="deleteButton">DELETE USER</button>
+
+                        <hr>
+                    </form>
+
+                </div>
+            </div>
+            <div id="delete-account-modal" class="modal">
+                <div class="modal-content">
+                    <h4>Confirmation</h4>
+                    <div class="modal-header">
+                        <h6> Are you sure you want to delete this account?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default red darken-4" id="confirm-delete">YES</button>
+                        <button type="submit" class="btn btn-default green darken-4" id="cancel-delete">CANCEL</button>
+                    </div>
+
+                </div>
+                {{!-- <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div> --}}
             </div>
         </div>
 
