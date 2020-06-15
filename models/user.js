@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* Requiring bcrypt for password hashing */
 const randomstring = require('randomstring');
 const bcrypt = require('bcrypt');
@@ -5,6 +6,7 @@ const bcrypt = require('bcrypt');
 // Creating our User model
 module.exports = function bar(sequelize, DataTypes) {
   const User = sequelize.define('User', {
+    // The email cannot be null, and must be a proper email before creation
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
