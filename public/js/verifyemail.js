@@ -6,8 +6,10 @@ $(document).ready(() => {
   function GetURLParameter(sParam) {
     const sPageURL = window.location.search.substring(1);
     const sURLVariables = sPageURL.split('&');
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < sURLVariables.length; i++) {
       const sParameterName = sURLVariables[i].split('=');
+      // eslint-disable-next-line eqeqeq
       if (sParameterName[0] == sParam) {
         return sParameterName[1];
       }

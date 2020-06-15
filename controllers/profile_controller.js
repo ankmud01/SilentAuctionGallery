@@ -11,7 +11,7 @@ router.get('/profile', async (req, res) => {
     try {
       await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.id = :id', {
         replacements: { id: req.session.passport.user },
-        type: db.Sequelize.QueryTypes.SELECT, //will use update
+        type: db.Sequelize.QueryTypes.SELECT,
       })
         .then((dbUser) => {
           const user = {

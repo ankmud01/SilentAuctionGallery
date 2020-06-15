@@ -185,7 +185,6 @@ router
       } else {
         req.flash('Success', 'Thank you! Now you can Login.');
         res.redirect('/login');
-
       }
     } catch (error) {
       next(error);
