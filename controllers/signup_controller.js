@@ -8,7 +8,6 @@ require('dotenv').config();
 
 const smtpTransport = require('../config/verify'); // { sendMail }
 
-
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
@@ -97,9 +96,8 @@ router.post('/send', (req, res) => {
           subject:
             'Silent Auction Gallery is asking you to confirm your Email account',
           // eslint-disable-next-line prefer-template
-          html:
-            `Hi there,<br> Please Click on the link to verify your email. <br><a href=${
-              link}>Click here to verify</a>`,
+          html: `Hi there,<br> Copy this token: <b>${secretToken}</b>  and paste it into the Verification page at the link below.<br>
+          Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
         };
         console.log('Sent by:', process.env.GMAIL_USERNAME);
         console.log('Line 87 signup_controller.js: ', mailOptions);
@@ -125,13 +123,14 @@ router.post('/send', (req, res) => {
   }
 });
 
+secretToken = ''; // to clear for verify
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router
   .get('/verify', (req, res) => {
     console.log('<----------------------------------Req.body: ', req.body);
-    res.render('verifytoken');
+    res.render('verifytoken', { title: 'Verify Email Page' });
   })
   // eslint-disable-next-line prefer-template
   // console.log(req.protocol + ':/' + req.get('host'));
@@ -139,11 +138,19 @@ router
   .post('/verify', async (req, res, next) => {
     try {
       secretToken = req.body;
-      console.log('secretToken:', secretToken);
+      console.log('Line 141 ----->secretToken:', secretToken);
       // Find account with matching secret Token
-      const user = await db.User.findOne({ secretToken });
-      if (req.query.id === secretToken) {
-        console.log('Domain is matched. Information is from Authentic email. secretToken:', req.query.id === secretToken);
+      const user = await db.User.findOne({
+        where: {
+          secretToken: secretToken.secretToken,
+        },
+      });
+      console.log('Line 144------->User db output:', user.dataValues.secretToken);
+      console.log('line 145 ------>User db only output:', user);
+
+      if (user.dataValues.secretToken === secretToken.secretToken) {
+        console.log('Domain is matched. Information is from Authentic email. secretToken:',
+          req.query.id === secretToken);
         console.log('email is verified');
         console.log('In Verify Route and user: ', user);
         if (!user) {
@@ -152,23 +159,33 @@ router
           res.redirect('/signup');
           return;
         }
-        let condition = "secretToken = " + req.body;
+        const condition = {
+          where: {
+            secretToken: secretToken.secretToken,
+          },
+        };
         console.log('Condition----->: ', condition);
-        db.Users.update({
-          secretToken: '',
-          active: true,
-        }, condition, function (result) {
-          if (result.changedRows === 0) {
-            return res.status(404).end();
-          }
-          res.status(200).end();
-        });
-        db.user.active = true;
-        user.secretToken = '';
-        await user.save();
+        db.User.update(
+          {
+            secretToken: null,
+            active: true,
+          },
+          condition,
+          function (result) {
+            if (result.changedRows === 0) {
+              return res.status(404).end();
+            }
+            req.flash('Success', 'Thank you! Now you can Login.');
+            res.redirect('/login').status(200);
+          },
+        );
 
         req.flash('Success', 'Thank you! Now you can Login.');
+        res.redirect('/signup');
+      } else {
+        req.flash('Success', 'Thank you! Now you can Login.');
         res.redirect('/login');
+
       }
     } catch (error) {
       next(error);
@@ -176,6 +193,5 @@ router
   });
 
 //   if ((req.protocol + '://' + req.get('host')) === ('http://' + host)) {
-
 
 module.exports = router;
