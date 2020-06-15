@@ -20,7 +20,7 @@ router.get('/profile', async (req, res) => {
             // roleid: dbUser[0].role_id,
             isloggedin: req.isAuthenticated(),
           };
-          // console.log(user.userInfo);
+          console.log('user.userInfo:', dbUser);
           if (dbUser[0].role_id > 1) {
             res.render('userProfilepage', user);
           } else {

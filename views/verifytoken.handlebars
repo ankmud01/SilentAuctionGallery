@@ -26,16 +26,18 @@
 
                             <form class="form-token">
                               <div class="form-group">
-                                <label for="secretToken"></label>
-                                <input type="text" class="form-control" id="secretToken"
-                                  placeholder="Paste Secret Token Here" required autofocus>
+                                <label for="secretToken"><h5 style="color:blue;">Paste Secret Token Below</h5></label>
+                                <input type="text" class="form-control" id="secretToken" placeholder="Paste Secret Token Here" required autofocus>
                               </div>
+                              <span id="token" type="text" value="{{token}}"></span>
+                              <br>
+                              
                               <br>
                               <button type="submit" data-target="verified-token-modal" class="btn btn-default red darken-4 modal-trigger"
-                                id="verifyToken">Verify</button> <i class="material-icons prefix">done</i>
+                                id="verifyTokenBtn">Verify</button> <i class="material-icons prefix">done</i>
                             </form>
                             <br />
-                            <p><a href="/">Or sign up here</a></p>
+                            <p><a href="/signup">Or sign up here</a></p>
                           </div>
                           <!-- Modal Trigger -->
                           <div id="verified-token-modal" class="modal">
