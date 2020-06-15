@@ -1,10 +1,10 @@
 let to = '';
-let goto = '';
+
 const subject = 'Silent Auction Verification Email';
 $(document).ready(() => {
+  // eslint-disable-next-line consistent-return
   async function sendAnEmail(data) {
     let result;
-
     try {
       result = await $.post('/send', data, (req, res) => {
         console.log('Return from /send route', res);
@@ -38,17 +38,16 @@ $(document).ready(() => {
         subject,
       };
       sendAnEmail(data);
-
     }
   });
 
   $('#verifyToken').click((event) => {
     event.preventDefault();
     const token = { secretToken: $('#secretToken').val() };
+    // eslint-disable-next-line no-unused-vars
     $.post('/verify', token, (req, res) => {
       $('.modal').modal().val();
       console.log('The value of goto: ', token);
-    // if (goto === )
     });
   });
 });
