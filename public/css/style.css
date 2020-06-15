@@ -231,6 +231,35 @@
 
 /* ------------------- BODY GALLERY------------------- */
 
+/* ------------------- BODY ARTISTS------------------- */
+
+.artistCard {
+  cursor: pointer;
+}
+
+.artistCard img {
+  cursor: pointer;
+  width: 85%;
+}
+
+.artCardArtists {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.artCardArtists .card {
+  background-color: transparent;
+  padding-bottom: 10px;
+}
+
+.frontCardArtists {
+ 
+}
+
+/* ------------------- BODY ARTISTS------------------- */
+
+
+
 /* ------------------- CHARITY INDEX FOOTER------------------- */
   /* .charityAmountContainer {
 
