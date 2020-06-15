@@ -32,6 +32,10 @@ footer {
   width: 50%;
 }
 
+#err-msg{
+  color: red;
+  text-align: center;
+}
 
 
 #logInButton{
@@ -196,7 +200,7 @@ body{
   background-color: white;
   color: black;
   padding: 1rem;
-  height: 4rem;
+  height: 8rem;
 }
 
 .cards {
