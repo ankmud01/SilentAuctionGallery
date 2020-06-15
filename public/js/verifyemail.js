@@ -46,6 +46,7 @@ $(document).ready(() => {
     const token = { secretToken: $('#secretToken').val() };
     // eslint-disable-next-line no-unused-vars
     $.post('/verify', token, (req, res) => {
+      console.log('<-------verfy email button clicked-------->');
       $('.modal').modal().val();
       console.log('The value of goto: ', token);
     });

@@ -152,6 +152,17 @@ router
           res.redirect('/signup');
           return;
         }
+        let condition = "secretToken = " + req.body;
+        console.log('Condition----->: ', condition);
+        db.Users.update({
+          secretToken: '',
+          active: true,
+        }, condition, function (result) {
+          if (result.changedRows === 0) {
+            return res.status(404).end();
+          }
+          res.status(200).end();
+        });
         db.user.active = true;
         user.secretToken = '';
         await user.save();

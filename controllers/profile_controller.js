@@ -11,7 +11,7 @@ router.get('/profile', async (req, res) => {
     try {
       await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.id = :id', {
         replacements: { id: req.session.passport.user },
-        type: db.Sequelize.QueryTypes.SELECT,
+        type: db.Sequelize.QueryTypes.SELECT, //will use update
       })
         .then((dbUser) => {
           const user = {
@@ -20,7 +20,7 @@ router.get('/profile', async (req, res) => {
             // roleid: dbUser[0].role_id,
             isloggedin: req.isAuthenticated(),
           };
-          // console.log(user.userInfo);
+          console.log('user.userInfo:', dbUser);
           if (dbUser[0].role_id > 1) {
             res.render('userProfilepage', user);
           } else {
