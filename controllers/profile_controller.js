@@ -85,18 +85,24 @@ router.get('/searchuser/:email', async (req, res) => {
     })
       .then((dbUser) => {
         console.log(dbUser);
-        const user = {
-          userInfo: dbUser[0],
+        if (!dbUser) {
+          res.status(404);
+          return res.send('No User Found');
+        }
+        const newSearch = {
+          searchedUser: dbUser[0],
           id: req.params.email,
           roleid: dbUser[0].role_id,
           isloggedin: req.isAuthenticated(),
         };
-        // res.json({ user });
-        console.log(user);
-        // res.render('adminProfilepage', user);
+        console.log(newSearch);
+        res.status(200);
+        res.json(newSearch);
+        // res.render('adminProfilepage', newSearch);
       });
   } catch (error) {
-    console.log(error);
+    res.status(404);
+    return res.send('No User Found');
   }
 });
 

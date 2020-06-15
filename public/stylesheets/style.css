@@ -3,7 +3,7 @@ form.login {
   margin-top: 90%;
 }
 
-#err-msg {
+#err-msg, #email-err-msg {
   color: red;
   text-align: center;
   font-weight: bolder;

@@ -85,32 +85,32 @@ $(document).ready(() => {
   });
 
   // SEARCH FOR AN ACCOUNT
-  $('#userSearch').submit((event) => {
+  $('#searchforUser').submit((event) => {
     // const $form = $(this);
     // const validator = $form.data('validator');
 
     // if (!validator || !$form.valid()) return;
     // $validator.resetForm();
     event.preventDefault();
-    const emailSearched = $('#searchUser').val().trim();
+    const emailSearched = $('#searchforUser').val().trim();
     console.log(`emailSearched ~~~~~~~ ${emailSearched}`);
 
 
-    if (emailSearched.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
-      try {
-        $.ajax({
-          type: 'get',
-          url: `/searchuser/${emailSearched}`,
-        })
-          .then((res) => {
-            console.log(res);
-          });
-      } catch (err) {
-        console.log(`Something went wrong ${err}`);
-      }
-    } else {
-      console.log('**Please enter a valid email**');
-      $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
-    }
+    // if (emailSearched.match(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
+    //   try {
+    //     $.ajax({
+    //       type: 'get',
+    //       url: `/searchuser/${emailSearched}`,
+    //     })
+    //       .then((res) => {
+    //         console.log(res);
+    //       });
+    //   } catch (err) {
+    //     console.log(`Something went wrong ${err}`);
+    //   }
+    // } else {
+    //   console.log('**Please enter a valid email**');
+    //   $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
+    // }
   });
 });
