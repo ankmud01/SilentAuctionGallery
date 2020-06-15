@@ -85,6 +85,6 @@ module.exports = function bar(sequelize, DataTypes) {
     return bcrypt.compareSync(password, this.password);
   };
   // Generate SecretToken for Email verification
-  User.secretToken = randomstring.generate();
+  User.secretToken = randomstring.generate(32);
   return User;
 };
