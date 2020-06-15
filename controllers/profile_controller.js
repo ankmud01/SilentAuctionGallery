@@ -49,7 +49,7 @@ router.delete('/user/:account_id/:email', (req, res) => {
       id: req.params.account_id,
       email: req.params.email,
     },
-  }).then((dbUser) => res.json(dbUser));
+  }).then((dbUser) => res.status(200).end());
 });
 
 // ROUTER TO UPDATE ACCOUNT
@@ -74,4 +74,36 @@ router.put('/user/:account_id', (req, res) => {
     res.json(dbuser);
   });
 });
+
+// PROFILE SEARCH BY ADMIN
+
+router.get('/searchuser/:email', async (req, res) => {
+  try {
+    await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.email = :email', {
+      replacements: { email: req.params.email },
+      type: db.Sequelize.QueryTypes.SELECT,
+    })
+      .then((dbUser) => {
+        console.log(dbUser);
+        if (!dbUser) {
+          res.status(404);
+          return res.send('No User Found');
+        }
+        const newSearch = {
+          searchedUser: dbUser[0],
+          id: req.params.email,
+          roleid: dbUser[0].role_id,
+          isloggedin: req.isAuthenticated(),
+        };
+        console.log(newSearch);
+        res.status(200);
+        res.json(newSearch);
+        // res.render('adminProfilepage', newSearch);
+      });
+  } catch (error) {
+    res.status(404);
+    return res.send('No User Found');
+  }
+});
+
 module.exports = router;

@@ -7,6 +7,7 @@ exports.checkAuthenticated = function authenticated(req, res, next) {
   }
 
   // If the user isn't logged in, redirect them to the signup page
+  res.status(403);
   return res.redirect('/signup');
 };
 
