@@ -39,7 +39,7 @@ $(document).ready(() => {
       });
     } else {
       console.log('**Please fill out entire form**');
-      $('#create-err-msg').empty('').text('**Please fill out entire form**');
+      $('#err-msg').empty('').text('**Please fill out entire form**');
     }
   });
 });
