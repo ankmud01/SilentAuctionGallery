@@ -1,0 +1,323 @@
+/* ------------------- BODY BACKGROUND ------------------- */
+  html {
+    background-image: url(../resources/backgroundImage.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  nav {
+    background-color: transparent;
+  }
+
+  .backgroundNav {
+    position: absolute; 
+    opacity: 75%; 
+    background-color:black;
+  }
+/* ------------------- BODY BACKGROUND ------------------- */
+
+
+
+/* ------------------- NAVBAR ------------------- */
+  .SAGnav {
+    position: relative;
+    display: inline-block;
+    float: left;
+    
+    margin-left: 2%;
+    font-size: 21pt;
+  }
+
+  .navList1 {
+    position: relative;
+    display: inline-block;
+    float: left;
+
+
+  }
+
+  .navList2 {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 8%;
+  }
+
+  .navArt {
+    margin-left: 30px;
+    font-size: 16pt;
+  }
+
+  .navLink {
+    font-size: 16pt;
+  }
+
+  .navBID {
+    margin-right: 30px;
+    font-size: 16pt;
+  }
+
+  .navProfile {
+    font-size: 16pt;
+  }
+/* ------------------- NAVBAR ------------------- */
+
+/* ------------------- FOOTER ------------------- */
+
+.charityText {
+  font-size: 20pt; 
+  margin: 0px;
+}
+
+.charityContainer {
+
+}
+
+.charityContainer p {
+  font-size: 40pt; 
+  margin: 0px; 
+  text-align: left;
+}
+
+.charityContainer img {
+  height: 100px; 
+  text-align: right;
+  cursor: pointer;
+}
+
+.footerCharityOpacity {
+  border-top: 3px solid white;
+  position: absolute; 
+  width: 100%; 
+  opacity: 40%; 
+  background-color: black; 
+}
+
+.footerFront {
+  position: relative;
+}
+
+/* ------------------- FOOTER ------------------- */
+
+
+/* ------------------- BODY TITLE HEADER INDEX------------------- */
+
+  .bodyTitleIndex {
+
+  }
+
+  .oconeePicIndex {
+    height: 100%;
+  }
+
+  .oconeePicIndex img {
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .headerTitleIndex {
+    font-size: 40pt;
+  }
+
+  .headerArtistsIndex p {
+    font-size: 30pt;
+    font-style: italic;
+    cursor: pointer;
+  }
+
+/* ------------------- BODY TITLE HEADER INDEX------------------- */
+
+/* ------------------- BODY TITLE HEADER GALLERY------------------- */
+
+.bodyTitleIndex {
+
+}
+
+.headerTitleIndex {
+  font-size: 40pt;
+}
+
+.headerArtistsIndex p {
+  font-size: 30pt;
+  font-style: italic;
+  cursor: pointer;
+}
+
+/* ------------------- BODY TITLE HEADER GALLERY------------------- */
+
+/* ------------------- BODY INDEX------------------- */
+
+.indexBody {
+  width: 100%;
+}
+
+
+.arrowLeftIndex {
+
+} 
+
+.arrowLeftIndexBG {
+  height: 400px; /* Make Responsive */
+  opacity: 50%;
+  cursor: pointer;
+} 
+
+.arrowLeftIndex img {
+  width: 40%;
+}
+
+.arrowRightIndex {
+  
+}
+
+.arrowRightIndexBG {
+  height: 400px; /* Make Responsive */
+  opacity: 50%;
+  cursor: pointer;
+}
+
+.arrowRightIndex img {
+  width: 40%;
+}
+
+
+.artCardIndex {
+  background-color: transparent;
+  opacity: 100%;
+}
+
+.artCardIndex .card {
+  background-color: transparent;
+}
+
+.cardImagesIndex {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.artCardIndex .cardButton {
+  opacity: 200%;
+  position: absolute;
+  top: 80%;
+  right: 5%;
+  width: 25%;
+  height: 10%;
+  text-align: center;
+}
+
+.artCardIndex .cardButton p {
+  opacity: 200%;
+  text-align: center;
+  color: black;
+  font-size: 14pt;
+  line-height: 0px;
+}
+
+.cardOpacityBackground {
+  background-color: white; 
+  opacity: 50%;
+}
+
+.frontCardIndex {
+  border-style: solid;
+  border-color: #646464;
+}
+/* ------------------- BODY INDEX------------------- */
+
+/* ------------------- BODY GALLERY------------------- */
+
+.sortButtonGallery { 
+  height: 50px; /* Make Resposnsive */
+  position: absolute; 
+  margin-left: 275px;
+}
+
+/* ------------------- BODY GALLERY------------------- */
+
+/* ------------------- BODY ARTISTS------------------- */
+
+.artistCard {
+  cursor: pointer;
+}
+
+.artistCard img {
+  cursor: pointer;
+  width: 85%;
+}
+
+.artCardArtists {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.artCardArtists .card {
+  background-color: transparent;
+  padding-bottom: 10px;
+}
+
+.frontCardArtists {
+ 
+}
+
+/* ------------------- BODY ARTISTS------------------- */
+
+/* ------------------- BODY ARTIST ITEMS------------------- */
+
+.artItemCard {
+  cursor: pointer;
+}
+
+.artItemCard img {
+  cursor: pointer;
+  width: 85%;
+}
+
+.artCardArtItem {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.artCardArtItem .card {
+  background-color: transparent;
+  padding-bottom: 10px;
+}
+
+.frontCardArtItem {
+  border-style: solid;
+  border-color: #646464;
+}
+
+/* ------------------- BODY ARTIST ITEMS------------------- */
+
+/* ------------------- CHARITY INDEX FOOTER------------------- */
+  /* .charityAmountContainer {
+
+}
+
+.charityText {
+  height: 100px; 
+  text-align: center;
+}
+
+.charityText p {
+  font-size: 30pt;
+}
+
+.charityAmount {
+  border: solid black; 
+  border-radius: 20px; 
+  max-height: 100px;
+}
+
+.charityAmount p {
+  font-size: 30pt; 
+  color: black;
+  padding-left: 13%;
+}
+
+.charityAmount img {
+
+} */
+/* ------------------- CHARITY INDEX FOOTER------------------- */
