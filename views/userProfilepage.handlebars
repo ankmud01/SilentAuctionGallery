@@ -97,18 +97,21 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-default red darken-4" id="updateButton">UPDATE
-                            PROFILE</button>
-
+                            PROFILE</button><button type="submit" class="btn btn-default red darken-4" id="refreshButton">REFRESH</button>
+                        {{#if active}}
+                        <div class="row emailVal"></div>
+                        {{else}}
                         <hr>
+                        <div class="row emailVal"></div>
                         <h3 class="emailVal" style="font-size: 1.5vw;">Email Validation</h3> <span id="emailmsg"
                             style="color:red;font-weight:bold"></span>
-                        <div class="row">
-                            <input class="emailVal" id="email-input" type="text" class="validate">
+                       
+                            <input class="emailVal" id="emailinput" type="text" class="validate emailVal">
                             <label for="email">Enter Your Email Address</label>
                         </div>
-                        <button type="submit" class="btn btn-default red darken-4" id="validateEmailButton">VALIDATE
+                        <button type="submit" class="btn btn-default red darken-4 enableOnInput emailVal" disabled="disabled" id="validateEmailButton">VALIDATE
                             EMAIL</button>
-                        <button type="submit" class="btn btn-default red darken-4" id="refreshButton">REFRESH</button>
+                        {{/if}}
                     </form>
 
                 </div>
