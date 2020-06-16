@@ -1,59 +1,4 @@
-<ul id="slide-out" class="sidenav sidenav-fixed">
-    <li>
-        <div class="user-view">
-            <div class="background">
-
-            </div>
-            <img class="circle" style="text-align: center; margin-left:35%"
-                src="https://avatars3.githubusercontent.com/u/61264828?s=460&u=85c3af334051baca42c09bd68c228ef867438da7&v=4">
-            <a href="#name"><span class="white-text name">{{userInfo.first_name}} {{userInfo.last_name}}</span></a>
-            <a href="#email"><span class="white-text email">{{userInfo.email}}</span></a>
-        </div>
-    </li>
-    <li class="sidenavLinks">
-        <div class="divider"></div>
-    </li>
-    <li class="sidenavLinks"><a href="/"><i class="material-icons crazyLinks" style="color:black">home</i>Home</a></li>
-    <li class="sidenavLinks"><a href="/profile"><i class="material-icons" style="color:black">account_box</i>Profile</a>
-    </li>
-        <li class="sidenavLinks"><a href="/gallery"><i class="material-icons" style="color:black">color_lens</i>Art Gallery</a>
-    </li>
-    <li class="sidenavLinks"><a href="/privacypolicy"><i class="material-icons" style="color:black">security</i>Privacy
-            Policy</a></li>
-    <li class="sidenavLinks"><a href="/donate"><i class="material-icons" style="color:black">payment</i>Donate/Bid</a>
-    </li>
-    
-    <li class="sidenavLinks"><a href="/logout"><i class="material-icons"
-                style="color:black">power_settings_new</i>Logout</a></li>
-
-</ul>
-
-
-<div class="w3-main">
-
-    <div class="w3-teal" id="headerBg">
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" style="color:black">menu</i></a>
-        <div class="w3-container">
-            <h1 class="headerText">Silent Auction Gallery</h1>
-        </div>
-
-
-    </div>
-</div>
-
-<div class="header" id="secondNavBar">
-    <a href="/" class="logo">S.A.G</a>
-    <div class="header-right">
-        <a href="/">Home</a>
-        <a href="/profile">Profile</a>
-        <a href="/donate">Donate/Bid</a>
-        <a href="/privacypolicy">Privacy Policy</a>
-        <a href="#about">About Us</a>
-        <a href="/logout">Log Out</a>
-    </div>
-</div>
-
-
+{{> sidebarNav }}
 
 <div class="container" id="mainContent" style="margin-right:10%">
     <div class="cards" style="margin-left:10%">
@@ -200,14 +145,18 @@
 
     /* Style the active/current link*/
     .header a.active {
-            
-                
-                 {{!-- !-- background-color: black;
+
+
+            {
+                {
+                 !-- !-- background-color: black;
                 color: silver;
-                -- --}}
-            
+                -- --
+            }
         }
-    
+
+    }
+
 
     /* Float the link section to the right */
     .header-right {
@@ -286,10 +235,9 @@
         margin-top: 5%;
         margin-bottom: 5%;
     }
-    
 </style>
 <script>
-   
+
     //for the countdown timer
     // Set the date we're counting down to
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
@@ -353,8 +301,9 @@
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 
- $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
 
 </script>
+<script type="text/javascript" src="/js/members.js"></script>

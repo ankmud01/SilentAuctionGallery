@@ -1,29 +1,38 @@
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-// Creating our school model
-module.exports = function bar(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Artwork = sequelize.define('Artwork', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    artName: {
-      allowNull: false,
+    art_name: {
       type: DataTypes.STRING,
-    },
-    aboutArt: {
       allowNull: false,
-      type: DataTypes.STRING,
+      validate: {
+        len: [1, 60],
+      },
     },
-    category: {
+    description: {
+      type: DataTypes.STRING,
       allowNull: false,
-      type: DataTypes.STRING,
+      validate: {
+        len: [1, 255],
+      },
     },
-    artistName: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.DECIMAL(8, 2),
+      allowNull: false,
     },
+    picture_link: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 255],
+      },
+    },
+
   });
+
+  Artwork.associate = function (models) {
+    Artwork.belongsTo(models.User, {
+      foreignKey: 'user_id',
+    });
+  };
+
   return Artwork;
 };

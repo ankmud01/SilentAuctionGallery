@@ -17,15 +17,15 @@ router.get('/login', (req, res) => {
 // ROUTE TO LOGIN USER INTO APPLICATION
 router.post('/api/login', (req, res, next) => {
   passport.authenticate('local-login', (err, user, info) => {
-    console.log('\n\n\n########userrrr', user);
+    console.log('\n\n\n########userrrr info', info);
     if (err) {
       console.log('passport err', err);
       return next(err); // will generate a 500 error
     }
     // Generate a JSON response reflecting authentication status
     if (!user) {
-      req.flash('loginMessage', 'No user found.');
-      return res.send({ success: false, message: 'loginMessage' });
+      // req.flash('loginMessage', 'No user found.');
+      return res.render('login', { title: 'Login Page', success: false, info });
     }
     req.login(user, (loginErr) => {
       if (loginErr) {
@@ -35,7 +35,7 @@ router.post('/api/login', (req, res, next) => {
       console.log('redirecting....');
       res.cookie('first_name', user.first_name);
       res.cookie('user_id', user.id);
-      return res.json(true);
+      return res.json(user);
     });
   })(req, res, next);
 });
