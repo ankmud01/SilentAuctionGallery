@@ -219,6 +219,11 @@
   background-color: white; 
   opacity: 50%;
 }
+
+.frontCardIndex {
+  border-style: solid;
+  border-color: #646464;
+}
 /* ------------------- BODY INDEX------------------- */
 
 /* ------------------- BODY GALLERY------------------- */
@@ -258,7 +263,33 @@
 
 /* ------------------- BODY ARTISTS------------------- */
 
+/* ------------------- BODY ARTIST ITEMS------------------- */
 
+.artItemCard {
+  cursor: pointer;
+}
+
+.artItemCard img {
+  cursor: pointer;
+  width: 85%;
+}
+
+.artCardArtItem {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.artCardArtItem .card {
+  background-color: transparent;
+  padding-bottom: 10px;
+}
+
+.frontCardArtItem {
+  border-style: solid;
+  border-color: #646464;
+}
+
+/* ------------------- BODY ARTIST ITEMS------------------- */
 
 /* ------------------- CHARITY INDEX FOOTER------------------- */
   /* .charityAmountContainer {
