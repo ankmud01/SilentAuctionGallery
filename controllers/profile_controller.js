@@ -99,7 +99,7 @@ router.get('/searchuser/:email', async (req, res) => {
         console.log(newSearch);
         res.status(200);
         res.json(newSearch);
-        // res.render('adminProfilepage', newSearch);
+        // res.render('partials/manageUser', newSearch);
       });
   } catch (error) {
     res.status(404);

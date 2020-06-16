@@ -85,7 +85,7 @@ $(document).ready(() => {
   });
 
   // SEARCH FOR AN ACCOUNT
-  $('#searchforUser').submit((event) => {
+  $('#userSearch').submit((event) => {
     // const $form = $(this);
     // const validator = $form.data('validator');
 
@@ -96,21 +96,21 @@ $(document).ready(() => {
     console.log(`emailSearched ~~~~~~~ ${emailSearched}`);
 
 
-    // if (emailSearched.match(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
-    //   try {
-    //     $.ajax({
-    //       type: 'get',
-    //       url: `/searchuser/${emailSearched}`,
-    //     })
-    //       .then((res) => {
-    //         console.log(res);
-    //       });
-    //   } catch (err) {
-    //     console.log(`Something went wrong ${err}`);
-    //   }
-    // } else {
-    //   console.log('**Please enter a valid email**');
-    //   $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
-    // }
+    if (emailSearched.match(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
+      try {
+        $.ajax({
+          type: 'get',
+          url: `/searchuser/${emailSearched}`,
+        })
+          .then((res) => {
+            console.log(res);
+          });
+      } catch (err) {
+        console.log(`Something went wrong ${err}`);
+      }
+    } else {
+      console.log('**Please enter a valid email**');
+      $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
+    }
   });
 });
