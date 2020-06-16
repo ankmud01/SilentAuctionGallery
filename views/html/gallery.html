@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{title}}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="../../public/css/spacing.css" rel="stylesheet" />
+  <link href="stylesheets/style.css" rel="stylesheet" />
+  <link href="../../public/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  
+  <nav class="backgroundNav"></nav> <!-- colors back of nav with lower opacity without ruining nav -->
+  
+  <!-- NavBar -->
+    <nav style="position: relative;">
+      <div class="nav-wrapper">
+        <a href="/" class="SAGnav">Silent Auction Gallery</a>
+        <ul id="" class="navList1">
+          <li><a href="" class="navArt">Artists</a></li>
+          <li><a href="" class="navLink">Gallery</a></li>
+          <li><a href="" class="navLink">FAQ</a></li>
+          <li><a href="" class="navLink">Donate</a></li>
+        </ul>
+        <ul id="" class="navList2">
+          <li><a href="" class="navBID ">
+            Bids
+            <span class="material-icons">shopping_cart</span>
+          </a></li>
+          <li><a href="" class="navProfile">
+            Profile
+            <span class="material-icons">account_circle</span>
+          </a></li>
+        </ul>
+      </div>
+    </nav>
+  <!-- NavBar -->
+
+  <main>
+    <!-- Body Header -->
+      <div class="row valign-wrapper center" style="height: 100px; margin-bottom: 0px;">
+        <div class="col m2 headerArtistsIndex" >
+          <p class="center">| Home</p>
+        </div>
+        <div class="col m8 headerTitleIndex center">
+          <p class="center">Artwork Gallery</p>
+        </div>
+        <div class="col m2 headerArtistsIndex" >
+          <p class="center">Artists |</p>
+        </div>
+      </div>
+    <!-- Body Header -->
+
+    <div class="divider" style="background-color: black; height: 3px;"></div> <!-- Divider -->
+  
+    <!-- Page Sort & Top Page Changer -->
+      <div class="row">
+        <div class="col m2">
+          <p class="right">Sort by:</p>
+        </div>
+        <div class="valign-wrapper sortButtonGallery">
+          <a class='dropdown-trigger btn red darken-1' href='#' data-target='dropdown1'>Change to selection</a>
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a class="black-text" href="#!">Time Left (low)</a></li>
+            <li><a class="" href="#!">Time Left (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Price (low)</a></li>
+            <li><a href="#!">Price (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Current Bid (low)</a></li>
+            <li><a href="#!">Current Bid (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Size (low)</a></li>
+            <li><a href="#!">Size (high)</a></li>
+              <li class="divider" tabindex="-1"></li>
+            <li><a class="black-text" href="#!">Name</a></li>
+            <li><a class="black-text" href="#!">Artist</a></li>
+            <li><a class="black-text" href="#!">Category</a></li>
+          </ul>
+        </div>
+        <div class="col m2 push-m8 valign-wrapper galleryPageChange container">
+          <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </div>
+      </div>
+    <!-- Page Sort & Top Page Changer -->
+
+    <!-- Body Cards -->
+      <div class="row">
+
+        <!-- white low opacity card background -->
+          <div class="row valign-wrapper center indexBody" style="position: absolute;">
+            <div class="row center indexBody"> 
+              <div class="">
+                <div class="col m12">
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- white low opacity card background -->
+        
+        <!-- Front layer interactive cards and arrows --> <!-- Make Mobile Friendly -->
+          <div class="row center indexBody"> 
+      
+            <div class="">
+              <div class="col m12">
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card frontCard">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s12 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        <!-- Front layer interactive cards and arrows -->
+      </div>
+    <!-- Body Cards -->
+
+    <!-- Body Cards 2 -->
+      <div class="row">
+
+        <!-- white low opacity card background -->
+          <div class="row valign-wrapper center indexBody" style="position: absolute;">
+            <div class="row center indexBody"> 
+              <div class="">
+                <div class="col m12">
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                  <div class="col m3 s0 ">
+                    <div class="col s12">
+                      <div class="card cardOpacityBackground"></div>       
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- white low opacity card background -->
+        
+        <!-- Front layer interactive cards and arrows --> <!-- Make Mobile Friendly -->
+          <div class="row center indexBody"> 
+      
+            <div class="">
+              <div class="col m12">
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card frontCard">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s12 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+                <div class="col m3 s0 ">
+      
+                  <div class="artCardIndex">
+                    <div class="">
+                      <div class="col s12">
+                        <div class="card">
+                          <div class="card-image">
+                            <img class="cardImagesIndex" src="../../public/resources/bust_1915.jpg">
+                            <a class="btn-large halfway-fab waves-effect waves-light red cardButton"><p>BID</p></a>
+                          </div>
+                          <hr style="width: 80%; height: 1px; background-color: black;">
+                          <div class="card-content">
+                            <div class="row">
+                              <div class="col s6" style="text-align: left;">
+                                <p>
+                                  Name :<br>
+                                  Category :<br>
+                                  Size :<br>
+                                  Starting Bid :<br> 
+                                  Current Bid :<br> 
+                                  Time Left :<br> 
+                                </p>
+                              </div>
+                              <div class="col s6" style="text-align: right;">
+                                <p>
+                                  "Bust"<br>
+                                  Painting<br>
+                                  36"x36"x2"<br>
+                                  $26.95<br> 
+                                  $100<br> 
+                                  xx:xx:xx<br> 
+                                </p>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </div>          
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        <!-- Front layer interactive cards and arrows -->
+      </div>
+    <!-- Body Cards 2 -->
+
+
+
+    <!-- Bottom Page Changer -->
+      <div class="row">
+        <div class="col m2 push-m10 valign-wrapper galleryPageChange container">
+          <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </div>
+      </div>
+    <!-- Bottom Page Changer -->
+  </main>
+
+
+
+  <!-- <hr style="width: 70%; border: 1px solid black;"> Divider -->
+
+  <!-- Footer Opacity Background -->
+    <footer class="page-footer footerCharityOpacity">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12 row">
+            <div class="row">
+            </div>
+            <div class="container valign-wrapper left">
+            </div>
+          </div>
+          <div class="col l4 offset-l2 s12">
+          </div>
+        </div>
+      </div>
+    </footer>
+  <!-- Footer Opacity Background -->
+
+  <!-- Footer -->
+    <footer class="page-footer transparent footerFront">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12 row">
+            <div class="row">
+              <p class="charityText">Total amount raised for Charity:</p>
+            </div>
+            <div class="charityContainer container valign-wrapper left">
+              <p>$123,456</p>
+              <img src="../../public/resources/St.-Jude-Logo.png">
+            </div>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Artists</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Gallery</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">FAQ</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Donate</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">North Oconee Highschool</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright grey darken-4">
+        <div class="container center">
+        <a class="grey-text text-lighten-4" href="#!">Developed by: Ankit Mudvari, Dean Warren, Isaiah Kelly, Steven Langlois, Joshua Stillion</a>
+        </div>
+      </div>
+    </footer>
+  <!-- Footer -->
+
+</body>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+<script>
+  let backgroundCard = $(".cardOpacityBackground");
+  let frontCard = $(".frontCard");
+    let frontCardHeight = frontCard.css("height")
+  //
+
+  let leftArrow = $(".arrowLeftIndexBG");
+  let rightArrow = $(".arrowRightIndexBG");
+
+  let backCharity = $(".footerCharityOpacity");
+  let frontCharity = $(".footerFront");
+    let frontCharityHeight = frontCharity.css("height");
+
+  backgroundCard.css("height", frontCardHeight);
+  // leftArrow.css("height", frontCardHeight);
+  // rightArrow.css("height", frontCardHeight);
+  backCharity.css("height", frontCharityHeight)
+
+  // $('.dropdown-trigger').dropdown();
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    let options = {
+      constrainWidth: false,
+      coverTrigger: false
+    }
+    var instances = M.Dropdown.init(elems, options);
+  });
+
+</script>
+
+
+</html>
