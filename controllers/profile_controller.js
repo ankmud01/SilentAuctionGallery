@@ -22,7 +22,8 @@ router.get('/profile', async (req, res) => {
           };
           console.log('user.userInfo:', dbUser);
           if (dbUser[0].role_id > 1) {
-            res.render('userProfilepage', user);
+            res.render('userProfilepage', {
+              title: 'Registration Page', user });
           } else {
             res.render('adminProfilepage', user);
           }
