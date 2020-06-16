@@ -173,6 +173,7 @@ router
           condition,
           function (result) {
             if (result.changedRows === 0) {
+              req.flash('You have either already confirmed your account OR you may need to register', 'I did NOT find you in our database.');
               return res.status(404).end();
             }
             req.flash('Success', 'Thank you! Now you can Login.');
