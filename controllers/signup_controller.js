@@ -128,7 +128,8 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router
-  .get('/verify', (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  .get('/verify', (req, res, next) => {
     console.log('<----------------------------------Req.body: ', req.body);
     res.render('verifytoken', { title: 'Verify Email Page' });
   })
@@ -138,6 +139,7 @@ router
   .post('/verify', async (req, res, next) => {
     try {
       secretToken = req.body;
+
       console.log('Line 141 ----->secretToken:', secretToken);
       // Find account with matching secret Token
       const user = await db.User.findOne({
@@ -145,8 +147,12 @@ router
           secretToken: secretToken.secretToken,
         },
       });
-      console.log('Line 144------->User db output:', user.dataValues.secretToken);
-      console.log('line 145 ------>User db only output:', user);
+      if (!user.dataValues.secretToken || user.dataValues.secretToken === '' || user.dataValues.secretToken === ' ') {
+        req.flash('You have either already confirmed your account OR you may need to register');
+        return res.status(404).redirect('/signup', { title: 'Register Page' });
+      }
+      console.log('Line 149------->User db output:', user.dataValues.secretToken);
+      console.log('line 145 ------>User db active output:', user.dataValues.active);
 
       if (user.dataValues.secretToken === secretToken.secretToken) {
         console.log('Domain is matched. Information is from Authentic email. secretToken:',
@@ -155,8 +161,9 @@ router
         console.log('In Verify Route and user: ', user);
         if (!user) {
           console.log('*****************User NOT Found!!!****************');
+          // res.;
           req.flash('Error, No user found.');
-          res.redirect('/signup');
+          res.status(401).redirect('/signup');
           return;
         }
         const condition = {
@@ -173,6 +180,7 @@ router
           condition,
           function (result) {
             if (result.changedRows === 0) {
+              req.flash('You have either already confirmed your account OR you may need to register', 'I did NOT find you in our database.');
               return res.status(404).end();
             }
             req.flash('Success', 'Thank you! Now you can Login.');
@@ -187,6 +195,8 @@ router
         res.redirect('/login');
       }
     } catch (error) {
+      throw new Error('BROKEN-DID NOT CATCH THE NULL VALUE');
+      // eslint-disable-next-line no-unreachable
       next(error);
     }
   });

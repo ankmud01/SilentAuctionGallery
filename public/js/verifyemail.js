@@ -45,22 +45,33 @@ $(document).ready(() => {
     }
   }
 
-  $('#validateEmailButton').click((event) => {
-    event.preventDefault();
-    to = $('#email-input').val();
-    console.log('<-------verfy email button clicked-------->');
-    if (to === '') {
-      console.log('No Email to send!');
-      $('#emailmsg').text('You must type in an Email to verify.');
-    } else {
-      console.log('Sending email to: ', to);
-      $('#emailmsg').text('Sending E-mail...Please wait');
-      const data = {
-        to,
-        subject,
-      };
-      sendAnEmail(data);
-    }
+  $(() => {
+    $('#emailinput').change(() => {
+      // event.preventDefault();
+      if ($('#emailinput').val() === '') {
+        $('.enableOnInput').prop('disabled', true);
+        $('#emailmsg').text('You must type in an Email to verify.');
+      } else {
+        $('.enableOnInput').prop('disabled', false);
+        $('#validateEmailButton').click((event) => {
+          event.preventDefault();
+          to = $('#emailinput').val();
+          console.log('<-------verfy email button clicked-------->', to);
+          if (to === '') {
+            console.log('No Email to send!');
+            $('#emailmsg').text('You must type in an Email to verify.');
+          } else {
+            console.log('Sending email to: ', to);
+            $('#emailmsg').text('Sending E-mail...Please wait');
+            const data = {
+              to,
+              subject,
+            };
+            sendAnEmail(data);
+          }
+        });
+      }
+    });
   });
 
 

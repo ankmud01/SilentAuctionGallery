@@ -4,7 +4,6 @@ const express = require('express');
 const db = require('../models');
 
 const router = express.Router();
-
 // ROUTE TO GET USER DETAILS OF SIGNED IN USER
 router.get('/profile', async (req, res) => {
   if (req.isAuthenticated()) {
@@ -17,12 +16,12 @@ router.get('/profile', async (req, res) => {
           const user = {
             userInfo: dbUser[0],
             id: req.session.passport.user,
-            // roleid: dbUser[0].role_id,
+            active: dbUser[0].active,
             isloggedin: req.isAuthenticated(),
           };
-          console.log('user.userInfo:', dbUser);
+          console.log('user.userInfo:', user);
           if (dbUser[0].role_id > 1) {
-            res.render('userProfilepage', user);
+            res.render('userProfilepage', { title: 'Admin Profile Page', user });
           } else {
             res.render('adminProfilepage', user);
           }
