@@ -52,15 +52,16 @@
 
   .navLink {
     font-size: 16pt;
+    margin-left: 30px;
   }
 
-  .navBID {
-    margin-right: 30px;
+  .navLogout {
     font-size: 16pt;
   }
 
   .navProfile {
     font-size: 16pt;
+    margin-right: 30px;
   }
 /* ------------------- NAVBAR ------------------- */
 

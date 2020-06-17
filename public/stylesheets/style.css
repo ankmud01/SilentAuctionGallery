@@ -99,9 +99,9 @@ footer {
 
 #donateCard{
   height: 60%;
-  width: 30%;
+  width: 80%;
   margin-top: 5%;
-  margin-left: 40%;
+  margin-left: 10%;
   text-align: left;
   margin-bottom: 7%;
 
@@ -156,10 +156,6 @@ p{
 .signUpBody{
   
   background-image: url("https://static01.nyt.com/images/2020/01/17/arts/15galleries-nodjoumi/15galleries-nodjoumi-mobileMasterAt3x.jpg");
-}
-
-body{
-  position: relative;
 }
 
 
@@ -242,7 +238,7 @@ body{
   height: 100%;
   margin-top: 2%;
   margin-bottom: 2%;
-  margin-left:18%; 
+  margin-left:10%; 
 }
 
 .w3-transparent, .w3-hover-none:hover {
@@ -432,7 +428,7 @@ body{
 @media screen and (max-width: 1000px) {
   
   #profilePageCardMain{
-      margin-left: 10%;
+      /* margin-left: 10%; */
   }
   #mainContent2{
     margin-left: 1%;

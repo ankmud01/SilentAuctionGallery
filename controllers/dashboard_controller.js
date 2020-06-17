@@ -11,7 +11,7 @@ router.get('/dashboard', checkAuthenticated, (req, res) => {
 });
 
 router.get('/gallery', checkAuthenticated, (req, res) => {
-  res.render('artGallery', { title: 'Art Gallery', school: 'North Oconee Highschool' });
+  res.render('artGallery', { title: 'Art Gallery', school: 'North Oconee Highschool'});
 //   console.log('Line 13 - In Get / route');
 });
 

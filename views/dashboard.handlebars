@@ -1,69 +1,47 @@
-{{> sidebarNav }}
-
-<div class="container" id="mainContent" style="margin-right:10%">
-    <div class="cards" style="margin-left:10%">
-        <div class="card auctionDashboardCard">
-            <p class="countdownTimerText">Countdown To Next Auction</p>
-            <p id="demo"></p>
-        </div>
-        <div class="card auctionLinkCard">
-            <p style="margin-top: 7%;"></p>
-
-            <a class="waves-effect waves-light transparent btn auctionLink">Place a Bid</a>
-        </div>
-    </div>
-
-    <div class="cards" style="margin-left:10%">
-        <div class="card" id="cardGalleryText">
-            <a href="#">New Artwork</a>
-        </div>
-    </div>
-</div>
-
-
-
+{{> header }}
 
 <!-- Container for the image gallery -->
-<div class="container" id="mainContent3" style="margin-right:10%">
-    <div class="w3-card" id="profilePageCard2" style="margin-left:10%">
+<div class="row" id="mainContent3" style="margin-right:10%">
+ 
+    <div class="w3-card" id="profilePageCard2" style="margin-left:10%; margin-top:100px">
 
         <!-- Full-width images with number text -->
         <div class="mySlides">
-            <div class="numbertext">1 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://mymodernmet.com/wp/wp-content/uploads/2019/03/elements-of-art-6.jpg" style="width:100%">
         </div>
 
         <div class="mySlides">
-            <div class="numbertext">2 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://obxartstudio.com/wp-content/uploads/2016/10/Art.jpg" style="width:100%">
         </div>
 
         <div class="mySlides">
-            <div class="numbertext">3 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://acrylgiessen.com/wp-content/uploads/2018/09/resinkunst_grundlagen-1-1080x675.jpg"
                 style="width:100%">
         </div>
 
         <div class="mySlides">
-            <div class="numbertext">4 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://cdn11.bigcommerce.com/s-x49po/images/stencil/1280x1280/products/36835/50093/1547274864391_Screenshot_20190108_111037_copy__55052.1547528015.jpg?c=2&imbypass=on"
                 style="width:100%">
         </div>
 
         <div class="mySlides">
-            <div class="numbertext">5 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://d2u3kfwd92fzu7.cloudfront.net/asset/cms/Art_Basel_Hong_Kong_2020_THUMB-5-1.jpg"
                 style="width:100%">
         </div>
 
         <div class="mySlides">
-            <div class="numbertext">6 / 6</div>
+            <div class="numbertext"></div>
             <img src="https://bridgeportartscouncil.org/wp-content/uploads/2018/02/bacc-jahmane.jpg" style="width:100%">
         </div>
 
         <!-- Next and previous buttons -->
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a class="next" style="margin-right: 10%;" onclick="plusSlides(1)">&#10095;</a>
 
         <!-- Image text -->
         <div class="caption-container">
@@ -105,10 +83,10 @@
     </div>
 </div>
 
+{{> footer }}
 
 <style>
     /*the nabar*/
-
     /* Style the header with a grey background and some padding */
     .header {
         overflow: hidden;
@@ -116,8 +94,6 @@
         padding: 20px 10px;
         border-bottom: 1px solid gray;
     }
-
-
     /* Style the header links */
     .header a {
         float: left;
@@ -128,25 +104,19 @@
         font-size: 18px;
         line-height: 5%;
         border-radius: 4px;
-
     }
-
     /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
     .header a.logo {
         font-size: 25px;
         font-weight: bold;
     }
-
     /* Change the background color on mouse-over */
     .header a:hover {
         background-color: #ddd;
         color: black;
     }
-
     /* Style the active/current link*/
     .header a.active {
-
-
             {
                 {
                  !-- !-- background-color: black;
@@ -154,20 +124,15 @@
                 -- --
             }
         }
-
     }
-
-
     /* Float the link section to the right */
     .header-right {
         float: right;
     }
-
     .sideNavBtn:hover {
         background-color: rgb(0, 0, 0);
         color: silver;
     }
-
     /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
     @media screen and (max-width: 500px) {
         .header a {
@@ -176,43 +141,33 @@
             text-align: left;
             margin-top: 1%;
         }
-
         .header-right {
             float: none;
         }
-
         .logo {
             margin-bottom: 1%;
         }
     }
-
     .auctionDashboardCard {
         background-image: url("https://wallpaperaccess.com/full/88229.jpg");
         opacity: 0.9;
         background-size: cover;
         background-repeat: round;
         height: 20vh;
-
     }
-
     .auctionLinkCard {
         background-image: url("https://media.glassdoor.com/l/0e/87/fe/4c/a-live-art-auction.jpg");
         opacity: 0.9;
         background-size: cover;
         background-repeat: round;
         height: 20vh;
-
     }
-
     #cardGalleryText {
         background-image: url("");
         opacity: 1;
         background-size: cover;
         background-repeat: round;
-
-
     }
-
     .auctionLink {
         color: white;
         text-align: center;
@@ -221,7 +176,6 @@
         background-position: bottom;
         text-shadow: 1px 1px black
     }
-
     .countdownTimerText {
         text-align: center;
         color: white;
@@ -229,60 +183,43 @@
         margin-top: 1px;
         text-shadow: 1px 1px black
     }
-
-
     #cardGalleryPics {
         margin-top: 5%;
         margin-bottom: 5%;
     }
 </style>
 <script>
-
     //for the countdown timer
     // Set the date we're counting down to
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
-
     // Update the count down every 1 second
     var x = setInterval(function () {
-
         // Get today's date and time
         var now = new Date().getTime();
-
         // Find the distance between now and the count down date
         var distance = countDownDate - now;
-
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
         // Output the result in an element with id="demo"
         document.getElementById("demo").innerHTML = days + "d " + hours + "h "
             + minutes + "m " + seconds + "s ";
-
         // If the count down is over, write some text 
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("demo").innerHTML = "EXPIRED";
         }
     }, 1000);
-
-
-
-
-
     var slideIndex = 1;
     showSlides(slideIndex);
-
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
-
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
-
     function showSlides(n) {
         var i;
         var slides = document.getElementsByClassName("mySlides");
@@ -300,10 +237,8 @@
         dots[slideIndex - 1].className += " active";
         captionText.innerHTML = dots[slideIndex - 1].alt;
     }
-
     $(document).ready(function () {
         $('.sidenav').sidenav();
     });
-
 </script>
 <script type="text/javascript" src="/js/members.js"></script>
