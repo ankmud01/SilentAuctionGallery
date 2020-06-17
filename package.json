@@ -17,7 +17,7 @@
     "express-handlebars",
     "sequelize"
   ],
-  "author": "Ankit Mudvari, Esther Kwon,and Dean Warren",
+  "author": "Ankit Mudvari, Dean Warren, Isaiah Kelly, Joshua Stillion, Steven Langlois",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ankmud01/SilentAuctionGallery/issues"
