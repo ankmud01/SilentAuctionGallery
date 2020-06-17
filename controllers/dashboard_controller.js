@@ -5,7 +5,13 @@ const { checkAuthenticated } = require('../config/middleware/isAuthenticated');
 const router = express.Router();
 
 // This is get route for dashboard
-router.get('/dashboard', checkAuthenticated, (req, res) => {
+router.get('/verify', (req, res) => {
+  res.render('index', { title: 'Dashboard', school: 'North Oconee Highschool' });
+//   console.log('Line 13 - In Get / route');
+});
+
+
+router.get('/dashboard', (req, res) => {
   res.render('dashboard', { title: 'Dashboard', school: 'North Oconee Highschool' });
 //   console.log('Line 13 - In Get / route');
 });

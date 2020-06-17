@@ -6,6 +6,9 @@ const path = require('path');
 const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const fileupload = require('express-fileupload');
+
+
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
 require('dotenv').config();
@@ -78,6 +81,28 @@ app.use(loginRoutes);
 app.use(donateRoutes);
 app.use(profileRoutes);
 
+app.use(fileupload({ safeFileNames: true, preserveExtension: 3 }));
+
+// eslint-disable-next-line consistent-return
+app.post('/upload', (req, res) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  const { sampleFile } = req.files;
+  console.log('Is there a file: ', req.files, req.files.sampleFile.name);
+
+  // Use the mv() method to place the file somewhere on your server
+  // eslint-disable-next-line consistent-return
+  sampleFile.mv(`./public/upload/${sampleFile}`, (err) => {
+    if (err) return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+});
+
+
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
@@ -89,5 +114,6 @@ db.sequelize.sync().then(() => {
     );
   });
 });
+
 
 module.exports = express;
