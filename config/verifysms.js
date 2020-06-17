@@ -4,6 +4,7 @@
 
 const accountSid = process.env.TWILIO_ACC_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+// eslint-disable-next-line import/no-unresolved
 const client = require('twilio')(accountSid, authToken);
 
 client.messages.create({
