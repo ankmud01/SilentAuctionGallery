@@ -5,9 +5,13 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const flash = require('express-flash');
 const bodyParser = require('body-parser');
+const mysql = require('mysql2');
 const passport = require('passport');
 const fileupload = require('express-fileupload');
 
+if (process.env.JAWSDB_URL) {
+  mysql.createConnection(process.env.JAWSDB_URL);
+}
 
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
