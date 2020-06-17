@@ -86,11 +86,6 @@ $(document).ready(() => {
 
   // SEARCH FOR AN ACCOUNT
   $('#userSearch').submit((event) => {
-    // const $form = $(this);
-    // const validator = $form.data('validator');
-
-    // if (!validator || !$form.valid()) return;
-    // $validator.resetForm();
     event.preventDefault();
     const emailSearched = $('#searchforUser').val().trim();
     console.log(`emailSearched ~~~~~~~ ${emailSearched}`);
@@ -103,14 +98,29 @@ $(document).ready(() => {
           url: `/searchuser/${emailSearched}`,
         })
           .then((res) => {
-            console.log(res);
+            // const accountId = $('#accountid');
+            $('#accountid').val(res.searchedUser.id);
+            $('#fullname').val(res.searchedUser.first_name || res.searchedUser.last_name);
+            $('#firstnameinput').val(res.searchedUser.first_name);
+            $('#lastnameinput').val(res.searchedUser.last_name);
+            $('#addressinput').val(res.searchedUser.address);
+            $('#address2input').val(res.searchedUser.address2);
+            $('#cityinput').val(res.searchedUser.city);
+            $('#statedropdown').val(res.searchedUser.state);
+            // $('#statedropdown').append(`<option value="">${res.searchedUser.state}</option>`);
+            $('#zipcodeinput').val(res.searchedUser.zip);
+            $('#phoneinput').val(res.searchedUser.phone);
+            $('#emailinput').val(res.searchedUser.email);
+            $('#schoolinput').val(res.searchedUser.school);
+            $('#roleinput').val(res.searchedUser.role_name);
           });
       } catch (err) {
         console.log(`Something went wrong ${err}`);
+        $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
       }
     } else {
       console.log('**Please enter a valid email**');
-      $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
+      $('#err-msg').empty('').text('**Email not found.. Please enter a valid Email**');
     }
   });
 });
