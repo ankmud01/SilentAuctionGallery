@@ -42,7 +42,7 @@ $(document).ready(() => {
       }
     } else {
       console.log('**Please enter a valid username and password**');
-      $('#create-err-msg').empty('').text('**Please enter a valid username and password**');
+      $('#err-msg').empty('').text('**Please enter a valid username and password**');
     }
   });
 });

@@ -1,9 +1,12 @@
+/* eslint-disable func-names */
 /* Requiring bcrypt for password hashing */
-
+const randomstring = require('randomstring');
 const bcrypt = require('bcrypt');
+
 // Creating our User model
 module.exports = function bar(sequelize, DataTypes) {
   const User = sequelize.define('User', {
+    // The email cannot be null, and must be a proper email before creation
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,6 +37,7 @@ module.exports = function bar(sequelize, DataTypes) {
     },
     address2: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     city: {
       type: DataTypes.STRING,
@@ -49,15 +53,29 @@ module.exports = function bar(sequelize, DataTypes) {
     },
     school: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    secretToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      default: false,
     },
   });
 
-  User.associate = (models) => {
-    User.belongsTo(models.Roles, {
-      foreignKey: {
-        allowNull: false,
-      },
+  User.associate = function (models) {
+    User.hasMany(models.Artwork, {
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+    });
+  };
+
+  User.associate = function (models) {
+    User.belongsTo(models.Role, {
+      foreignKey: 'role_id',
     });
   };
 
@@ -68,5 +86,7 @@ module.exports = function bar(sequelize, DataTypes) {
   User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
+  // Generate SecretToken for Email verification
+  User.secretToken = randomstring.generate(32);
   return User;
 };

@@ -1,39 +1,30 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
-// Creating our school model
+
 module.exports = function bar(sequelize, DataTypes) {
   const Bid = sequelize.define('Bid', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    artId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-    },
-    artDesc: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
-    artCategory: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
     startBid: {
       type: DataTypes.INTEGER,
     },
-    highestBid: {
+    bids: {
       type: DataTypes.INTEGER,
-    },
-    bidUserId: {
-      type: DataTypes.STRING,
     },
     status: {
       allowNull: false,
       type: DataTypes.STRING,
     },
   });
+
+  Bid.associate = (models) => {
+    Bid.hasMany(models.OrderHdr, {
+      foreignKey: 'bid_id',
+      onDelete: 'cascade',
+    });
+    Bid.hasMany(models.OrderDtl, {
+      foreignKey: 'bid_id',
+      onDelete: 'cascade',
+    });
+  };
+
   return Bid;
 };

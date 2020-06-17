@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
   if (req.isAuthenticated()) {
     res.redirect('/dashboard');
   } else {
-    res.render('login3');
+    res.render('login');
   }
 });
 
@@ -25,7 +25,7 @@ router.post('/api/login', (req, res, next) => {
     // Generate a JSON response reflecting authentication status
     if (!user) {
       // req.flash('loginMessage', 'No user found.');
-      return res.render('login', { success: false, info });
+      return res.render('login', { title: 'Login Page', success: false, info });
     }
     req.login(user, (loginErr) => {
       if (loginErr) {

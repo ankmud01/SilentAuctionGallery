@@ -1,42 +1,31 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 $(document).ready(() => {
-  // <h2>Welcome, {{userInfo.first_name}} {{userInfo.last_name}}</h2>
-  // <p> First Name: {{userInfo.first_name}}</p>
-  // <p> Last Name: {{userInfo.last_name}}</p>
-  // <p> Email-Id: {{userInfo.email}}</p>
-  // <p> Phone Number: {{userInfo.phone}}</p>
-  // <p> Address1: {{userInfo.address}}</p>
-  // <p> Address2: {{userInfo.address2}}</p>
-  // <p> City: {{userInfo.city}}</p>
-  // <p> State: {{userInfo.state}}</p>
-  // <p> Zip Code: {{userInfo.zip}}</p>
-  // <p> School: {{userInfo.school}}</p>
-  // <p> Role: {{userInfo.role_id}}</p>
-
-  // Delete Account
+  // DELETE ACCOUNT
   $('#deleteButton').on('click', (event) => {
     event.preventDefault();
-    // $('#err-msg').empty('');
-    // $('#delete-account-modal').open();
-    // });
+    $('#err-msg').empty('');
+    $('#delete-account-modal').modal();
+  });
 
-    // $('#confirm-delete').on('click', (event) => {
+  // CONFIRM DELETE
+  $('#confirm-delete').on('click', (event) => {
+    console.log('Clicked on Confirm Delete button');
     const deleteAccount = {
       account_id: $('#account_id').val().trim(),
-      password: $('#password-input').val().trim(),
+      email: $('#email-input').val().trim(),
     };
     console.log(deleteAccount);
-    if (deleteAccount.account_id.length > 0 && deleteAccount.password.length > 0) {
-      $.ajax(`/accounts/${deleteAccount.account_id}/${deleteAccount.password}`, {
+    if (deleteAccount.account_id.length > 0 && deleteAccount.email.length > 0) {
+      $.ajax(`/user/${deleteAccount.account_id}/${deleteAccount.email}`, {
         type: 'DELETE',
       }).then(
         () => {
           console.log('deleted account', deleteAccount.account_id);
           // Reload the page to get the updated list
+          // window.location.replace('/signup');
           location.reload();
         },
-
       );
     } else {
       console.log('fill out entire form');
@@ -44,9 +33,15 @@ $(document).ready(() => {
     }
   });
 
+  // CANCEL DELETE
+  $('#cancel-delete').on('click', (event) => {
+    $('#delete-account-modal').modal('close');
+  });
+
   // UPDATE ACCOUNT
   $('#updateButton').on('click', (event) => {
     event.preventDefault();
+    console.log('About to update my account...');
 
     // capture All changes
     const changeAccount = {
@@ -61,21 +56,20 @@ $(document).ready(() => {
       school: $('#school-input').val().trim(),
       email: $('#email-input').val().trim(),
       phone: $('#phone-input').val().trim(),
-      password: $('#password-input').val().trim(),
     };
     $('#err-msg').empty('');
     // $("#change-account-modal").modal("show");
     console.log(changeAccount);
 
 
-    if (changeAccount.password.length > 0 && changeAccount.phone.length > 0
+    if (changeAccount.phone.length > 0
       && changeAccount.email.length > 0 && changeAccount.zip.length > 0
       && changeAccount.state.length > 0 && changeAccount.city.length > 0
       && changeAccount.address1.length > 0 && changeAccount.last_name.length > 0
       && changeAccount.first_name.length > 0) {
       $.ajax({
         type: 'PUT',
-        url: `/accounts/${changeAccount.account_id}/${changeAccount.password}`,
+        url: `/user/${changeAccount.account_id}`,
         data: changeAccount,
       }).then(
         () => {
@@ -87,6 +81,36 @@ $(document).ready(() => {
     } else {
       console.log('**Please fill out entire form**');
       $('#update-err-msg').empty('').text('**Please fill out entire form**');
+    }
+  });
+
+  // SEARCH FOR AN ACCOUNT
+  $('#userSearch').submit((event) => {
+    // const $form = $(this);
+    // const validator = $form.data('validator');
+
+    // if (!validator || !$form.valid()) return;
+    // $validator.resetForm();
+    event.preventDefault();
+    const emailSearched = $('#searchforUser').val().trim();
+    console.log(`emailSearched ~~~~~~~ ${emailSearched}`);
+
+
+    if (emailSearched.match(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/i)) {
+      try {
+        $.ajax({
+          type: 'get',
+          url: `/searchuser/${emailSearched}`,
+        })
+          .then((res) => {
+            console.log(res);
+          });
+      } catch (err) {
+        console.log(`Something went wrong ${err}`);
+      }
+    } else {
+      console.log('**Please enter a valid email**');
+      $('#err-msg').empty('').text('**Email not found.. Please enter a different Email-Id**');
     }
   });
 });

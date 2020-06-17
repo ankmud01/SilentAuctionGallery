@@ -16,11 +16,6 @@ router.get('/dashboard', (req, res) => {
 //   console.log('Line 13 - In Get / route');
 });
 
-router.get('/profile', (req, res) => {
-  res.render('userProfilepage', { title: 'Profile', school: 'North Oconee Highschool' });
-//   console.log('Line 13 - In Get / route');
-});
-
 router.get('/gallery', checkAuthenticated, (req, res) => {
   res.render('artGallery', { title: 'Art Gallery', school: 'North Oconee Highschool' });
 //   console.log('Line 13 - In Get / route');

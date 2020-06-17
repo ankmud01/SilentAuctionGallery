@@ -7,7 +7,7 @@ const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const fileupload = require('express-fileupload');
-var Busboy = require('busboy');
+
 
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
@@ -16,6 +16,8 @@ require('dotenv').config();
 const { pid } = process;
 const PORT = process.env.PORT || 3000;
 const db = require('./models');
+
+console.log('Process PID: ', process.pid);
 
 const app = express();
 
@@ -27,17 +29,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({
-  key: 'user_sid',
-  secret: process.env.SESSION_SECRET,
-  // httpOnly: true,
-  // need to understand this more
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: 600000,
-  },
-}));
+app.use(
+  session({
+    key: 'user_sid',
+    secret: process.env.SESSION_SECRET,
+    // httpOnly: true,
+    // need to understand this more
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      expires: 600000,
+    },
+  }),
+);
 
 // using passport and session
 app.use(passport.initialize());
@@ -52,16 +56,16 @@ app.use(express.static('public'));
 app.engine(
   'handlebars',
   exphbs({
-    extname: 'handlebars',
+    // extname: 'handlebars',
     defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, 'views/layouts'),
+    // layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: [
       //  path to your partials
       path.join(__dirname, 'views/partials'),
     ],
   }),
 );
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 // Import routes and give the server access to them.
@@ -77,26 +81,26 @@ app.use(loginRoutes);
 app.use(donateRoutes);
 app.use(profileRoutes);
 
-app.use(fileupload({safeFileNames: true, preserveExtension:3}));
+app.use(fileupload({ safeFileNames: true, preserveExtension: 3 }));
 
-app.post('/upload', function(req, res) {
+// eslint-disable-next-line consistent-return
+app.post('/upload', (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.sampleFile;
+  const { sampleFile } = req.files;
   console.log('Is there a file: ', req.files, req.files.sampleFile.name);
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv('./public/upload/' + sampleFile, function(err) {
-    if (err)
-      return res.status(500).send(err);
+  // eslint-disable-next-line consistent-return
+  sampleFile.mv(`./public/upload/${sampleFile}`, (err) => {
+    if (err) return res.status(500).send(err);
 
     res.send('File uploaded!');
   });
 });
-
 
 
 // Syncing our database and logging a message to the user upon success
