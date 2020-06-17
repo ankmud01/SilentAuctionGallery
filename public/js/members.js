@@ -99,6 +99,7 @@ $(document).ready(() => {
         })
           .then((res) => {
             // const accountId = $('#accountid');
+            $('#roleinput').val(res.searchedUser.role_name);
             $('#accountid').val(res.searchedUser.id);
             $('#fullname').val(res.searchedUser.first_name || res.searchedUser.last_name);
             $('#firstnameinput').val(res.searchedUser.first_name);
@@ -106,13 +107,13 @@ $(document).ready(() => {
             $('#addressinput').val(res.searchedUser.address);
             $('#address2input').val(res.searchedUser.address2);
             $('#cityinput').val(res.searchedUser.city);
-            $('#statedropdown').val(res.searchedUser.state);
+            $('#stateinput').val(res.searchedUser.state);
             // $('#statedropdown').append(`<option value="">${res.searchedUser.state}</option>`);
             $('#zipcodeinput').val(res.searchedUser.zip);
             $('#phoneinput').val(res.searchedUser.phone);
-            $('#emailinput').val(res.searchedUser.email);
+            $('#emailinput1').val(res.searchedUser.email);
             $('#schoolinput').val(res.searchedUser.school);
-            $('#roleinput').val(res.searchedUser.role_name);
+            console.log(res.searchedUser.email);
           });
       } catch (err) {
         console.log(`Something went wrong ${err}`);
