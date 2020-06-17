@@ -179,6 +179,7 @@ router
           },
           condition,
           function (result) {
+            console.log('============>', result);
             if (result.changedRows === 0) {
               req.flash('You have either already confirmed your account OR you may need to register', 'I did NOT find you in our database.');
               return res.status(404).end();
