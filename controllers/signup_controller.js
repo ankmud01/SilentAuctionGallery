@@ -7,7 +7,7 @@ const db = require('../models');
 require('dotenv').config();
 
 const smtpTransport = require('../config/verify'); // { sendMail }
-
+const PORT = process.env.PORT || 3000;
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
@@ -87,7 +87,7 @@ router.post('/send', (req, res) => {
       })
       .then(() => {
         // eslint-disable-next-line prefer-template
-        link = 'http://localhost:3000/verify?id=' + secretToken;
+        link = 'http://localhost:' + PORT + '/verify?id=' + secretToken;
         console.log('Link: ', link);
         // link = `http://${req.get(host)}/verify?id=${rand}`;
         mailOptions = {
