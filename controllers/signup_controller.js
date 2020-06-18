@@ -96,7 +96,7 @@ router.post('/send', (req, res) => {
           subject:
             'Silent Auction Gallery is asking you to confirm your Email account',
           // eslint-disable-next-line prefer-template
-          html: `Hi there,<br> Copy this token: <b>${secretToken}</b>  and paste it into the Verification page at the link below.<br>
+          html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
           Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
         };
         console.log('Sent by:', process.env.GMAIL_USERNAME);
@@ -147,7 +147,7 @@ router
           secretToken: secretToken.secretToken,
         },
       });
-      if (!user.dataValues.secretToken || user.dataValues.secretToken === '' || user.dataValues.secretToken === ' ') {
+      if (!user.dataValues.secretToken || user.dataValues.active === 1 || user.dataValues.secretToken === ' ') {
         req.flash('You have either already confirmed your account OR you may need to register');
         return res.status(404).redirect('/signup', { title: 'Register Page' });
       }
