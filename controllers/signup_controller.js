@@ -7,6 +7,7 @@ const db = require('../models');
 require('dotenv').config();
 
 const smtpTransport = require('../config/verify'); // { sendMail }
+
 const PORT = process.env.PORT || 3000;
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 

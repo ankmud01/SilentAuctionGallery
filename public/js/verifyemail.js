@@ -91,7 +91,8 @@ $(document).ready(() => {
       $.post('/verify', token, (req, res) => {
         console.log('<-------verfy email button clicked-------->');
         $('.modal').modal();
-        $('#confirm-token').click((e) => {
+        // eslint-disable-next-line no-shadow
+        $('#confirm-token').click((event) => {
           event.preventDefault();
           window.location.href = '/dashboard';
           return false;
