@@ -81,14 +81,23 @@ $(document).ready(() => {
     const hbtoken = GetURLParameter('id');
     console.log(GetURLParameter('id'));
     const token = { secretToken: $('#secretToken').val() };
-    $('#token')
-      .empty()
-      .html(hbtoken);
-    // eslint-disable-next-line no-unused-vars
-    $.post('/verify', token, (req, res) => {
-      console.log('<-------verfy email button clicked-------->');
-      // $('.modal').modal().val();
-      console.log('The value of token: ', token);
-    });
+    if (!hbtoken) {
+      window.location.href = '/signup';
+    } else {
+      $('#token')
+        .empty()
+        .html(hbtoken);
+      // eslint-disable-next-line no-unused-vars
+      $.post('/verify', token, (req, res) => {
+        console.log('<-------verfy email button clicked-------->');
+        $('.modal').modal();
+        // eslint-disable-next-line no-shadow
+        $('#confirm-token').click((event) => {
+          event.preventDefault();
+          window.location.href = '/dashboard';
+          return false;
+        });
+      });
+    }
   });
 });

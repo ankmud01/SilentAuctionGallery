@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const smtpTransport = require('../config/verify'); // { sendMail }
 
+const PORT = process.env.PORT || 3000;
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
 const router = express.Router();
@@ -87,7 +88,7 @@ router.post('/send', (req, res) => {
       })
       .then(() => {
         // eslint-disable-next-line prefer-template
-        link = 'http://localhost:3000/verify?id=' + secretToken;
+        link = 'http://localhost:' + PORT + '/verify?id=' + secretToken;
         console.log('Link: ', link);
         // link = `http://${req.get(host)}/verify?id=${rand}`;
         mailOptions = {
@@ -96,7 +97,7 @@ router.post('/send', (req, res) => {
           subject:
             'Silent Auction Gallery is asking you to confirm your Email account',
           // eslint-disable-next-line prefer-template
-          html: `Hi there,<br> Copy this token: <b>${secretToken}</b>  and paste it into the Verification page at the link below.<br>
+          html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
           Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
         };
         console.log('Sent by:', process.env.GMAIL_USERNAME);
@@ -147,7 +148,7 @@ router
           secretToken: secretToken.secretToken,
         },
       });
-      if (!user.dataValues.secretToken || user.dataValues.secretToken === '' || user.dataValues.secretToken === ' ') {
+      if (!user.dataValues.secretToken || user.dataValues.active === 1 || user.dataValues.secretToken === ' ') {
         req.flash('You have either already confirmed your account OR you may need to register');
         return res.status(404).redirect('/signup', { title: 'Register Page' });
       }
@@ -179,6 +180,7 @@ router
           },
           condition,
           function (result) {
+            console.log('============>', result);
             if (result.changedRows === 0) {
               req.flash('You have either already confirmed your account OR you may need to register', 'I did NOT find you in our database.');
               return res.status(404).end();
