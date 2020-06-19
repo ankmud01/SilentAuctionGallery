@@ -3,11 +3,12 @@
 const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const os = require('os');
 const db = require('../models');
 require('dotenv').config();
 
 const smtpTransport = require('../config/verify'); // { sendMail }
-
+const hostname = os.hostname();
 const PORT = process.env.PORT || 3000;
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
 
@@ -68,7 +69,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post('/send', (req, res) => {
-  console.log('Line 72 in Send route', req.body);
+  console.log('Line 71 in Send route', req.body);
   if (req.isAuthenticated()) {
     db.User.findOne({
       where: {
@@ -83,12 +84,13 @@ router.post('/send', (req, res) => {
           isloggedin: req.isAuthenticated(),
         };
         console.log('Line 79 User.Info:', user.userInfo);
+        console.log('Line 86 os.hostname(): ', os.hostname());
         res.send(user.secretToken);
         secretToken = user.secretToken;
       })
       .then(() => {
         // eslint-disable-next-line prefer-template
-        link = 'http://localhost:' + PORT + '/verify?id=' + secretToken;
+        link = 'http://' + hostname + '/verify?id=' + secretToken;
         console.log('Link: ', link);
         // link = `http://${req.get(host)}/verify?id=${rand}`;
         mailOptions = {
@@ -97,8 +99,36 @@ router.post('/send', (req, res) => {
           subject:
             'Silent Auction Gallery is asking you to confirm your Email account',
           // eslint-disable-next-line prefer-template
-          html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
-          Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
+          html: `<div itemscope itemtype="http://schema.org/EmailMessage">
+          <div itemprop="potentialAction" itemscope itemtype="http://schema.org/ConfirmAction">
+            <meta itemprop="name" content="Verify Email"/>
+            <div>
+              <p>Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
+              Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a></p>
+            <div itemprop="handler" itemscope itemtype="http://schema.org/HttpActionHandler">
+              <link itemprop="url" href="https://silentauctiongaller.herokuapp.com/verify?id=${secretToken}"/>
+            </div>
+          </div>
+          <meta itemprop="description" content="Email Verification Request"/>
+        </div>
+        
+        <script type="application/ld+json">
+        {
+          "@context": "https://silentauctiongallery.herokuapp.com/",
+          "@type": "EmailMessage",
+          "potentialAction": {
+            "@type": "ConfirmAction",
+            "name": "Approve Expense",
+            "handler": {
+              "@type": "HttpActionHandler",
+              "url": "https://silentauctiongallery.herokuapp.com/verify?id=${secretToken}"
+            }
+          },
+          "description": "Email Verification for Silent Auction Gallery"
+        }
+        </script>`
+          // html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
+          // Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
         };
         console.log('Sent by:', process.env.GMAIL_USERNAME);
         console.log('Line 87 signup_controller.js: ', mailOptions);
@@ -152,8 +182,8 @@ router
         req.flash('You have either already confirmed your account OR you may need to register');
         return res.status(404).redirect('/signup', { title: 'Register Page' });
       }
-      console.log('Line 149------->User db output:', user.dataValues.secretToken);
-      console.log('line 145 ------>User db active output:', user.dataValues.active);
+      console.log('Line 155------->User db output:', user.dataValues.secretToken);
+      console.log('line 156 ------>User db active output:', user.dataValues.active);
 
       if (user.dataValues.secretToken === secretToken.secretToken) {
         console.log('Domain is matched. Information is from Authentic email. secretToken:',

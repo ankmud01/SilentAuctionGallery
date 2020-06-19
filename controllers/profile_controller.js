@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 const express = require('express');
+const os = require('os');
 const db = require('../models');
 
 const router = express.Router();

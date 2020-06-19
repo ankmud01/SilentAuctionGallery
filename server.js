@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const passport = require('passport');
 const fileupload = require('express-fileupload');
+const os = require('os');
 
 if (process.env.JAWSDB_URL) {
   mysql.createConnection(process.env.JAWSDB_URL);
@@ -106,13 +107,13 @@ app.post('/upload', (req, res) => {
   });
 });
 
-
+const hostname = os.hostname();
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`PID: ${pid}\n`);
     console.log(
-      '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
+      `==> 🌎  Listening on port %s. Visit http://${hostname}:%s/ in your browser.`,
       PORT,
       PORT,
     );
