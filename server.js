@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const passport = require('passport');
 const fileupload = require('express-fileupload');
+const os = require('os');
 
 if (process.env.JAWSDB_URL) {
   mysql.createConnection(process.env.JAWSDB_URL);
@@ -15,7 +16,8 @@ if (process.env.JAWSDB_URL) {
 
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
-require('dotenv').config();
+// require('dotenv').config(); move to a dev-dependency must run "node -r dotenv/config server.js"
+// or "npm run start_local"
 
 const { pid } = process;
 const PORT = process.env.PORT || 3000;
@@ -106,13 +108,13 @@ app.post('/upload', (req, res) => {
   });
 });
 
-
+const hostname = os.hostname();
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`PID: ${pid}\n`);
     console.log(
-      '==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.',
+      `==> 🌎  Listening on port %s. Visit http://${hostname}:%s/ in your browser.`,
       PORT,
       PORT,
     );

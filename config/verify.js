@@ -1,7 +1,8 @@
 /* eslint-disable prefer-arrow-callback */
 
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+// require('dotenv').config(); moved to dev-dependency
+// must run with "nodemon -r dotenv/config server.js" or "npm run start_local"
 
 const smtpTransport = nodemailer.createTransport({
   service: 'gmail',
