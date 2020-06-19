@@ -38,6 +38,18 @@ To run test, run the following comand:<br>
 ```
 npm run lint
 ```
+To run the application locally, run the following command:<br>
+```
+npm run start_local
+```
+Or :<br>
+```
+node -r dotenv/config server.js 
+```
+Or :<br>
+```
+ nodemon -r dotenv/config server.js
+```
 
 ## Contributing
 This application will be used for helping teachers and students to raise charity for a good cause and showcase their talent. So, please be respectful and mindful to others
