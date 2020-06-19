@@ -16,7 +16,8 @@ if (process.env.JAWSDB_URL) {
 
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
-// require('dotenv').config();
+// require('dotenv').config(); move to a dev-dependency must run "node -r dotenv/config server.js"
+// or "npm run start_local"
 
 const { pid } = process;
 const PORT = process.env.PORT || 3000;

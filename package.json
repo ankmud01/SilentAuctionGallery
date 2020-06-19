@@ -4,7 +4,8 @@
   "description": "A webpage to display student artwork with comments and host as a silent auction",
   "main": "server.js",
   "scripts": {
-    "start_local" : "node -r dotenv/config server.js",
+    "start": "node server.js",
+    "start_local": "node -r dotenv/config server.js",
     "test": "npm run lint",
     "lint": "eslint \"**/*.js\""
   },

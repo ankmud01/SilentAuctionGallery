@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const os = require('os');
 const db = require('../models');
 // require('dotenv').config(); move to a dev-dependency must run "node -r dotenv/config server.js"
+// or "npm run start_local"
 const smtpTransport = require('../config/verify'); // { sendMail }
 
 const hostname = os.hostname();
