@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config(); moved to dev-dependency must run "node -r dotenv/config server.js"
 
 module.exports = {
   development: {

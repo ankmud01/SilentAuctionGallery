@@ -16,7 +16,7 @@ if (process.env.JAWSDB_URL) {
 
 // const cookieParser = require('cookie-parser');
 require('./config/passport')(passport);
-require('dotenv').config();
+// require('dotenv').config();
 
 const { pid } = process;
 const PORT = process.env.PORT || 3000;

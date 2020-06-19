@@ -5,9 +5,9 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const os = require('os');
 const db = require('../models');
-require('dotenv').config();
-
+// require('dotenv').config(); move to a dev-dependency must run "node -r dotenv/config server.js"
 const smtpTransport = require('../config/verify'); // { sendMail }
+
 const hostname = os.hostname();
 const PORT = process.env.PORT || 3000;
 // const { checkNotAuthenticated } = require('../config/middleware/isAuthenticated');
@@ -89,10 +89,15 @@ router.post('/send', (req, res) => {
         secretToken = user.secretToken;
       })
       .then(() => {
-        // eslint-disable-next-line prefer-template
-        link = 'http://' + hostname + '/verify?id=' + secretToken;
-        console.log('Link: ', link);
-        // link = `http://${req.get(host)}/verify?id=${rand}`;
+        // eslint-disable-next-line no-cond-assign
+        if (process.env.NODE_ENV = 'development') {
+          link = `http://${hostname}:${PORT}/verify?id=${secretToken}`;
+        } else {
+          // eslint-disable-next-line prefer-template
+          link = 'http://' + hostname + '/verify?id=' + secretToken;
+          // link = `http://${req.get(host)}/verify?id=${rand}`;
+        }
+        console.log('Verify Return Link: ', link);
         mailOptions = {
           from: '"Silent Auction Gallery" <silentauctiongallery@gmail.com>',
           to: req.body.to,
@@ -106,7 +111,7 @@ router.post('/send', (req, res) => {
               <p>Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
               Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a></p>
             <div itemprop="handler" itemscope itemtype="http://schema.org/HttpActionHandler">
-              <link itemprop="url" href="https://silentauctiongaller.herokuapp.com/verify?id=${secretToken}"/>
+              <link itemprop="url" href="${link}"/>
             </div>
           </div>
           <meta itemprop="description" content="Email Verification Request"/>
@@ -126,9 +131,11 @@ router.post('/send', (req, res) => {
           },
           "description": "Email Verification for Silent Auction Gallery"
         }
-        </script>`
-          // html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b><br>and paste it into the Verification page at the link below.<br>
-          // Please Click on the link to verify your email. <br><a href=${link}>Click here to verify</a>`,
+        </script>`,
+          // html: `Hi there,<br> Copy this token:<br><b>${secretToken}</b>
+          // <br>and paste it into the Verification page at the link below.<br>
+          // Please Click on the link to verify your email. <br><a href=${link}>
+          // Click here to verify</a>`,
         };
         console.log('Sent by:', process.env.GMAIL_USERNAME);
         console.log('Line 87 signup_controller.js: ', mailOptions);
