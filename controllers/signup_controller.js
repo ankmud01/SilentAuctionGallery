@@ -95,7 +95,7 @@ router.post('/send', (req, res) => {
           link = `http://${hostname}:${PORT}/verify?id=${secretToken}`;
         } else {
           // eslint-disable-next-line prefer-template
-          link = 'http://' + hostname + '/verify?id=' + secretToken;
+          link = 'https://silentauctiongallery.herokuapp/com/verify?id=' + secretToken;
           // link = `http://${req.get(host)}/verify?id=${rand}`;
         }
         console.log('Verify Return Link: ', link);
@@ -179,7 +179,7 @@ router
     try {
       secretToken = req.body;
 
-      console.log('Line 141 ----->secretToken:', secretToken);
+      console.log('Line 182 ----->secretToken:', secretToken);
       // Find account with matching secret Token
       const user = await db.User.findOne({
         where: {
@@ -190,8 +190,8 @@ router
         req.flash('You have either already confirmed your account OR you may need to register');
         return res.status(404).redirect('/signup', { title: 'Register Page' });
       }
-      console.log('Line 155------->User db output:', user.dataValues.secretToken);
-      console.log('line 156 ------>User db active output:', user.dataValues.active);
+      console.log('Line 193------->User db output:', user.dataValues.secretToken);
+      console.log('line 194 ------>User db active output:', user.dataValues.active);
 
       if (user.dataValues.secretToken === secretToken.secretToken) {
         console.log('Domain is matched. Information is from Authentic email. secretToken:',
