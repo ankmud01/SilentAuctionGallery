@@ -95,7 +95,7 @@ router.post('/send', (req, res) => {
           link = `http://${hostname}:${PORT}/verify?id=${secretToken}`;
         } else {
           // eslint-disable-next-line prefer-template
-          link = 'http://silentauctiongallery.herokuapp/com/verify?id=' + secretToken;
+          link = 'https://silentauctiongallery.herokuapp/com/verify?id=' + secretToken;
           // link = `http://${req.get(host)}/verify?id=${rand}`;
         }
         console.log('Verify Return Link: ', link);
