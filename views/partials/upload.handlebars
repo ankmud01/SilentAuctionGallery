@@ -1,7 +1,81 @@
-<div class="container" id="imgUploadContainer">
-                            <form ref='uploadForm' id='uploadForm' action='/upload' method='post'
-                                encType="multipart/form-data">
-                                <input type="file" name="sampleFile" />
-                                <input type='submit' value='Upload!' />
-                            </form>
-                        </div>
+    {{!-- <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="card" id="uploadCard" style="width: 90%;">
+                <div class="card-content">
+                    <div class="container upload">
+                        <h3 id="create-err-msg"></h3>
+
+                        <h3 id="err-msg"></h3> --}}
+
+                        {{!-- <div class="row"> --}}
+                            {{!-- <div class="col-md-6 col-md-offset-3"> --}}
+                                <span class="card-title" style="text-align: center;">Artist Upload Form</span>
+                                <span id="art-upload"></span>
+                                {{#if expressFlash}}
+                                <p><strong>FLASH!</strong> {{ expressFlash }}</p>
+                                {{/if}}
+                                {{#if sessionFlash.message}}
+                                <div class="{{ sessionFlash.type }}">
+                                    <strong>FLASH!</strong> {{ sessionFlash.message }}
+                                </div>
+                                {{/if}}
+                                
+                                <div class="container" id="imgUploadContainer">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="email-input" type="email" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="email">Artist Email</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id="art_name-input" type="text" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="art_name">Art Piece Name</label>
+                                        </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="medium-input" type="text" class="validate" required="">
+                                            <label for="medium">Medium - i.e. photograph, watercolor, acrylic, etc.</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id="description-input" type="text" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="description">Brief Description - Approx 140 chars</label>
+                                        </div>
+                                    <div class="row">
+                                        <div class="input-field col s3">
+                                            <input id="size-input" type="number" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="size">Size: Length in inches</label>
+                                        </div>    
+                                        <div class="input-field col s3">
+                                            <input id="size-input" type="number" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="size">Size: Width in inches</label>
+                                        </div>
+                                        <div class="input-field col s3">
+                                            <label>
+                                            <input name="group1" type="radio" checked />
+                                            <span>Approved</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-field col s3">
+                                            <label>
+                                            <input name="group1" type="radio" />
+                                            <span>Rejected</span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <form method='POST' id='uploadForm' action='/upload' encType="multipart/form-data" ref='uploadForm'>
+                                        <input type="file" name="sampleFile" />
+                                        <input type='submit' value='Upload!' id="fileUpload"/>
+                                    </form>
+                                </div>
+                            {{!-- </div> --}}
+                        {{!-- </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+  <script type="text/javascript" src="./js/upload.js"></script>

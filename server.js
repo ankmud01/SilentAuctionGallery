@@ -10,6 +10,7 @@ const passport = require('passport');
 const fileupload = require('express-fileupload');
 const os = require('os');
 
+
 if (process.env.JAWSDB_URL) {
   mysql.createConnection(process.env.JAWSDB_URL);
 }
@@ -55,6 +56,17 @@ app.use(passport.session());
 // Using flash for messages
 app.use(flash());
 
+// attempt to use express-flash
+app.all('/session-flash', (req, res) => {
+  req.session.sessionFlash = {
+    type: 'success',
+    message: 'Your file was successfully Uploaded to the server.'
+  };
+  res.render(200, 'artGallery', { title: 'Art Gallery' });
+});
+
+
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static('public'));
 // Set Handlebars.
@@ -92,32 +104,45 @@ app.use(fileupload({ safeFileNames: true, preserveExtension: 3 }));
 // eslint-disable-next-line consistent-return
 app.post('/upload', (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
+    return res.status(400).render('artGallery');
   }
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   const { sampleFile } = req.files;
   console.log('Is there a file: ', req.files, req.files.sampleFile.name);
+  let file = req.files.sampleFile.name;
 
   // Use the mv() method to place the file somewhere on your server
   // eslint-disable-next-line consistent-return
-  sampleFile.mv(`./public/upload/${sampleFile}`, (err) => {
+  sampleFile.mv(`./public/upload/${file}`, (err) => {
     if (err) return res.status(500).send(err);
-
-    res.send('File uploaded!');
+    console.log('The file Name:', file);
+    req.flash('success_msg', 'File Uploaded');
+    res.status(200).render('artGallery');
   });
 });
 
 const hostname = os.hostname();
+console.log('Line 112 server.js-What env am I in: ', process.env.NODE_ENV);
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`PID: ${pid}\n`);
-    console.log(
-      `==> 🌎  Listening on port %s. Visit http://${hostname}:%s/ in your browser.`,
-      PORT,
-      PORT,
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `==> 🌎  Listening on port %s. Visit http://${hostname}:%s/ in your browser.`,
+        PORT,
+        PORT,
+      );
+    } else {
+      console.log(
+        '==> 🌎  Listening on port %s. Visit http://silentauctiongallery.herokuapp.com/ in your browser and running on port: %s .',
+        PORT,
+        PORT,
+      );
+
+    }
+
   });
 })
   .catch((err) => {

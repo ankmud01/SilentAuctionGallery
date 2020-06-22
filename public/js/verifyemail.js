@@ -16,7 +16,7 @@ $(document).ready(() => {
     }
   }
 
-
+  // Section to send Verification Email
   // eslint-disable-next-line consistent-return
   async function sendAnEmail(data) {
     let result;
