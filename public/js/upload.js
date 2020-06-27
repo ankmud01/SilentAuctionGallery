@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  // eslint-disable-next-line no-undef
   const fileUpload = res.status;
   console.log('fileUpload: ', fileUpload);
   if (fileUpload === '') {
