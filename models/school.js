@@ -24,10 +24,11 @@ module.exports = function bar(sequelize, DataTypes) {
   });
 
   School.associate = (models) => {
-    School.hasMany(models.User, {
-      foreignKey: 'school_id',
-      onDelete: 'cascade',
-    });
+    School.hasMany(models.User);
   };
+  // , {
+  //   foreignKey: 'school_id',
+  //   onDelete: 'cascade',
+  // }
   return School;
 };

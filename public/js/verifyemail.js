@@ -1,4 +1,4 @@
-let to = '';
+let to;
 
 const subject = 'Silent Auction Verification Email';
 $(document).ready(() => {

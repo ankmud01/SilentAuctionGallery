@@ -110,9 +110,8 @@
                                                 </div>
 
                                                 <div class="input-field col s6">
-                                                    <input id="phone-input" type="text" class="validate" required=""
-                                                        aria-required="true">
-                                                    <label for="phoneNumber">Tel Number</label>
+                                                    <input id="phone-input" type="tel" class="validate" required="" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" title="Phone Number (Format: +99(99)9999-9999)" aria-required="true">
+                                                    <label for="phoneNumber">Telephone Number</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -135,7 +134,7 @@
                                                         <option value="" disabled selected>School...</option>
                                                         <option value="North Oconee High School">North Oconee High
                                                             School</option>
-                                                        <option value="Oconee High School">Oconee High School</option>
+                                                        <option value="Oconee High School">Oconee County High School</option>
                                                         <option value="Milton High School">Milton High School</option>
                                                         <option value="Alpharetta High School">Alpharetta High School
                                                         </option>
@@ -146,13 +145,13 @@
                                                 <div class="input-field col s8 m8 l8">
                                                     <p>
                                                         <label>
-                                                            <input name="group1" type="radio" checked />
+                                                            <input name="role" class="role" value="2" type="radio" checked />
                                                             <span>Student</span>
                                                         </label>
                                                     </p>
                                                     <p>
                                                         <label>
-                                                            <input name="group1" type="radio" />
+                                                            <input name="role" class="role" value="3" type="radio" />
                                                             <span>Bidder</span>
                                                         </label>
                                                     </p>

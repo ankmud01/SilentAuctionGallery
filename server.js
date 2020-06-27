@@ -9,6 +9,7 @@ const mysql = require('mysql2');
 const passport = require('passport');
 const fileupload = require('express-fileupload');
 const os = require('os');
+const compression = require('compression');
 
 
 if (process.env.JAWSDB_URL) {
@@ -27,6 +28,17 @@ const db = require('./models');
 console.log('Process PID: ', process.pid);
 
 const app = express();
+
+function shouldCompress(req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+  // fallback to standard filter function
+  return compression.filter(req, res);
+}
+
+app.use(compression({ filter: shouldCompress }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -60,11 +72,10 @@ app.use(flash());
 app.all('/session-flash', (req, res) => {
   req.session.sessionFlash = {
     type: 'success',
-    message: 'Your file was successfully Uploaded to the server.'
+    message: 'Your file was successfully Uploaded to the server.',
   };
   res.render(200, 'artGallery', { title: 'Art Gallery' });
 });
-
 
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -110,7 +121,7 @@ app.post('/upload', (req, res) => {
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   const { sampleFile } = req.files;
   console.log('Is there a file: ', req.files, req.files.sampleFile.name);
-  let file = req.files.sampleFile.name;
+  const file = req.files.sampleFile.name;
 
   // Use the mv() method to place the file somewhere on your server
   // eslint-disable-next-line consistent-return
@@ -140,9 +151,7 @@ db.sequelize.sync().then(() => {
         PORT,
         PORT,
       );
-
     }
-
   });
 })
   .catch((err) => {

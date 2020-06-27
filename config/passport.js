@@ -48,6 +48,7 @@ module.exports = (passport) => {
           console.log('signupMessage', 'That email is already taken.');
           return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
         }
+        console.log('------>Role & School: ', req.body.role, req.body.school);
         // eslint-disable-next-line no-unused-vars
         const secretToken = randomstring.generate(64);
         db.User.create({
@@ -63,6 +64,7 @@ module.exports = (passport) => {
           phone: req.body.phone,
           password: db.User.generateHash(password),
           secretToken: db.User.secretToken,
+          role_id: req.body.role,
           active: false,
         }).then((dbUser) => done(null, dbUser)).catch((error) => { console.log(error); });
       });
