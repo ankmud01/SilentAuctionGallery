@@ -17,10 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Role.associate = function (models) {
-    Role.hasMany(models.User, {
-      foreignKey: 'role_id',
-      onDelete: 'cascade',
-    });
+    Role.hasMany(models.User);
+    //   , {
+    //   foreignKey: 'role_id',
+    //   onDelete: 'cascade',
+    // }
   };
   return Role;
 };

@@ -22,6 +22,7 @@ $(document).ready(() => {
       email: $('#email-input').val().trim(),
       phone: $('#phone-input').val().trim(),
       password: $('#password-input').val().trim(),
+      role: $('.role:checked').val().trim(),
 
     };
 

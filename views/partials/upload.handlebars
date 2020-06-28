@@ -1,7 +1,155 @@
-<div class="container" id="imgUploadContainer">
-                            <form ref='uploadForm' id='uploadForm' action='/upload' method='post'
-                                encType="multipart/form-data">
-                                <input type="file" name="sampleFile" />
-                                <input type='submit' value='Upload!' />
-                            </form>
+
+                    <div class="upload">
+                        <h3 id="create-err-msg"></h3>
+
+                        <h3 id="err-msg"></h3> 
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="card-title" style="text-align: center;">Artist Upload Form</h3>
+                                <span id="art-upload"></span>
+                               
+                                <div class="container" id="imgUploadContainer">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="email-input" type="email" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="email">Artist Email</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id="art_name-input" type="text" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="art_name">Art Piece Name</label>
+                                        </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <div class="col s6" id="medium-input">
+                                                <label>Medium - i.e. photograph, watercolor, acrylic, etc.</label>
+                                                <select id="medium-input" class="browser-default" required="">
+                                                    <option value="" disabled selected>Medium...</option>
+                                                    <option value="Painting-Oil">Painting - Oil</option>
+                                                    <option value="Painting-Acrylic">Painting - Acrylic</option>
+                                                    <option value="Painting-Watercolor">Painting - Watercolor</option>
+                                                    <option value="Painting-Gouache">Painting - Gouache</option>
+                                                    <option value="Painting-Tempera">Painting - Tempera</option>
+                                                    <option value="Painting-Fresco painting">Painting - Fresco painting</option>
+                                                    <option value="Drawing-Charcoal">Drawing - Charcoal</option>
+                                                    <option value="Drawing-Graphite">Drawing - Graphite</option>
+                                                    <option value="Drawing-Conte crayons">Drawing - Conte crayons</option>
+                                                    <option value="Drawing-Pen and Ink">Drawing - Pen and Ink</option>
+                                                    <option value="Drawing-India Ink (with brush)">Drawing - India Ink (with brush)</option>
+                                                    <option value="Drawing-Chalk">Drawing - Chalk</option>
+                                                    <option value="Drawing-Chalk pastels">Drawing - Chalk pastels</option>
+                                                    <option value="Drawing-Oil pastels">Drawing - Oil pastels</option>
+                                                    <option value="Drawing-Color pencils">Drawing - Color pencils</option>
+                                                    <option value="Drawings-Markers">Drawings Markers</option>
+                                                    <option value="Printing-Screen-printing">Printing Screen-printing</option>
+                                                    <option value="Printing-Mono-printing">Printing Mono-printing</option>
+                                                    <option value="Printing-Block printing">Printing Block printing</option>
+                                                    <option value="Printing-Etching">Printing Etching</option>
+                                                    <option value="Printing-Lithography">Printing Lithography</option>
+                                                    <option value="Printing-Spraypaint">Printing Spraypaint</option>
+                                                    <option value="Printing-Airbrush">Printing Airbrush</option>
+                                                    <option value="Sculpture-Pottery">Sculpture Pottery</option>
+                                                    <option value="Sculpture-Ceramics">Sculpture Ceramics</option>
+                                                    <option value="Sculpture-Terracotta">Sculpture Terracotta</option>
+                                                    <option value="Sculpture-Wood carving">Sculpture Wood carving</option>
+                                                    <option value="Sculpture-Balsa wood">Sculpture Balsa wood</option>
+                                                    <option value="Sculpture-Found objects">Sculpture Found objects</option>
+                                                    <option value="Sculpture-Assemblage">Sculpture Assemblage</option>
+                                                    <option value="Sculpture-Installation art">Sculpture Installation art</option>
+                                                    <option value="Sculpture-Earth Art">Sculpture Earth Art</option>
+                                                    <option value="Sculpture-Jewelry">Sculpture Jewelry</option>
+                                                    <option value="Sculpture-Mosaics">Sculpture Mosaics</option>
+                                                    <option value="Sculpture-Polymer clay">Sculpture Polymer clay</option>
+                                                    <option value="Sculpture-Paper">Sculpture Paper</option>
+                                                    <option value="Sculpture-Plaster">Sculpture Plaster</option>
+                                                    <option value="Sculpture-PVC piping">Sculpture PVC piping</option>
+                                                    <option value="Sculpture-Resin">Sculpture Resin</option>
+                                                    <option value="Sculpture-Glass">Sculpture Glass</option>
+                                                    <option value="Sculpture-Stained glass">Sculpture Stained glass</option>
+                                                    <option value="Sculpture-Blown glass">Sculpture Blown glass</option>
+                                                    <option value="Sculpture-Metal">Sculpture Metal</option>
+                                                    <option value="Sculpture-Metal Silver">Sculpture Metal Silver</option>
+                                                    <option value="Sculpture-Metal Nickel">Sculpture Metal Nickel</option>
+                                                    <option value="Sculpture-Metal Copper">Sculpture Metal Copper</option>
+                                                    <option value="Sculpture-Metal Wires">Sculpture Metal Wires</option>
+                                                    <option value="Sculpture-Metal Aluminum foil">Sculpture Metal Aluminum foil</option>
+                                                    <option value="Sculpture-Metal Bronze">Sculpture Metal Bronze</option>
+                                                    <option value="Sculpture-Fiberglass">Sculpture Fiberglass</option>
+                                                    <option value="Sculpture-Wax">Sculpture Wax</option>
+                                                    <option value="Sculpture-Stone">Sculpture Stone</option>
+                                                    <option value="Sculpture-Marble">Sculpture Marble</option>
+                                                    <option value="Sculpture-Concrete">Sculpture Concrete</option>
+                                                    <option value="Sculpture-Gelatine">Sculpture Gelatine</option>
+                                                    <option value="Sculpture-Styrofoam">Sculpture Styrofoam</option>
+                                                    <option value="Sculpture-Relief sculpture">Sculpture Relief sculpture</option>
+                                                    <option value="Sculpture-Ready-mades">Sculpture Ready-mades</option>
+                                                    <option value="Textiles">Textiles </option>
+                                                    <option value="Textiles-Weaving">Textiles Weaving</option>
+                                                    <option value="Textiles-Macrame">Textiles Macrame</option>
+                                                    <option value="Textiles-Fashion design">Textiles Fashion design</option>
+                                                    <option value="Textiles-Batik">Textiles Batik</option>
+                                                    <option value="Textiles-Marbeling">Textiles Marbeling</option>
+                                                    <option value="Textiles-Stamping">Textiles Stamping</option>
+                                                    <option value="Photography-Film-Technology">Photography/Film/Technology</option>
+                                                    <option value="Photography-Film-Technology-Black and white">Photography/Film/Technology Black and white</option>
+                                                    <option value="Photography-Film-Technology-Digital">Photography/Film/Technology Digital</option>
+                                                    <option value="Photography-Film-Technology-Photoshop">Photography/Film/Technology Photoshop</option>
+                                                    <option value="Photography-Film-Technology-Graphic design">Photography/Film/Technology Graphic design</option>
+                                                    <option value="Photography-Film-Technology-Video art">Photography/Film/Technology Video art</option>
+                                                    <option value="Photography-Film-Technology-Video art-Animation">Photography/Film/Technology Video art Animation</option>
+                                                    <option value="Photography-Film-Technology-Video art-Clay animation">Photography/Film/Technology Video art Clay animation</option>
+                                                    <option value="Photography-Film-Technology-Video art-Stop motion photography">Photography/Film/Technology Video art Stop motion photography</option>
+                                                    <option value="Other">Other</option>
+                                                    <option value="Other-Mixed media">Other Mixed media</option>
+                                                    <option value="Other-Collage">Other Collage</option>
+                                                    <option value="Other-Paper cutting">Other Paper cutting</option>
+                                                    <option value="Other-scrimshaw">Other scrimshaw</option>
+                                                    <option value="Other-fimo">Other fimo</option>
+                                                    <option value="Other-gold leafing">Other gold leafing</option>
+                                                    <option value="Other-glues">Other glues</option>
+                                                    <option value="Other-transparencies">Other transparencies</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input id="description-input" type="text" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="description">Brief Description - Approx 140 chars</label>
+                                        </div>
+                                    <div class="row">
+                                        <div class="input-field col s3">
+                                            <input id="size-input" type="number" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="size">Size: Length in inches</label>
+                                        </div>    
+                                        <div class="input-field col s3">
+                                            <input id="size-input" type="number" class="validate" required=""
+                                                aria-required="true">
+                                            <label for="size">Size: Width in inches</label>
+                                        </div>
+                                        <div class="input-field col s3">
+                                            <label>
+                                            <input name="group1" type="radio" checked />
+                                            <span>Approved</span>
+                                            </label>
+                                        </div>
+                                        <div class="input-field col s3">
+                                            <label>
+                                            <input name="group1" type="radio" />
+                                            <span>Rejected</span>
+                                            </label>    
+                                        </div>
+                                    </div>
+                                    <form method='POST' id='uploadForm' action='/upload' encType="multipart/form-data" ref='uploadForm'>
+                                        <input type="file" name="sampleFile" />
+                                        <input type='submit' value='Upload!' id="fileUpload"/>
+                                    </form>
+                                </div>
+                            </div> 
                         </div>
+                    </div>
+           
+  <script type="text/javascript" src="./js/upload.js"></script>

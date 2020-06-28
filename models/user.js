@@ -64,6 +64,11 @@ module.exports = function bar(sequelize, DataTypes) {
       allowNull: false,
       default: false,
     },
+  },
+  {
+    underscored: true,
+    tableName: 'user',
+    // freezeTableName: true,
   });
 
   User.associate = function (models) {
@@ -74,9 +79,17 @@ module.exports = function bar(sequelize, DataTypes) {
   };
 
   User.associate = function (models) {
-    User.belongsTo(models.Role, {
-      foreignKey: 'role_id',
-    });
+    User.belongsTo(models.Role); // changed from hasOne
+    //   , {
+    //   foreignKey: 'role_id',
+    // }
+  };
+
+  User.associate = function (models) {
+    User.belongsTo(models.School);
+    //  , {
+    //   foreignKey: 'role_id',
+    // });
   };
 
   // generating a hash

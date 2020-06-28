@@ -1,4 +1,4 @@
-let to = '';
+let to;
 
 const subject = 'Silent Auction Verification Email';
 $(document).ready(() => {
@@ -16,7 +16,7 @@ $(document).ready(() => {
     }
   }
 
-
+  // Section to send Verification Email
   // eslint-disable-next-line consistent-return
   async function sendAnEmail(data) {
     let result;

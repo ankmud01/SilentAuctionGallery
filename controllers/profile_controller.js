@@ -9,18 +9,19 @@ const router = express.Router();
 router.get('/profile', async (req, res) => {
   if (req.isAuthenticated()) {
     try {
-      await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.id = :id', {
+      await db.sequelize.query('SELECT roles.role_name, user.* FROM user, roles WHERE user.role_id = roles.id AND user.id = :id', {
         replacements: { id: req.session.passport.user },
         type: db.Sequelize.QueryTypes.SELECT,
       })
         .then((dbUser) => {
+          console.log('Profile_controller.js Line 17 DB User---->', dbUser[0]);
           const user = {
             userInfo: dbUser[0],
             id: req.session.passport.user,
             active: dbUser[0].active,
             isloggedin: req.isAuthenticated(),
           };
-          console.log('user.userInfo:', user);
+          console.log('Line 24 ##------->user.userInfo:', user);
           if (dbUser[0].role_id > 1) {
             res.render('userProfilepage', user);
           } else {
@@ -66,6 +67,7 @@ router.put('/user/:account_id', (req, res) => {
     school: req.body.school,
     email: req.body.email,
     phone: req.body.phone,
+    role_id: req.body,
   }, {
     where: {
       id: req.params.account_id,
@@ -79,7 +81,7 @@ router.put('/user/:account_id', (req, res) => {
 
 router.get('/searchuser/:email', async (req, res) => {
   try {
-    await db.sequelize.query('SELECT Roles.role_name, Users.* from Users, Roles where Users.role_id = Roles.id and Users.email = :email', {
+    await db.sequelize.query('SELECT roles.role_name, user.* FROM user, roles WHERE user.role_id = roles.id AND user.email = :email', {
       replacements: { email: req.params.email },
       type: db.Sequelize.QueryTypes.SELECT,
     })

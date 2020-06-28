@@ -91,12 +91,10 @@ router.post('/send', (req, res) => {
       })
       .then(() => {
         // eslint-disable-next-line no-cond-assign
-        if (process.env.NODE_ENV = 'development') {
+        if (process.env.NODE_ENV === 'development') {
           link = `http://${hostname}:${PORT}/verify?id=${secretToken}`;
         } else {
-          // eslint-disable-next-line prefer-template
-          link = 'https://silentauctiongallery.herokuapp/com/verify?id=' + secretToken;
-          // link = `http://${req.get(host)}/verify?id=${rand}`;
+          link = `https://silentauctiongallery.herokuapp/com/verify?id=${secretToken}`;
         }
         console.log('Verify Return Link: ', link);
         mailOptions = {
@@ -175,6 +173,7 @@ router
   // eslint-disable-next-line prefer-template
   // console.log(req.protocol + ':/' + req.get('host'));
   // eslint-disable-next-line prefer-template
+  // TODO: change this to a promis Referenece: https://zellwk.com/blog/async-await-express/
   .post('/verify', async (req, res, next) => {
     try {
       secretToken = req.body;
@@ -235,9 +234,9 @@ router
         res.redirect('/login');
       }
     } catch (error) {
-      throw new Error('BROKEN-DID NOT CATCH THE NULL VALUE');
+      // throw new Error('BROKEN-DID NOT CATCH THE NULL VALUE')
       // eslint-disable-next-line no-unreachable
-      next(error);
+      return next(error);
     }
   });
 

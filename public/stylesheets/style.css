@@ -574,13 +574,10 @@ div.desc {
 
 /* Style the active/current link*/
 .header a.active {
-      
-          
-           {{!-- !-- background-color: black;
-          color: silver;
-          -- --}}
-      
-  }
+   {{!-- background-color: black;
+   color: silver;
+   --}}
+}
 
 
 /* Float the link section to the right */

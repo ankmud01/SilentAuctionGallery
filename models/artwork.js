@@ -7,6 +7,20 @@ module.exports = function (sequelize, DataTypes) {
         len: [1, 60],
       },
     },
+    medium: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 255],
+      },
+    },
+    size: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 60],
+      },
+    },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
